@@ -1,0 +1,29 @@
+.App {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+#main-title {
+  color: gray;
+  font-size: 500%;
+}
+
+#full-board {
+  display: flex;
+  justify-content: space-around;
+  width: 98%;
+}
+
+#progress-column {
+  border-left: 3px groove white;
+  border-right: 3px groove white;
+}
+
+#queue-column, #progress-column, #completed-column {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 32%;
+}

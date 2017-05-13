@@ -1,4 +1,8 @@
+/*jshint esversion: 6*/
 import React, {Component} from 'react';
+import './KanbanCard.css';
+import { connect } from 'react-redux';
+import { updateCards } from '../../actions';
 import {updateCardInDb, deleteCardInDb} from '../../lib/fetchFromDB';
 
 class KanbanCard extends Component{
@@ -10,59 +14,51 @@ class KanbanCard extends Component{
       assignedTo: this.props.card.Assigned.id,
       priority: this.props.card.priority
     };
-
-    this.handleStatus = this.handleStatus.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
-    this.handleCompleteEdit = this.handleCompleteEdit.bind(this);
-    this.handleTitleEdit = this.handleTitleEdit.bind(this);
-    this.handleAssignEdit = this.handleAssignEdit.bind(this);
-    this.handlePriorityEdit = this.handlePriorityEdit.bind(this);
   }
 
-  handleStatus(event){
+  handleStatus = (event) => {
     event.preventDefault();
-    this.updateCard(this.props.card.id, {status: event.target.value});
-  }
-
-  updateCard(id, cardObj) {
-    updateCardInDb(id, cardObj)
+    updateCardInDb(this.props.card.id, {status: event.target.value})
       .then(this.props.updateApp)
       .catch(console.log);
   }
 
-  handleDelete(event){
+  handleDelete = (event) => {
     event.preventDefault();
-    this.deleteCard(this.props.card.id);
-  }
-
-  deleteCard(id) {
-    deleteCardInDb(id)
+    deleteCardInDb(this.props.card.id)
       .then(this.props.updateApp)
       .catch(console.log);
-  }
+  };
 
-  handleEdit(event) {
+  handleEdit = (event) => {
     this.setState({editCard: !this.state.editCard});
-  }
+  };
 
-  handleCompleteEdit(event) {
+  handleCompleteEdit = (event) => {
     event.preventDefault();
-    this.updateCard(this.props.card.id, {title: this.state.title, assignedTo: this.state.assignedTo, priority: this.state.priority});
     this.setState({editCard: false});
-  }
+    updateCardInDb(
+      this.props.card.id,
+      {
+        title: this.state.title,
+        assignedTo: this.state.assignedTo,
+        priority: this.state.priority
+      }
+    )
+      .then(console.log());
+  };
 
-  handleTitleEdit(event) {
+  handleTitleEdit = (event) => {
     this.setState({title: event.target.value});
-  }
+  };
 
-  handleAssignEdit(event) {
+  handleAssignEdit = (event) => {
     this.setState({assignedTo: event.target.value});
-  }
+  };
 
-  handlePriorityEdit(event) {
+  handlePriorityEdit = (event) => {
     this.setState({priority: event.target.value});
-  }
+  };
 
   getPriorityColor(priority) {
     switch (priority) {
@@ -122,4 +118,26 @@ class KanbanCard extends Component{
   }
 };
 
-export default KanbanCard;
+const mapStateToProps = (state) => {
+  return {
+      editCard: state.editCard,
+      title: state.title,
+      assignedTo: state.assignedTo,
+      priority: state.priority
+  };
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    updateCards: cards => {
+      dispatch(updateCards(cards))
+    }
+  }
+}
+
+const ConnectedKanbanCard = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(KanbanCard);
+
+export default ConnectedKanbanCard;

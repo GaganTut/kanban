@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './Login.css';
 import {sendLoginRequest, logoutUser} from '../../lib/fetchFromDB';
 
 class Login extends React.Component {
@@ -69,7 +70,7 @@ class Login extends React.Component {
         <div
           className="login-component"
           >
-            <p>{'Hello ' + this.state.loggedUsername}
+            <p id="loggedInMsg">{'Hello ' + this.state.loggedUsername}
             </p>
 
             <input

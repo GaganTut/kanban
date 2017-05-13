@@ -1,4 +1,6 @@
+/*jshint esversion: 6*/
 import React, { Component } from 'react';
+import './App.css';
 import { connect } from 'react-redux';
 import { loadCards } from '../../actions';
 import {getAllCards} from '../../lib/fetchFromDB';

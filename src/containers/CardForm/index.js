@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './CardForm.css';
 import {addCardToDb} from '../../lib/fetchFromDB';
 
 class CardForm extends Component {

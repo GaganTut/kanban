@@ -1,8 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './containers/App';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import kanbanReducers from './reducers';
+
+const store = createStore(
+  kanbanReducers
+);
 
 ReactDOM.render(
-  <App />,
+  <Provider store={store}>
+    <App />
+  </Provider>
+  ,
   document.getElementById('root')
 );

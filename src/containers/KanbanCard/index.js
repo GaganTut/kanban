@@ -2,35 +2,36 @@
 import React, {Component} from 'react';
 import './KanbanCard.css';
 import { connect } from 'react-redux';
-import { updateCards } from '../../actions';
+import { updateCard, deleteCard } from '../../actions';
 import {updateCardInDb, deleteCardInDb} from '../../lib/fetchFromDB';
 
 class KanbanCard extends Component{
   constructor(props) {
     super(props);
+
     this.state = {
       editCard: false,
       title: this.props.card.title,
-      assignedTo: this.props.card.Assigned.id,
+      assignedTo: this.props.card.assignedTo,
       priority: this.props.card.priority
     };
-  }
-
-  handleStatus = (event) => {
-    event.preventDefault();
-    updateCardInDb(this.props.card.id, {status: event.target.value})
-      .then(this.props.updateApp)
-      .catch(console.log);
   }
 
   handleDelete = (event) => {
     event.preventDefault();
     deleteCardInDb(this.props.card.id)
-      .then(this.props.updateApp)
+      .then(this.props.deleteCard(this.props.card.id))
       .catch(console.log);
   };
 
-  handleEdit = (event) => {
+  handleStatus = (event) => {
+    event.preventDefault();
+    updateCardInDb(this.props.card.id, {status: event.target.value})
+      .then(this.props.updateCard)
+      .catch(console.log);
+  };
+
+  handleEdit = () => {
     this.setState({editCard: !this.state.editCard});
   };
 
@@ -41,35 +42,29 @@ class KanbanCard extends Component{
       this.props.card.id,
       {
         title: this.state.title,
-        assignedTo: this.state.assignedTo,
+        assignedTo: this.state.assignedTo || this.props.card.assignedTo,
         priority: this.state.priority
       }
     )
-      .then(console.log());
+      .then(this.props.updateCard);
   };
 
-  handleTitleEdit = (event) => {
-    this.setState({title: event.target.value});
-  };
-
-  handleAssignEdit = (event) => {
-    this.setState({assignedTo: event.target.value});
-  };
-
-  handlePriorityEdit = (event) => {
-    this.setState({priority: event.target.value});
+  handleChange = (event) => {
+    this.setState({[event.target.name]: event.target.value});
   };
 
   getPriorityColor(priority) {
     switch (priority) {
       case 'Urgent' :
-        return {'background-color':'red'};
+        return {'backgroundColor':'red'};
       case 'High' :
-        return {'background-color':'orange'};
+        return {'backgroundColor':'orange'};
       case 'Medium' :
-        return {'background-color':'yellow'};
+        return {'backgroundColor':'yellow'};
       case 'Low' :
-        return {'background-color':'beige'};
+        return {'backgroundColor':'beige'};
+      default:
+        return {'backgroundColor':'beige'};
     }
   }
 
@@ -83,10 +78,10 @@ class KanbanCard extends Component{
           onDoubleClick={this.handleEdit}
           >
           <h1>#{this.props.card.id}</h1>
-          <input type="text" name="title" value={this.state.title} onChange={this.handleTitleEdit}/>
-          <p>By: {this.props.card.Creator.username}</p>
-          <input type="text" name="assignedTo" value={this.state.assignedTo} onChange={this.handleAssignEdit}/>
-          <select type="text" name="priority" value={this.state.priority} onChange={this.handlePriorityEdit}>
+          <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>
+          <p>By: {this.props.card.createdBy}</p>
+          <input type="text" name="assignedTo" value={this.state.assignedTo} onChange={this.handleChange}/>
+          <select type="text" name="priority" value={this.state.priority} onChange={this.handleChange}>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
@@ -104,8 +99,8 @@ class KanbanCard extends Component{
           >
             <h1>#{this.props.card.id}</h1>
             <h4>{this.props.card.title}</h4>
-            <p>By: {this.props.card.Creator.username}</p>
-            <p>For: {this.props.card.Assigned.username}</p>
+            <p>By: {this.props.card.createdBy}</p>
+            <p>For: {this.props.card.assignedTo}</p>
             <select value={this.props.card.status} onChange={this.handleStatus}>
               <option value="Queue">Queue</option>
               <option value="Progress">Progress</option>
@@ -119,19 +114,13 @@ class KanbanCard extends Component{
 };
 
 const mapStateToProps = (state) => {
-  return {
-      editCard: state.editCard,
-      title: state.title,
-      assignedTo: state.assignedTo,
-      priority: state.priority
-  };
+  return {};
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    updateCards: cards => {
-      dispatch(updateCards(cards))
-    }
+    updateCard: card => dispatch(updateCard(card)),
+    deleteCard: card => dispatch(deleteCard(card))
   }
 }
 

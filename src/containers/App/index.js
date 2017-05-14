@@ -12,16 +12,16 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    this.title = 'KANBAN BOARD';
+
   }
-  componentDidMount() {
+  componentWillMount() {
     this.getCards();
   }
 
   getCards = () => {
     return getAllCards()
-      .then( cards => {
-        this.props.loadCards();
-      })
+      .then(this.props.loadCards)
       .catch(console.log);
   }
 
@@ -29,11 +29,11 @@ class App extends Component {
     return (
       <div className="App">
         <Login />
-        <h1 id="main-title">KANBAN BOARD</h1>
+        <h1 id="main-title">{this.title}</h1>
         <div id="full-board">
-          <Column cardList={this.props.queueCards} columnID="queue-column"></Column>
-          <Column cardList={this.props.progressCards} columnID="progress-column"></Column>
-          <Column cardList={this.props.completedCards} columnID="completed-column"></Column>
+          <Column cardList={this.props.allCards.filter(card => card.status === 'Queue')} columnID="queue-column"></Column>
+          <Column cardList={this.props.allCards.filter(card => card.status === 'Progress')} columnID="progress-column"></Column>
+          <Column cardList={this.props.allCards.filter(card => card.status === 'Completed')} columnID="completed-column"></Column>
         </div>
         <CardForm/>
       </div>
@@ -43,17 +43,13 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    queueCards: state.queueCards,
-    progressCards: state.progressCards,
-    completedCards: state.completedCards
+    allCards: state.allCards
   };
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    loadCards: cards => {
-      dispatch(loadCards(cards))
-    }
+    loadCards: cards => dispatch(loadCards(cards))
   }
 }
 

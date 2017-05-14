@@ -28,7 +28,7 @@ cards.route('/')
   })
   .post(middleWare.userPermission, (req, res) => {
     Card.create(req.body)
-      .then(res.redirect('/api/cards'))
+      .then(data => res.json(data))
       .catch(err => {
         res.json(err);
       });
@@ -42,7 +42,7 @@ cards.delete('/:id', middleWare.userPermission, (req, res) => {
       }
     }
   )
-  .then(res.redirect('/api/cards'))
+  .then(res.json({success: true}))
   .catch(err => {
     res.send(err);
   });
@@ -54,10 +54,12 @@ cards.put('/:id', middleWare.userPermission, (req, res) => {
     {
       where: {
         id: req.params.id
-      }
+      },
+      returning: true,
+      plain: true
     }
   )
-  .then(res.redirect('/api/cards'))
+  .then(card => res.json(card[1].dataValues))
   .catch(err => {
     res.send(err);
   });

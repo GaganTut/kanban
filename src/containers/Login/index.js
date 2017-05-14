@@ -1,8 +1,9 @@
+/*jshint esversion: 6*/
 import React, {Component} from 'react';
 import './Login.css';
 import {sendLoginRequest, logoutUser} from '../../lib/fetchFromDB';
 
-class Login extends React.Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -14,20 +15,15 @@ class Login extends React.Component {
       loggedFirstname: localStorage.firstname || '',
       loggedLastname: localStorage.lastname || ''
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handlePassword = this.handlePassword.bind(this);
-    this.handleUsername = this.handleUsername.bind(this);
-    this.handleLogOut = this.handleLogOut.bind(this);
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.attemptLogin(this.state.username, this.state.password);
     this.setState({username: '', password: ''});
   }
 
-  attemptLogin(username, password) {
+  attemptLogin = (username, password) => {
     sendLoginRequest(username, password)
       .then((user) => {
         this.setState({
@@ -42,17 +38,17 @@ class Login extends React.Component {
         localStorage.setItem('lastname', user.lastname);
       })
       .catch(console.log);
-  }
+  };
 
-  handleUsername(event) {
+  handleUsername = (event) => {
     this.setState({username: event.target.value});
-  }
+  };
 
-  handlePassword(event) {
+  handlePassword = (event) => {
     this.setState({password: event.target.value});
-  }
+  };
 
-  handleLogOut(event) {
+  handleLogOut = (event) => {
     this.setState({
       loggedIn: false,
       loggedUsername: '',
@@ -61,7 +57,7 @@ class Login extends React.Component {
     });
     logoutUser();
     localStorage.clear();
-  }
+  };
 
 
   render() {

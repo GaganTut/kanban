@@ -10,10 +10,6 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      loggedIn: localStorage.loggedIn || false,
-      loggedUsername: localStorage.username || '',
-      loggedFirstname: localStorage.firstname || '',
-      loggedLastname: localStorage.lastname || ''
     };
   }
 
@@ -25,13 +21,8 @@ class Login extends Component {
 
   attemptLogin = (username, password) => {
     sendLoginRequest(username, password)
-      .then((user) => {
-        this.setState({
-          loggedIn: true,
-          loggedUsername: user.username,
-          loggedFirstname: user.firstname,
-          loggedLastname: user.lastname
-        });
+      .then(user => {
+        this.props.login(user);
         localStorage.setItem('loggedIn', true);
         localStorage.setItem('username', user.username);
         localStorage.setItem('firstname', user.firstname);
@@ -49,24 +40,18 @@ class Login extends Component {
   };
 
   handleLogOut = (event) => {
-    this.setState({
-      loggedIn: false,
-      loggedUsername: '',
-      loggedFirstname: '',
-      loggedLastname: ''
-    });
     logoutUser();
     localStorage.clear();
   };
 
 
   render() {
-    if (this.state.loggedIn) {
+    if (this.props.loggedIn) {
       return (
         <div
           className="login-component"
           >
-            <p id="loggedInMsg">{'Hello ' + this.state.loggedUsername}
+            <p id="loggedInMsg">{'Hello ' + this.props.loggedUsername}
             </p>
 
             <input
@@ -83,13 +68,13 @@ class Login extends Component {
           className="login-component">
           <input type="text"
             placeholder="Username"
-            value={this.state.username}
+            value={this.props.username}
             onChange={this.handleUsername}
             />
           <input
             type="password"
             placeholder="Password"
-            value={this.state.password}
+            value={this.props.password}
             onChange={this.handlePassword}
             />
           <input

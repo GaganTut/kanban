@@ -1,6 +1,6 @@
 /*jshint esversion: 6*/
 import React, {Component} from 'react';
-import './KanbanCard.css';
+import './KanbanCard.scss';
 import { connect } from 'react-redux';
 import { updateCard, deleteCard } from '../../actions';
 

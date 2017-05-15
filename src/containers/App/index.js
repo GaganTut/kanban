@@ -1,6 +1,6 @@
 /*jshint esversion: 6*/
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import { connect } from 'react-redux';
 import { loadCards } from '../../actions';
 import Column from '../../components/Column';
@@ -33,6 +33,7 @@ class App extends Component {
           <Column cardList={this.props.allCards.filter(card => card.status === 'Completed')} columnID="completed-column"></Column>
         </div>
         <CardForm/>
+        {this.props.fetching && <div id="loading-message"></div>}
       </div>
     );
   }
@@ -40,7 +41,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    allCards: state.allCards
+    allCards: state.allCards,
+    fetching: state.fetching
   };
 }
 

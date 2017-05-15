@@ -1,7 +1,8 @@
 /*jshint esversion: 6*/
 import React, {Component} from 'react';
 import './Login.css';
-import {sendLoginRequest, logoutUser} from '../../lib/fetchFromDB';
+import { login, logout } from '../../actions';
+import { connect } from 'react-redux';
 
 class Login extends Component {
   constructor(props) {
@@ -15,20 +16,8 @@ class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.attemptLogin(this.state.username, this.state.password);
+    this.props.login(this.state.username, this.state.password);
     this.setState({username: '', password: ''});
-  }
-
-  attemptLogin = (username, password) => {
-    sendLoginRequest(username, password)
-      .then(user => {
-        this.props.login(user);
-        localStorage.setItem('loggedIn', true);
-        localStorage.setItem('username', user.username);
-        localStorage.setItem('firstname', user.firstname);
-        localStorage.setItem('lastname', user.lastname);
-      })
-      .catch(console.log);
   };
 
   handleUsername = (event) => {
@@ -40,8 +29,7 @@ class Login extends Component {
   };
 
   handleLogOut = (event) => {
-    logoutUser();
-    localStorage.clear();
+    this.props.logout();
   };
 
 
@@ -90,4 +78,25 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.loggedIn,
+    loggedUsername: state.loggedUsername,
+    loggedFirstname: state.loggedFirstname,
+    loggedLastname: state.loggedLastname
+  };
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    login: (username, password) => dispatch(login(username, password)),
+    logout: username => dispatch(logout(username))
+  }
+}
+
+const ConnectedLogin = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
+
+export default ConnectedLogin;

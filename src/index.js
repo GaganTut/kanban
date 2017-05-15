@@ -2,13 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './containers/App';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import boardReducers from './reducers/boardReducers';
+import customMiddleare from './middleware';
 import './index.css';
 import './reset.css';
 
 const store = createStore(
-  boardReducers
+  boardReducers,
+  applyMiddleware(customMiddleare)
 );
 
 ReactDOM.render(

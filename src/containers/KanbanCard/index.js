@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import './KanbanCard.css';
 import { connect } from 'react-redux';
 import { updateCard, deleteCard } from '../../actions';
-import {updateCardInDb, deleteCardInDb} from '../../lib/fetchFromDB';
 
 class KanbanCard extends Component{
   constructor(props) {
@@ -19,16 +18,12 @@ class KanbanCard extends Component{
 
   handleDelete = (event) => {
     event.preventDefault();
-    deleteCardInDb(this.props.card.id)
-      .then(this.props.deleteCard(this.props.card.id))
-      .catch(console.log);
+    this.props.deleteCard(this.props.card.id)
   };
 
   handleStatus = (event) => {
     event.preventDefault();
-    updateCardInDb(this.props.card.id, {status: event.target.value})
-      .then(this.props.updateCard)
-      .catch(console.log);
+    this.props.updateCard({id: this.props.card.id, status: event.target.value});
   };
 
   handleEdit = () => {
@@ -38,15 +33,12 @@ class KanbanCard extends Component{
   handleCompleteEdit = (event) => {
     event.preventDefault();
     this.setState({editCard: false});
-    updateCardInDb(
-      this.props.card.id,
-      {
-        title: this.state.title,
-        assignedTo: this.state.assignedTo || this.props.card.assignedTo,
-        priority: this.state.priority
-      }
-    )
-      .then(this.props.updateCard);
+    this.props.updateCard({
+      id: this.props.card.id,
+      title: this.state.title,
+      assignedTo: this.state.assignedTo,
+      priority: this.state.priority
+    });
   };
 
   handleChange = (event) => {

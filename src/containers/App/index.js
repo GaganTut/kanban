@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { loadCards } from '../../actions';
-import {getAllCards} from '../../lib/fetchFromDB';
 import Column from '../../components/Column';
 import CardForm from '../CardForm';
 import Login from '../Login';
@@ -20,9 +19,7 @@ class App extends Component {
   }
 
   getCards = () => {
-    return getAllCards()
-      .then(this.props.loadCards)
-      .catch(console.log);
+    this.props.loadCards();
   }
 
   render() {

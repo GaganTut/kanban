@@ -33,7 +33,6 @@ const customMiddleware = store => next => action => {
 
     case types.ADD_CARD:
       next({type: types.FETCHING_IN_PROGRESS});
-      console.log(action.card);
       db.addCard(action.card)
         .then(card => {
           action.card = card;
@@ -56,9 +55,11 @@ const customMiddleware = store => next => action => {
       .catch(console.log);
       break;
     case types.LOG_OUT:
+      console.log(action);
       next({type: types.FETCHING_IN_PROGRESS});
       db.logoutUser()
-        .then(() => {
+        .then((success) => {
+          console.log(success);
           localStorage.clear();
           next(action);
         })

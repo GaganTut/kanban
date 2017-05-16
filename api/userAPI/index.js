@@ -89,7 +89,9 @@ user.get('/:username', (req, res) => {
 });
 
 user.get('/logout', (req, res) => {
+  console.log(req.isAuthenticated());
   req.logout();
+  console.log(req.isAuthenticated());
   res.json({success: true});
 });
 

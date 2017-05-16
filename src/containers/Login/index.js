@@ -29,7 +29,7 @@ class Login extends Component {
   };
 
   handleLogOut = (event) => {
-    this.props.logout();
+    this.props.logout(localStorage.username);
   };
 
 

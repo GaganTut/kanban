@@ -26,21 +26,9 @@ class CardForm extends Component {
         })
   }
 
-  handleTitleChange = (event) => {
-    this.setState({ title : event.target.value });
-  }
-
-  handlePriorityChange = (event) => {
-    this.setState({ priority : event.target.value });
-  }
-
-  handleStatusChange = (event) => {
-    this.setState({ status : event.target.value });
-  }
-
-  handleAssignedToChange = (event) => {
-    this.setState({ assignedTo : event.target.value });
-  }
+  handleChange = (event) => {
+    this.setState({[event.target.name]: event.target.value});
+  };
 
   createCardObject(stateObj) {
     return {
@@ -61,14 +49,14 @@ class CardForm extends Component {
 
         <input type="text"
           placeholder="title"
-          onChange={this.handleTitleChange}
+          onChange={this.handleChange}
           value={this.state.title}
           id="title-input"
           className="cardInputs"
         />
 
         <select
-          onChange={this.handlePriorityChange}
+          onChange={this.handleChange}
           id="priority-input"
           className="cardInputs"
           value={this.state.priority}
@@ -81,7 +69,7 @@ class CardForm extends Component {
         </select>
 
         <select
-          onChange={this.handleStatusChange}
+          onChange={this.handleChange}
           id="status-input"
           className="cardInputs"
           value={this.state.status}
@@ -95,7 +83,7 @@ class CardForm extends Component {
         <input
           type="text"
           placeholder="Assigned To"
-          onChange={this.handleAssignedToChange}
+          onChange={this.handleChange}
           value={this.state.assignedTo}
           id="assigned-input"
           className="cardInputs"

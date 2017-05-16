@@ -10,7 +10,6 @@ app.use(require('method-override')('_method'));
 app.use('/api', require('./api'));
 app.use(express.static('public'));
 
-
-//db.sequelize.sync({force:true});
-
-app.listen(PORT);
+app.listen(PORT, () => {
+  db.sequelize.sync();
+});

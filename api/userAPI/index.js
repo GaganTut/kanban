@@ -14,9 +14,7 @@ user.route('/')
       .then( user => {
         res.json(user);
       })
-      .catch(err => {
-        res.send(err);
-      });
+      .catch(res.json({success: false}));
   });
 
 user.post('/new', middleWare.validateNewUser, (req, res) => {
@@ -46,7 +44,6 @@ user.post('/login', passport.authenticate('local'), (req, res) => {
 });
 
 user.get('/logout', (req, res) => {
-  console.log(req.isAuthenticated());
   req.logout();
   res.json({success: true});
 });
@@ -61,9 +58,7 @@ user.delete('/:username', middleWare.userPermission, (req, res) => {
     }
   )
   .then(res.json({success: true}))
-  .catch(err => {
-    res.send(err);
-  });
+  .catch(res.json({success: false}));
 });
 
 
@@ -76,9 +71,7 @@ user.put('/:username', middleWare.userPermission, (req, res) => {
     }
   )
   .then(res.json({success: true}))
-  .catch(err => {
-    res.send(err);
-  });
+  .catch(res.json({success: false}));
 });
 
 user.get('/:username', (req, res) => {
@@ -91,7 +84,7 @@ user.get('/:username', (req, res) => {
     .then(userInfo => {
       res.json(userInfo);
     })
-    .catch(console.log);
+    .catch(res.json({success: false}));
 });
 
 module.exports = user;

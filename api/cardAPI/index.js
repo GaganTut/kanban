@@ -23,16 +23,12 @@ cards.route('/')
       .then( cards => {
         res.json(cards);
       })
-      .catch(err => {
-        res.send(err);
-      });
+      .catch(res.json({success: false}));
   })
   .post(middleWare.userPermission, (req, res) => {
     Card.create(req.body)
       .then(data => res.json(data))
-      .catch(err => {
-        res.json(err);
-      });
+      .catch(res.json({success: false}));
   });
 
 cards.delete('/:id', middleWare.userPermission, (req, res) => {
@@ -44,9 +40,7 @@ cards.delete('/:id', middleWare.userPermission, (req, res) => {
     }
   )
   .then(res.json({success: true}))
-  .catch(err => {
-    res.send(err);
-  });
+  .catch(res.json({success: false}));
 });
 
 
@@ -61,9 +55,7 @@ cards.put('/:id', middleWare.userPermission, (req, res) => {
     }
   )
   .then(card => res.json(card[1].dataValues))
-  .catch(err => {
-    res.send(err);
-  });
+  .catch(res.json({success: false}));
 });
 
 module.exports = cards;

@@ -1,6 +1,6 @@
 /*jshint esversion: 6*/
 import React, { Component } from 'react';
-import './App.scss';
+import './App.css';
 import { connect } from 'react-redux';
 import { loadCards } from '../../actions';
 import Column from '../../components/Column';
@@ -12,7 +12,6 @@ class App extends Component {
     super(props);
 
     this.title = 'KANBAN BOARD';
-
   }
   componentWillMount() {
     this.getCards();

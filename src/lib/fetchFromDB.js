@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
-export const getAllCards = () => fetch('http://localhost:8888/api/cards').then(res => res.json());
+export const getAllCards = () => fetch('/api/cards').then(res => res.json());
 
-export const addCard = (cardObj) => fetch('http://localhost:8888/api/cards', {
+export const addCard = (cardObj) => fetch('/api/cards', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -9,7 +9,7 @@ export const addCard = (cardObj) => fetch('http://localhost:8888/api/cards', {
     body: JSON.stringify(cardObj)
   }).then(res => res.json());
 
-export const updateCard = (id, cardObj) => fetch(`http://localhost:8888/api/cards/${id}`, {
+export const updateCard = (id, cardObj) => fetch(`/api/cards/${id}`, {
     method: 'PUT',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -17,11 +17,11 @@ export const updateCard = (id, cardObj) => fetch(`http://localhost:8888/api/card
     body: JSON.stringify(cardObj)
   }).then(res => res.json());
 
-export const deleteCard = (id) => fetch(`http://localhost:8888/api/cards/${id}`, {
+export const deleteCard = (id) => fetch(`/api/cards/${id}`, {
     method: 'DELETE'
   }).then(res => res.json());
 
-export const loginUser = (username, password) => fetch('http://localhost:8888/api/user/login', {
+export const loginUser = (username, password) => fetch('/api/user/login', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -30,4 +30,4 @@ export const loginUser = (username, password) => fetch('http://localhost:8888/ap
   })
     .then(res => res.json());
 
-export const logoutUser = () => fetch('http://localhost:8888/api/user/logout').then(res => res.json());
+export const logoutUser = () => fetch('/api/user/logout').then(res => res.json());

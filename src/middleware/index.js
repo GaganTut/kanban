@@ -30,6 +30,18 @@ const customMiddleware = store => next => action => {
         })
         .catch(console.log);
       break;
+
+    case types.ADD_CARD:
+      next({type: types.FETCHING_IN_PROGRESS});
+      console.log(action.card);
+      db.addCard(action.card)
+        .then(card => {
+          action.card = card;
+          next(action);
+        })
+        .catch(console.log);
+        break;
+
     case types.LOG_IN:
       next({type: types.FETCHING_IN_PROGRESS});
       db.loginUser(action.userInfo.username, action.userInfo.password)

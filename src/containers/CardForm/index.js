@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './CardForm.css';
-import {addCardToDb} from '../../lib/fetchFromDB';
+import { addCard } from '../../actions';
+import { connect } from 'react-redux';
 
 class CardForm extends Component {
   constructor(props) {
@@ -8,46 +9,36 @@ class CardForm extends Component {
 
     this.state = {
       title: '',
-      priority: '',
-      status: '',
+      priority: 'Base',
+      status: 'Base',
       assignedTo: ''
     };
-
-    this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.handlePriorityChange = this.handlePriorityChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleStatusChange = this.handleStatusChange.bind(this);
-    this.handleAssignedToChange = this.handleAssignedToChange.bind(this);
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
-    addCardToDb(this.createCardObject(this.object))
-      .then(card => {
-        this.setState({
+    this.props.addCard(this.createCardObject(this.state));
+    this.setState = ({
           title: '',
-          priority: '',
-          status: '',
+          priority: 'Base',
+          status: 'Base',
           assignedTo: ''
-        });
-        this.props.getCards();
-      })
-      .catch(console.log);
+        })
   }
 
-  handleTitleChange(event) {
+  handleTitleChange = (event) => {
     this.setState({ title : event.target.value });
   }
 
-  handlePriorityChange(event) {
+  handlePriorityChange = (event) => {
     this.setState({ priority : event.target.value });
   }
 
-  handleStatusChange(event) {
+  handleStatusChange = (event) => {
     this.setState({ status : event.target.value });
   }
 
-  handleAssignedToChange(event) {
+  handleAssignedToChange = (event) => {
     this.setState({ assignedTo : event.target.value });
   }
 
@@ -57,7 +48,7 @@ class CardForm extends Component {
       priority: this.state.priority,
       status: this.state.status,
       assignedTo: this.state.assignedTo,
-      createdBy: localStorage.username
+      createdBy: 'GaganTut'
     };
   }
 
@@ -82,6 +73,7 @@ class CardForm extends Component {
           className="cardInputs"
           value={this.state.priority}
           >
+            <option disabled value="Base">Choose Priority</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
@@ -94,6 +86,7 @@ class CardForm extends Component {
           className="cardInputs"
           value={this.state.status}
           >
+            <option disabled value="Base">Choose Status</option>
             <option value="Queue">Queue</option>
             <option value="Progress">Progress</option>
             <option value="Completed">Completed</option>
@@ -118,4 +111,22 @@ class CardForm extends Component {
   }
 }
 
-export default CardForm;
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.loggedIn,
+    loggedUsername: state.loggedUsername
+  };
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    addCard: card => dispatch(addCard(card))
+  }
+}
+
+const ConnectedCardForm = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardForm);
+
+export default ConnectedCardForm;

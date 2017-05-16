@@ -34,6 +34,13 @@ const cards = (state = initialState, action) => {
         allCards: state.allCards.filter(card => card.id !== action.card.id).concat([action.card]),
         fetching: false
       });
+
+    case types.ADD_CARD :
+      return Object.assign({}, state, {
+        allCards: state.allCards.concat([action.card]),
+        fetching: false
+      });
+
     case types.LOG_IN :
       return Object.assign({}, state, {
         loggedIn: true,

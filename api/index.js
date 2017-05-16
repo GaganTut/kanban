@@ -45,6 +45,7 @@ passport.use(new LocalStrategy (
 ));
 
 passport.serializeUser(function(user, done) {
+  console.log('Serializing');
   return done(null, {
     username: user.username,
     firstname: user.firstname
@@ -52,6 +53,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(user, done) {
+  console.log('deserializing');
   User.findOne({
     where: {
       username: user.username

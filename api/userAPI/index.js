@@ -12,9 +12,9 @@ user.route('/')
       attributes: ['username', 'firstname', 'lastname']
     })
       .then( user => {
-        res.json(user);
+        res.send(200).json(user);
       })
-      .catch(res.json({success: false}));
+      .catch(res.status(400));
   });
 
 user.post('/new', middleWare.validateNewUser, (req, res) => {
@@ -27,7 +27,7 @@ user.post('/new', middleWare.validateNewUser, (req, res) => {
         password: hash
       })
       .then((user) => {
-        res.json(
+        res.status(200).json(
           {
             "firstname": user.firstname,
             "lastname": user.lastname,
@@ -45,7 +45,7 @@ user.post('/login', passport.authenticate('local'), (req, res) => {
 
 user.get('/logout', (req, res) => {
   req.logout();
-  res.json({success: true});
+  res.sendStatus(200);
 });
 
 
@@ -57,8 +57,8 @@ user.delete('/:username', middleWare.userPermission, (req, res) => {
       }
     }
   )
-  .then(res.json({success: true}))
-  .catch(res.json({success: false}));
+  .then(res.status(200).json({success: true}))
+  .catch(res.status(400));
 });
 
 
@@ -70,8 +70,8 @@ user.put('/:username', middleWare.userPermission, (req, res) => {
       }
     }
   )
-  .then(res.json({success: true}))
-  .catch(res.json({success: false}));
+  .then(res.status(200).json({success: true}))
+  .catch(res.status(400));
 });
 
 user.get('/:username', (req, res) => {
@@ -82,9 +82,9 @@ user.get('/:username', (req, res) => {
     attributes: ['username', 'firstname', 'lastname']
   })
     .then(userInfo => {
-      res.json(userInfo);
+      res.status(200).json(userInfo);
     })
-    .catch(res.json({success: false}));
+    .catch(res.status(400));
 });
 
 module.exports = user;

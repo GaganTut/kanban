@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 const express = require('express');
 const user = express.Router();
 const { Card, User } = require('../../models');
@@ -39,13 +40,18 @@ user.post('/new', middleWare.validateNewUser, (req, res) => {
   });
 });
 
-user.post('/login', passport.authenticate('local'), (req, res) => {
-  res.redirect(`/api/user/${req.body.username}`);
-});
+user.post('/user/login', passport.authenticate('local', {
+  successRedirect: '/api/user/success',
+  failureaRedirect: '/api/user/failure'
+}));
 
 user.get('/logout', (req, res) => {
   req.logout();
-  res.sendStatus(200);
+  res.status(200).json({ success: true });
+});
+
+user.get('/success', (req, res) => {
+  res.status(200).json({success: true});
 });
 
 

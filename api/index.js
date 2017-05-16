@@ -45,28 +45,25 @@ passport.use(new LocalStrategy (
 ));
 
 passport.serializeUser(function(user, done) {
-  console.log('Serializing');
+  console.log('serializing');
+                              // ^ ---------- given from authentication strategy
+  // building the object to serialize to save
   return done(null, {
-    username: user.username,
-    firstname: user.firstname
+    username: user.username
   });
 });
 
 passport.deserializeUser(function(user, done) {
   console.log('deserializing');
+                                 // ^ ---------- given from serializeUser
   User.findOne({
     where: {
       username: user.username
     }
   }).then(user => {
-    return done(null, {
-      username: user.username,
-      firstname: user.firstname
-    });
+    return done(null, user); // <------- inserts into the request object
   });
 });
-
-
 
 api.use('/cards', require('./cardAPI'));
 api.use('/user', require('./userAPI'));

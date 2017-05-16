@@ -1,9 +1,74 @@
 /*jshint esversion :6*/
 import * as types from '../constants';
+import * as db from '../lib/fetchFromDB';
 
-export const loadCards = () => ({type: types.LOAD_CARDS});
-export const deleteCard = id => ({type: types.DELETE_CARD, id});
-export const updateCard = card => ({type: types.UPDATE_CARD, card});
-export const addCard = card => ({type: types.ADD_CARD, card});
-export const login = (username, password) => ({type: types.LOG_IN, userInfo: {username, password}});
-export const logout = username => ({type: types.LOG_OUT, username});
+export const login = (username, password) => {
+  return dispatch => {
+    dispatch({type: types.FETCHING_IN_PROGRESS});
+    return db.loginUser(username, password)
+      .then(user => {
+        console.log(user);
+        localStorage.setItem('loggedIn', true);
+        localStorage.setItem('username', user.username);
+        dispatch({type: types.LOG_IN, user});
+      })
+      .catch(console.log);
+  };
+};
+
+export const logout= username => {
+  return dispatch => {
+    dispatch({type: types.FETCHING_IN_PROGRESS});
+    db.logoutUser()
+      .then(() => {
+        localStorage.clear();
+        dispatch({type: types.LOG_OUT, username});
+      })
+      .catch(console.log);
+  };
+};
+
+export const loadCards = () => {
+  return dispatch => {
+    dispatch({type: types.FETCHING_IN_PROGRESS});
+    return db.getAllCards()
+      .then(cards => {
+        dispatch({
+          type: types.LOAD_CARDS,
+          cards
+        });
+      })
+      .catch(console.log);
+  };
+};
+
+export const deleteCard = id => {
+  return dispatch => {
+    dispatch({type: types.FETCHING_IN_PROGRESS});
+    return db.deleteCard(id)
+      .then(dispatch({type: types.DELETE_CARD, id}))
+      .catch(console.log);
+  };
+};
+
+export const updateCard=  card => {
+  return dispatch => {
+    dispatch({type: types.FETCHING_IN_PROGRESS});
+    return db.updateCard(card.id, card)
+      .then(card => {
+        dispatch({type: types.UPDATE_CARD, card});
+      })
+      .catch(console.log);
+  };
+};
+
+export const addCard = card => {
+  return dispatch => {
+    dispatch({type: types.FETCHING_IN_PROGRESS});
+    return db.addCard(card)
+      .then(card => {
+        dispatch({type: types.ADD_CARD, card});
+      })
+      .catch(console.log);
+  };
+};

@@ -1,6 +1,10 @@
 /*jshint esversion: 6*/
 module.exports = function(sequelize, DataTypes) {
   let User = sequelize.define("User", {
+    id: {
+      type: DataTypes.UUID,
+      unique: true
+    },
     username: {
       type: DataTypes.STRING,
       primaryKey: true,

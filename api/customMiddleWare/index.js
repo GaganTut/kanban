@@ -9,10 +9,11 @@ module.exports = (() => {
   };
 
   const userPermission = (req, res, next) => {
-    if (req.username === req.body.username) {
+    console.log(req.isAuthenticated());
+    if (req.isAuthenticated()) {
       next();
     } else {
-      res.json({failed: 'Please Login'});
+      res.send(401, {failed: 'Please Login'});
     }
   };
 

@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 const express = require('express');
 const cards = express.Router();
 const { Card, User } = require('../../models');

@@ -41,6 +41,16 @@ user.post('/new', middleWare.validateNewUser, (req, res) => {
   });
 });
 
+user.post('/login', passport.authenticate('local'), (req, res) => {
+  res.redirect(`/api/user/${req.body.username}`);
+});
+
+user.get('/logout', (req, res) => {
+  console.log(req.isAuthenticated());
+  req.logout();
+  res.json({success: true});
+});
+
 
 user.delete('/:username', middleWare.userPermission, (req, res) => {
   Card.destroy(
@@ -71,10 +81,6 @@ user.put('/:username', middleWare.userPermission, (req, res) => {
   });
 });
 
-user.post('/login', passport.authenticate('local'), (req, res) => {
-  res.redirect(`/api/user/${req.body.username}`);
-});
-
 user.get('/:username', (req, res) => {
   User.findOne({
     where: {
@@ -86,13 +92,6 @@ user.get('/:username', (req, res) => {
       res.json(userInfo);
     })
     .catch(console.log);
-});
-
-user.get('/logout', (req, res) => {
-  console.log(req.isAuthenticated());
-  req.logout();
-  console.log(req.isAuthenticated());
-  res.json({success: true});
 });
 
 module.exports = user;

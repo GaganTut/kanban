@@ -24,8 +24,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Login />
         <h1 id="main-title">{this.title}</h1>
+        <Login />
         <div id="full-board">
           <Column
             cardList={this.props.allCards.filter(card => card.status === 'Queue')}

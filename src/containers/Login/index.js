@@ -39,14 +39,14 @@ class Login extends Component {
         <div
           className="login-component"
           >
-            <p id="loggedInMsg">{'Hello ' + this.props.loggedUsername}
-            </p>
+          <p id="loggedInMsg">{'Hello ' + this.props.loggedUsername}
+          </p>
 
-            <input
-              type="button"
-              onClick={this.handleLogOut}
-              value="Sign Out"
-              />
+          <input
+            type="button"
+            onClick={this.handleLogOut}
+            value="Sign Out"
+            />
         </div>
       )
     } else {

@@ -77,21 +77,50 @@ class KanbanCard extends Component{
           onSubmit={this.handleCompleteEdit}
           style={this.getPriorityColor(this.props.card.priority)}
           >
-          <input className="close-edit" type="button" onClick={this.handleEdit} value="✖"/>
-          <h1>#{this.props.card.id}</h1>
-          <input className="edit-title" type="text" name="title" value={this.state.title} onChange={this.handleChange}/>
-          <input className="edit-assigned" type="text" name="assignedTo" value={this.state.assignedTo} onChange={this.handleChange} list="userSearch"/>
+          <input
+            className="close-edit"
+            type="button"
+            onClick={this.handleEdit}
+            value="✖"
+            />
+          <h1>
+            {this.props.card.id}
+          </h1>
+          <input
+            className="edit-title"
+            type="text"
+            name="title"
+            value={this.state.title}
+            onChange={this.handleChange}
+            />
+          <input
+            className="edit-assigned"
+            type="text" name="assignedTo"
+            value={this.state.assignedTo}
+            onChange={this.handleChange}
+            list="userSearch"/>
             <datalist id="userSearch">
-                {this.props.userListOptions.map(listOption => (<option value={listOption.username} key={listOption.username}></option>))}
-              </datalist>
-          <select className="edit-priority" type="text" name="priority" value={this.state.priority} onChange={this.handleChange}>
+              {this.props.userListOptions.map(listOption => (<option value={listOption.username} key={listOption.username}></option>))}
+            </datalist>
+          <select
+            className="edit-priority"
+            type="text"
+            name="priority"
+            value={this.state.priority}
+            onChange={this.handleChange}>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
             <option value="Urgent">Urgent</option>
           </select>
-          <input type="submit"/>
-          <input type="button" onClick={this.handleDelete} value="Delete Card"/>
+          <input
+            type="submit"
+            />
+          <input
+            type="button"
+            onClick={this.handleDelete}
+            value="Delete Card"
+            />
         </form>
       )
     } else {

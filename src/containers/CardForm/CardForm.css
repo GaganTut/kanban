@@ -1,12 +1,12 @@
-#newCardForm {
+#newCardForm, #not-logged-form {
+  align-items: center;
   background-color: gray;
+  color: white;
   bottom: 0;
   display: flex;
+  height: 100px;
+  font-size: 30px;
   justify-content: space-around;
   position: fixed;
   width: 100%;
-}
-
-.cardInputs {
-  margin: 2% 0;
-}
+};

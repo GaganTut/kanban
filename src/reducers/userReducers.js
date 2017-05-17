@@ -6,7 +6,8 @@ const initialState = {
   loggedIn: localStorage.loggedIn || false,
   loggedUsername: localStorage.username || '',
   loggedFirstname: localStorage.firstname || '',
-  loggedLastname: localStorage.lastname || ''
+  loggedLastname: localStorage.lastname || '',
+  userListOptions: []
 };
 
 const users = (state = initialState, action) => {
@@ -25,6 +26,11 @@ const users = (state = initialState, action) => {
         loggedUsername: '',
         loggedFirstname: '',
         loggedLastname: '',
+      });
+
+    case types.LOAD_USER_LIST :
+      return Object.assign({}, state, {
+        userListOptions: action.users
       });
 
     default:

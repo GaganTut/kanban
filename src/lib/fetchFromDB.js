@@ -35,3 +35,5 @@ export const loginUser = (username, password) => fetch('/api/user/login', {
     .then(res => res.json());
 
 export const logoutUser = () => fetch('/api/user/logout',{credentials: 'include'}).then(res => res.json());
+
+export const getUserList = () => fetch('/api/user').then(res => res.json());

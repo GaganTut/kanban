@@ -1,17 +1,49 @@
 .each-card, .editCardForm {
+  align-items: center;
+  box-shadow: 10px 10px 5px gray;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 5%;
-  opacity: 0.65;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 3% 1%;
+  opacity: 0.8;
   width: 100px;
   height: 150px;
+  position: relative;
 }
 
-.each-card *, .editCardForm * {
-  margin: 2%;
+.card-id, .card-title, .card-creator, .card-assigned, .edit-title, .edit-assigned, .edit-priority {
   text-align: center;
-  width: 95%;
+  width: 90%;
+}
+
+.card-id {
+  font-size: 25px;
+}
+
+.card-title {
+  font-size: 18px;
+}
+
+.card-creator {
+  font-size: 12px;
+}
+
+.card-assigned {
+  font-size: 12px;
+}
+
+
+.close-edit {
+  background-color: transparent;
+  border: none;
+  color: black;
+  font-size: 15px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+
 }
 
 

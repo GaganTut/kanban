@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
 import React, {Component} from 'react';
 import './CardForm.css';
-import { addCard } from '../../actions';
+import { addCard, loadUserList } from '../../actions';
 import { connect } from 'react-redux';
 
 class CardForm extends Component {
@@ -13,7 +13,11 @@ class CardForm extends Component {
       priority: 'Base',
       status: 'Base',
       assignedTo: ''
-    }
+    };
+  }
+
+  componentDidMount() {
+    this.props.loadUserList();
   }
 
   handleSubmit = (event) => {
@@ -93,11 +97,16 @@ class CardForm extends Component {
             type="text"
             placeholder="Assigned To"
             onChange={this.handleChange}
+            onKeyUp={this.handleFuzzy}
             value={this.state.assignedTo}
             id="assigned-input"
             className="cardInputs"
             name="assignedTo"
+            list="userSearch"
             />
+              <datalist id="userSearch">
+                {this.props.userListOptions.map(listOption => (<option value={listOption.username} key={listOption.username}></option>))}
+              </datalist>
           <button
             type="submit"
             id="submit-input"
@@ -115,13 +124,15 @@ class CardForm extends Component {
 const mapStateToProps = (state) => {
   return {
     loggedIn: state.user.loggedIn,
-    loggedUsername: state.user.loggedUsername
+    loggedUsername: state.user.loggedUsername,
+    userListOptions: state.user.userListOptions
   };
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addCard: card => dispatch(addCard(card))
+    addCard: card => dispatch(addCard(card)),
+    loadUserList: () => dispatch(loadUserList())
   }
 }
 

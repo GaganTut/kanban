@@ -42,9 +42,9 @@ class KanbanCard extends Component{
 
   handleDrag = (event) => {
     event.preventDefault();
-    if (event.clientX / window.innerWidth < 0.3) {
+    if (event.clientX / window.innerWidth < 0.28) {
       this.props.updateCard({id: this.props.card.id, status: 'Queue'});
-    } else if (event.clientX / window.innerWidth < 0.625) {
+    } else if (event.clientX / window.innerWidth < 0.61) {
       this.props.updateCard({id: this.props.card.id, status: 'Progress'});
     } else if (event.clientX / window.innerWidth < 1) {
       this.props.updateCard({id: this.props.card.id, status: 'Completed'});
@@ -74,23 +74,24 @@ class KanbanCard extends Component{
       return (
         <form
           className="editCardForm"
-          draggable="true"
           onSubmit={this.handleCompleteEdit}
           style={this.getPriorityColor(this.props.card.priority)}
-          onDoubleClick={this.handleEdit}
-          onDragEnd={this.handleDrag}
           >
+          <input className="close-edit" type="button" onClick={this.handleEdit} value="✖"/>
           <h1>#{this.props.card.id}</h1>
-          <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>
-          <p>By: {this.props.card.createdBy}</p>
-          <input type="text" name="assignedTo" value={this.state.assignedTo} onChange={this.handleChange}/>
-          <select type="text" name="priority" value={this.state.priority} onChange={this.handleChange}>
+          <input className="edit-title" type="text" name="title" value={this.state.title} onChange={this.handleChange}/>
+          <input className="edit-assigned" type="text" name="assignedTo" value={this.state.assignedTo} onChange={this.handleChange} list="userSearch"/>
+            <datalist id="userSearch">
+                {this.props.userListOptions.map(listOption => (<option value={listOption.username} key={listOption.username}></option>))}
+              </datalist>
+          <select className="edit-priority" type="text" name="priority" value={this.state.priority} onChange={this.handleChange}>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
             <option value="Urgent">Urgent</option>
           </select>
           <input type="submit"/>
+          <input type="button" onClick={this.handleDelete} value="Delete Card"/>
         </form>
       )
     } else {
@@ -102,11 +103,10 @@ class KanbanCard extends Component{
           onDoubleClick={this.handleEdit}
           onDragEnd={this.handleDrag}
           >
-            <h1>#{this.props.card.id}</h1>
-            <h4>{this.props.card.title}</h4>
-            <p>By: {this.props.card.createdBy}</p>
-            <p>For: {this.props.card.assignedTo}</p>
-            <input type="button" onClick={this.handleDelete} value="Delete Card"/>
+            <h1 className="card-id">#{this.props.card.id}</h1>
+            <h4 className="card-title">{this.props.card.title}</h4>
+            <p className="card-creator">By: {this.props.card.createdBy}</p>
+            <p className="card-assigned">For: {this.props.card.assignedTo}</p>
         </div>
       )
     }
@@ -114,7 +114,9 @@ class KanbanCard extends Component{
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    userListOptions: state.user.userListOptions
+  };
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {

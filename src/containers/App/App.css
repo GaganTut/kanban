@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Vollkorn');
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -11,17 +12,26 @@
 }
 
 #main-title {
-  color: gray;
-  font-size: 500%;
+  background-color: gray;
+  border-bottom: 3px groove white;
+  color: silver;
+  font-family: 'Vollkorn', serif;
+  font-size: 100px;
+  line-height: 120px;
+  text-align: center;
+  top: 0;
+  height: 100px;
+  width: 100%;
+  position: fixed;
 }
 
 #full-board {
   display: flex;
   justify-content: space-around;
-  width: 98%;
+  width: 100%;
   position: fixed;
   bottom: 100px;
-  top: 0;
+  top: 100px;
   overflow: auto;
 }
 
@@ -46,12 +56,11 @@
 }
 
 .column-title {
-  border-bottom: 2px solid silver;
+  border-bottom: 3px groove white;
   color: white;
   font-size: 50px;
   padding-bottom: 3%;
   text-align: center;
-  width: 110%;
 }
 
 #loading-message {

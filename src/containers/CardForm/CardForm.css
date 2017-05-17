@@ -1,6 +1,7 @@
 #newCardForm, #not-logged-form {
   align-items: center;
   background-color: gray;
+  border-top: 3px groove white;
   color: white;
   bottom: 0;
   display: flex;

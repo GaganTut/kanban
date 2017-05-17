@@ -6,3 +6,4 @@ export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
 export const ADD_CARD = 'ADD_CARD';
 export const FETCHING_DONE = 'FETCHING_DONE';
+export const LOAD_USER_LIST = 'LOAD_USER_LIST';

@@ -29,6 +29,19 @@ export const logout= username => {
   };
 };
 
+export const loadUserList = () => {
+  return dispatch => {
+    return db.getUserList()
+      .then(users => {
+        dispatch({
+          type: types.LOAD_USER_LIST,
+          users
+        });
+      })
+      .catch(console.log);
+  };
+};
+
 export const loadCards = () => {
   return dispatch => {
     dispatch({type: types.FETCHING_IN_PROGRESS});

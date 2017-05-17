@@ -21,11 +21,6 @@ class KanbanCard extends Component{
     this.props.deleteCard(this.props.card.id)
   };
 
-  handleStatus = (event) => {
-    event.preventDefault();
-    this.props.updateCard({id: this.props.card.id, status: event.target.value});
-  };
-
   handleEdit = () => {
     this.setState({editCard: !this.state.editCard});
   };
@@ -43,6 +38,20 @@ class KanbanCard extends Component{
 
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value});
+  };
+
+  handleDrag = (event) => {
+    event.preventDefault();
+    if (event.clientX / window.innerWidth < 0.3) {
+      this.props.updateCard({id: this.props.card.id, status: 'Queue'});
+    } else if (event.clientX / window.innerWidth < 0.625) {
+      this.props.updateCard({id: this.props.card.id, status: 'Progress'});
+    } else if (event.clientX / window.innerWidth < 1) {
+      this.props.updateCard({id: this.props.card.id, status: 'Completed'});
+    } else {
+      return;
+    }
+
   };
 
   getPriorityColor(priority) {
@@ -86,18 +95,15 @@ class KanbanCard extends Component{
       return (
         <div
           className="each-card"
+          draggable="true"
           style={this.getPriorityColor(this.props.card.priority)}
           onDoubleClick={this.handleEdit}
+          onDragEnd={this.handleDrag}
           >
             <h1>#{this.props.card.id}</h1>
             <h4>{this.props.card.title}</h4>
             <p>By: {this.props.card.createdBy}</p>
             <p>For: {this.props.card.assignedTo}</p>
-            <select value={this.props.card.status} onChange={this.handleStatus}>
-              <option value="Queue">Queue</option>
-              <option value="Progress">Progress</option>
-              <option value="Completed">Completed</option>
-            </select>
             <input type="button" onClick={this.handleDelete} value="Delete Card"/>
         </div>
       )

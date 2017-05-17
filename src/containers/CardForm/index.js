@@ -13,18 +13,13 @@ class CardForm extends Component {
       priority: 'Base',
       status: 'Base',
       assignedTo: ''
-    };
+    }
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.addCard(this.createCardObject(this.state));
-    this.setState = ({
-          title: '',
-          priority: 'Base',
-          status: 'Base',
-          assignedTo: ''
-        });
+    this.reset();
   };
 
   handleChange = (event) => {
@@ -39,6 +34,15 @@ class CardForm extends Component {
       assignedTo: this.state.assignedTo,
       createdBy: this.props.loggedUsername
     };
+  }
+
+  reset() {
+    this.setState({
+      title: '',
+      priority: 'Base',
+      status: 'Base',
+      assignedTo: ''
+    });
   }
 
   render() {

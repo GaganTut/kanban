@@ -74,9 +74,11 @@ class KanbanCard extends Component{
       return (
         <form
           className="editCardForm"
+          draggable="true"
           onSubmit={this.handleCompleteEdit}
           style={this.getPriorityColor(this.props.card.priority)}
           onDoubleClick={this.handleEdit}
+          onDragEnd={this.handleDrag}
           >
           <h1>#{this.props.card.id}</h1>
           <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>

@@ -37,7 +37,7 @@ class CardForm extends Component {
       priority: this.state.priority,
       status: this.state.status,
       assignedTo: this.state.assignedTo,
-      createdBy: 'GaganTut'
+      createdBy: this.props.loggedUsername
     };
   }
 

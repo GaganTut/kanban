@@ -27,7 +27,7 @@ cards.route('/')
   })
   .post(middleWare.userPermission, (req, res) => {
     Card.create(req.body)
-      .then(data => res.json(data))
+      .then(data => res.status(200).json(data))
       .catch(res.status(400));
   });
 

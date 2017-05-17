@@ -21,16 +21,33 @@
   width: 98%;
 }
 
-#progress-column {
+.Progress {
   border-left: 3px groove white;
   border-right: 3px groove white;
 }
 
-#queue-column, #progress-column, #completed-column {
+.Queue, .Progress, .Completed {
+  align-items: center;
   display: flex;
+  flex-direction: column;
+  width: 32%;
+}
+
+.card-section {
+  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: 32%;
+  width: 100%;
+}
+
+.column-title {
+  border-bottom: 2px solid silver;
+  color: white;
+  font-size: 50px;
+  padding-bottom: 3%;
+  text-align: center;
+  width: 110%;
 }
 
 #loading-message {

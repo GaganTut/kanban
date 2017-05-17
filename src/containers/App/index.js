@@ -27,9 +27,18 @@ class App extends Component {
         <Login />
         <h1 id="main-title">{this.title}</h1>
         <div id="full-board">
-          <Column cardList={this.props.allCards.filter(card => card.status === 'Queue')} columnID="queue-column"></Column>
-          <Column cardList={this.props.allCards.filter(card => card.status === 'Progress')} columnID="progress-column"></Column>
-          <Column cardList={this.props.allCards.filter(card => card.status === 'Completed')} columnID="completed-column"></Column>
+          <Column
+            cardList={this.props.allCards.filter(card => card.status === 'Queue')}
+            columnName="Queue"
+            />
+          <Column
+            cardList={this.props.allCards.filter(card => card.status === 'Progress')}
+            columnName="Progress"
+            />
+          <Column
+            cardList={this.props.allCards.filter(card => card.status === 'Completed')}
+            columnName="Completed"
+            />
         </div>
         <CardForm/>
         {this.props.fetching && <div id="loading-message"></div>}

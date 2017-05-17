@@ -101,8 +101,8 @@ class CardForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    loggedIn: state.loggedIn,
-    loggedUsername: state.loggedUsername
+    loggedIn: state.user.loggedIn,
+    loggedUsername: state.user.loggedUsername
   };
 }
 

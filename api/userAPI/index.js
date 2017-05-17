@@ -13,7 +13,7 @@ user.route('/')
       attributes: ['username', 'firstname', 'lastname']
     })
       .then( user => {
-        res.send(200).json(user);
+        res.status(200).json(user);
       })
       .catch(res.status(400));
   });
@@ -40,57 +40,49 @@ user.post('/new', middleWare.validateNewUser, (req, res) => {
   });
 });
 
-user.post('/user/login', passport.authenticate('local', {
-  successRedirect: '/api/user/success',
-  failureaRedirect: '/api/user/failure'
-}));
+user.post('/login', passport.authenticate('local'), (req, res) => {
+  res.redirect(`/api/user/${req.user.username}`);
+});
 
 user.get('/logout', (req, res) => {
   req.logout();
-  res.status(200).json({ success: true });
-});
-
-user.get('/success', (req, res) => {
   res.status(200).json({success: true});
 });
 
-
-user.delete('/:username', middleWare.userPermission, (req, res) => {
-  Card.destroy(
-    {
+user.route('/:username')
+  .get((req, res) => {
+    User.findOne({
       where: {
         username: req.params.username
-      }
-    }
-  )
-  .then(res.status(200).json({success: true}))
-  .catch(res.status(400));
-});
-
-
-user.put('/:username', middleWare.userPermission, (req, res) => {
-  Card.update(req.body,
-    {
-      where: {
-        username: req.params.username
-      }
-    }
-  )
-  .then(res.status(200).json({success: true}))
-  .catch(res.status(400));
-});
-
-user.get('/:username', (req, res) => {
-  User.findOne({
-    where: {
-      username: req.params.username
-    },
-    attributes: ['username', 'firstname', 'lastname']
-  })
-    .then(userInfo => {
-      res.status(200).json(userInfo);
+      },
+      attributes: ['username', 'firstname', 'lastname']
     })
+      .then(userInfo => {
+        res.status(200).json(userInfo);
+      })
+      .catch(res.status(400));
+  })
+  .put(middleWare.userPermission, (req, res) => {
+    Card.update(req.body,
+      {
+        where: {
+          username: req.params.username
+        }
+      }
+    )
+      .then(res.status(200).json({success: true}))
+      .catch(res.status(400));
+  })
+  .delete(middleWare.userPermission, (req, res) => {
+    Card.destroy(
+      {
+        where: {
+          username: req.params.username
+        }
+      }
+    )
+    .then(res.status(200).json({success: true}))
     .catch(res.status(400));
-});
+  });
 
 module.exports = user;

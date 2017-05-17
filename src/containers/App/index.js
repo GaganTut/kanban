@@ -40,8 +40,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    allCards: state.allCards,
-    fetching: state.fetching
+    allCards: state.board.allCards,
+    fetching: state.board.fetching
   };
 }
 

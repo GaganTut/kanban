@@ -7,7 +7,7 @@ export const login = (username, password) => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
     return db.loginUser(username, password)
       .then(user => {
-        console.log(user);
+        dispatch({type: types.FETCHING_DONE});
         localStorage.setItem('loggedIn', true);
         localStorage.setItem('username', user.username);
         dispatch({type: types.LOG_IN, user});
@@ -22,6 +22,7 @@ export const logout= username => {
     db.logoutUser()
       .then(() => {
         localStorage.clear();
+        dispatch({type: types.FETCHING_DONE});
         dispatch({type: types.LOG_OUT, username});
       })
       .catch(console.log);
@@ -33,6 +34,7 @@ export const loadCards = () => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
     return db.getAllCards()
       .then(cards => {
+        dispatch({type: types.FETCHING_DONE});
         dispatch({
           type: types.LOAD_CARDS,
           cards
@@ -46,7 +48,10 @@ export const deleteCard = id => {
   return dispatch => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
     return db.deleteCard(id)
-      .then(dispatch({type: types.DELETE_CARD, id}))
+      .then(() => {
+        dispatch({type: types.FETCHING_DONE});
+        dispatch({type: types.DELETE_CARD, id});
+      })
       .catch(console.log);
   };
 };
@@ -56,6 +61,7 @@ export const updateCard=  card => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
     return db.updateCard(card.id, card)
       .then(card => {
+        dispatch({type: types.FETCHING_DONE});
         dispatch({type: types.UPDATE_CARD, card});
       })
       .catch(console.log);
@@ -67,6 +73,7 @@ export const addCard = card => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
     return db.addCard(card)
       .then(card => {
+        dispatch({type: types.FETCHING_DONE});
         dispatch({type: types.ADD_CARD, card});
       })
       .catch(console.log);

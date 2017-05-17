@@ -80,10 +80,8 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    loggedIn: state.loggedIn,
-    loggedUsername: state.loggedUsername,
-    loggedFirstname: state.loggedFirstname,
-    loggedLastname: state.loggedLastname
+    loggedIn: state.user.loggedIn,
+    loggedUsername: state.user.loggedUsername
   };
 }
 

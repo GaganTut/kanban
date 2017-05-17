@@ -4,12 +4,12 @@ import App from './containers/App';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
-import boardReducers from './reducers/boardReducers';
+import reducers from './reducers';
 import './index.css';
 import './reset.css';
 
 const store = createStore(
-  boardReducers,
+  reducers,
   applyMiddleware(ReduxThunk)
 );
 

@@ -16,7 +16,7 @@ const users = (state = initialState, action) => {
         loggedIn: true,
         loggedUsername: action.user.username,
         loggedFirstname: action.user.firstname,
-        loggedLastname: action.user.lastname
+        loggedLastname: action.user.lastname,
       });
 
     case types.LOG_OUT :
@@ -24,7 +24,7 @@ const users = (state = initialState, action) => {
         loggedIn: false,
         loggedUsername: '',
         loggedFirstname: '',
-        loggedLastname: ''
+        loggedLastname: '',
       });
 
     default:

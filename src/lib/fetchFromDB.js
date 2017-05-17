@@ -3,6 +3,7 @@ export const getAllCards = () => fetch('/api/cards').then(res => res.json());
 
 export const addCard = (cardObj) => fetch('/api/cards', {
     method: 'POST',
+    credentials: 'include',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
@@ -11,6 +12,7 @@ export const addCard = (cardObj) => fetch('/api/cards', {
 
 export const updateCard = (id, cardObj) => fetch(`/api/cards/${id}`, {
     method: 'PUT',
+    credentials: 'include',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
@@ -18,11 +20,13 @@ export const updateCard = (id, cardObj) => fetch(`/api/cards/${id}`, {
   }).then(res => res.json());
 
 export const deleteCard = (id) => fetch(`/api/cards/${id}`, {
-    method: 'DELETE'
+    method: 'DELETE',
+    credentials: 'include',
   }).then(res => res.json());
 
 export const loginUser = (username, password) => fetch('/api/user/login', {
     method: 'POST',
+    credentials: 'include',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
@@ -30,4 +34,4 @@ export const loginUser = (username, password) => fetch('/api/user/login', {
   })
     .then(res => res.json());
 
-export const logoutUser = () => fetch('/api/user/logout').then(res => res.json());
+export const logoutUser = () => fetch('/api/user/logout',{credentials: 'include'}).then(res => res.json());

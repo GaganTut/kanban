@@ -5,10 +5,6 @@ import * as types from '../constants';
 const initialState = {
   allCards: [],
   fetching: false,
-  loggedIn: localStorage.loggedIn || false,
-  loggedUsername: localStorage.username || '',
-  loggedFirstname: localStorage.firstname || '',
-  loggedLastname: localStorage.lastname || ''
 };
 
 const cards = (state = initialState, action) => {
@@ -16,6 +12,10 @@ const cards = (state = initialState, action) => {
     case types.FETCHING_IN_PROGRESS:
       return Object.assign({}, state, {
         fetching: true
+      });
+    case types.FETCHING_DONE:
+      return Object.assign({}, state, {
+        fetching: false
       });
     case types.LOAD_CARDS :
       return Object.assign({}, state, {
@@ -39,24 +39,6 @@ const cards = (state = initialState, action) => {
       return Object.assign({}, state, {
         allCards: state.allCards.concat([action.card]),
         fetching: false
-      });
-
-    case types.LOG_IN :
-      return Object.assign({}, state, {
-        loggedIn: true,
-        loggedUsername: action.user.username,
-        loggedFirstname: action.user.firstname,
-        loggedLastname: action.user.lastname,
-        fetching: false,
-      });
-
-    case types.LOG_OUT :
-      return Object.assign({}, state, {
-        loggedIn: false,
-        loggedUsername: '',
-        loggedFirstname: '',
-        loggedLastname: '',
-        fetching: false,
       });
 
     default:

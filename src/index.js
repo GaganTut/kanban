@@ -1,6 +1,10 @@
+/*jshint esversion: 6*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './containers/App';
+import Signup from './containers/Signup';
+import CardForm from './containers/CardForm';
+import Login from './containers/Login';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
@@ -20,7 +24,13 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <Router>
+    <div>
+      <h1 className="main-title">Kanban Board</h1>
+      <Login />
       <Route exact path="/" component={App} />
+      <Route exact path="/signup" component={Signup} />
+      <CardForm/>
+    </div>
     </Router>
   </Provider>
   ,

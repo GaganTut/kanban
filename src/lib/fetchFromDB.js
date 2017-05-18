@@ -44,6 +44,18 @@ export const loginUser = (username, password) => fetch('/api/user/login', {
       return res.json();
     });
 
+export const signupUser = userInfo => fetch('/api/user/new', {
+  method: 'POST',
+  credentials: 'include',
+  headers: new Headers({
+    'Content-Type': 'application/json'
+  }),
+  body: JSON.stringify(userInfo)
+})
+  .then(res => {
+    return res.json();
+  });
+
 export const logoutUser = () => fetch('/api/user/logout',{credentials: 'include'})
   .then(res => res.json());
 

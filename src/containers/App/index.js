@@ -4,17 +4,9 @@ import './App.css';
 import { connect } from 'react-redux';
 import { loadCards, closeError } from '../../actions';
 import Column from '../../components/Column';
-import CardForm from '../CardForm';
-import Login from '../Login';
-import Signup from '../Signup';
 import ErrorMessage from '../../components/ErrorMessage';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.title = 'KANBAN BOARD';
-  }
   componentWillMount() {
     this.getCards();
   }
@@ -26,9 +18,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1 id="main-title">{this.title}</h1>
-        <Login />
-        <Signup />
         <div id="full-board">
           <Column
             cardList={this.props.allCards.filter(card => card.status === 'Queue')}
@@ -43,7 +32,6 @@ class App extends Component {
             columnName="Completed"
             />
         </div>
-        <CardForm/>
         {this.props.fetching && <div id="loading-message"></div>}
         {this.props.hasError && <ErrorMessage
                   errorMessage={this.props.errorMessage}

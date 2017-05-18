@@ -32,6 +32,16 @@ export const logout= username => {
   };
 };
 
+export const signup = userInfo => {
+  return dispatch => {
+    dispatch({type: types.FETCHING_IN_PROGRESS});
+    db.signupUser(userInfo)
+      .then(user => {
+        console.log(user);
+      });
+  };
+};
+
 export const loadUserList = () => {
   return dispatch => {
     return db.getUserList()

@@ -76,6 +76,18 @@
   left: 45%;
 }
 
+.error-message {
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  height: 200px;
+  position: fixed;
+  top: 35%;
+  left: 35%;
+}
+
 @media (max-width: 789px) {
   #main-title {
     font-size: 50px;

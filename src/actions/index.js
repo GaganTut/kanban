@@ -9,12 +9,11 @@ export const login = (username, password) => {
       .then(user => {
         dispatch({type: types.FETCHING_DONE});
         if (typeof user === 'object' && user.hasOwnProperty('username')) {
-          console.log(user);
           localStorage.setItem('loggedIn', true);
           localStorage.setItem('username', user.username);
           dispatch({type: types.LOG_IN, user});
         } else {
-          dispatch({type: types.ERROR, error: 'Login Failed'});
+          dispatch({type: types.THROW_ERROR, error: 'Login Failed'});
         }
       })
       .catch(err => {console.log(err);});
@@ -89,5 +88,11 @@ export const addCard = card => {
         dispatch({type: types.FETCHING_DONE});
         dispatch({type: types.ADD_CARD, card});
       });
+  };
+};
+
+export const closeError = () => {
+  return dispatch => {
+    dispatch({type: types.CLOSE_ERROR});
   };
 };

@@ -5,7 +5,7 @@ import * as types from '../constants';
 const initialState = {
   allCards: [],
   fetching: false,
-  error: false,
+  hasError: false,
   errorMessage: ''
 };
 
@@ -20,10 +20,16 @@ const cards = (state = initialState, action) => {
         fetching: false
       });
 
-    case types.ERROR :
+    case types.THROW_ERROR :
       return Object.assign({}, state, {
-        error: true,
+        hasError: true,
         errorMessage: action.error
+      });
+
+    case types.CLOSE_ERROR :
+      return Object.assign({}, state, {
+        hasError: false,
+        errorMessage: ''
       });
 
     case types.LOAD_CARDS :

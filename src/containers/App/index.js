@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import { loadCards } from '../../actions';
+import { loadCards, closeError } from '../../actions';
 import Column from '../../components/Column';
 import CardForm from '../CardForm';
 import Login from '../Login';
 import Signup from '../Signup';
-import ErrorMessage from '../../components/error';
+import ErrorMessage from '../../components/ErrorMessage';
 
 class App extends Component {
   constructor(props) {
@@ -29,7 +29,6 @@ class App extends Component {
         <h1 id="main-title">{this.title}</h1>
         <Login />
         <Signup />
-        <ErrorMessage />
         <div id="full-board">
           <Column
             cardList={this.props.allCards.filter(card => card.status === 'Queue')}
@@ -46,6 +45,10 @@ class App extends Component {
         </div>
         <CardForm/>
         {this.props.fetching && <div id="loading-message"></div>}
+        {this.props.hasError && <ErrorMessage
+                  errorMessage={this.props.errorMessage}
+                  closeError={this.props.closeError}
+                  />}
       </div>
     );
   }
@@ -54,13 +57,16 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     allCards: state.board.allCards,
-    fetching: state.board.fetching
+    fetching: state.board.fetching,
+    hasError: state.board.hasError,
+    errorMessage: state.board.errorMessage
   };
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    loadCards: cards => dispatch(loadCards(cards))
+    loadCards: cards => dispatch(loadCards(cards)),
+    closeError: () => dispatch(closeError())
   }
 }
 

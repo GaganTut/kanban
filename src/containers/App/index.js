@@ -6,6 +6,7 @@ import { loadCards } from '../../actions';
 import Column from '../../components/Column';
 import CardForm from '../CardForm';
 import Login from '../Login';
+import Signup from '../Signup';
 
 class App extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class App extends Component {
       <div className="App">
         <h1 id="main-title">{this.title}</h1>
         <Login />
+        <Signup />
         <div id="full-board">
           <Column
             cardList={this.props.allCards.filter(card => card.status === 'Queue')}

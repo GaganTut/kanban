@@ -15,7 +15,7 @@ user.route('/')
       .then( user => {
         res.status(200).json(user);
       })
-      .catch(res.status(400));
+      .catch(error => res.status(400).json({error}));
   });
 
 user.post('/new', middleWare.validateNewUser, (req, res) => {
@@ -35,7 +35,8 @@ user.post('/new', middleWare.validateNewUser, (req, res) => {
             "username": user.username,
           }
         );
-      });
+      })
+      .catch(error => res.status(400).json({error:'Create User Failed'}));
     });
   });
 });
@@ -60,7 +61,7 @@ user.route('/:username')
       .then(userInfo => {
         res.status(200).json(userInfo);
       })
-      .catch(res.status(400));
+      .catch(error => res.status(400).json({error:'Failed to find user'}));
   })
   .put(middleWare.userPermission, (req, res) => {
     Card.update(req.body,
@@ -71,7 +72,7 @@ user.route('/:username')
       }
     )
       .then(res.status(200).json({success: true}))
-      .catch(res.status(400));
+      .catch(error => res.status(400).json({error:'Failed to update user'}));
   })
   .delete(middleWare.userPermission, (req, res) => {
     Card.destroy(
@@ -82,7 +83,7 @@ user.route('/:username')
       }
     )
     .then(res.status(200).json({success: true}))
-    .catch(res.status(400));
+    .catch(error => res.status(400).json({error:'Failed to delete user'}));
   });
 
 module.exports = user;

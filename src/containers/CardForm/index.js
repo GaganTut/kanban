@@ -116,7 +116,11 @@ class CardForm extends Component {
         </form>
       )
     } else {
-      return (<div id="not-logged-form">PLEASE SIGN IN TO POST OR EDIT CARD</div>)
+      return (
+        <div id="not-logged-form">
+          <h1>PLEASE SIGN IN TO POST OR EDIT CARD</h1>
+        </div>
+      )
     }
   }
 }

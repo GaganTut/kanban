@@ -84,7 +84,7 @@ class KanbanCard extends Component{
             value="✖"
             />
           <h1>
-            {this.props.card.id}
+            #{this.props.card.id}
           </h1>
           <input
             className="edit-title"

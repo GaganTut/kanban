@@ -20,18 +20,13 @@ class Login extends Component {
     this.setState({username: '', password: ''});
   };
 
-  handleUsername = (event) => {
-    this.setState({username: event.target.value});
-  };
-
-  handlePassword = (event) => {
-    this.setState({password: event.target.value});
+  handleText = (event) => {
+    this.setState({[event.target.name]: event.target.value});
   };
 
   handleLogOut = (event) => {
     this.props.logout(localStorage.username);
   };
-
 
   render() {
     if (this.props.loggedIn) {
@@ -56,22 +51,21 @@ class Login extends Component {
           className="login-component">
           <input type="text"
             placeholder="Username"
+            name="username"
             value={this.props.username}
-            onChange={this.handleUsername}
+            onChange={this.handleText}
             />
           <input
             type="password"
             placeholder="Password"
+            name="password"
             value={this.props.password}
-            onChange={this.handlePassword}
+            onChange={this.handleText}
             />
           <input
             type="submit"
             value="Sign In"
             />
-          <button>
-            Sign Up
-          </button>
         </form>
       );
     }

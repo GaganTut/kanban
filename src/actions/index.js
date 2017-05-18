@@ -8,11 +8,16 @@ export const login = (username, password) => {
     return db.loginUser(username, password)
       .then(user => {
         dispatch({type: types.FETCHING_DONE});
-        localStorage.setItem('loggedIn', true);
-        localStorage.setItem('username', user.username);
-        dispatch({type: types.LOG_IN, user});
+        if (typeof user === 'object' && user.hasOwnProperty('username')) {
+          console.log(user);
+          localStorage.setItem('loggedIn', true);
+          localStorage.setItem('username', user.username);
+          dispatch({type: types.LOG_IN, user});
+        } else {
+          dispatch({type: types.ERROR, error: 'Login Failed'});
+        }
       })
-      .catch(console.log);
+      .catch(err => {console.log(err);});
   };
 };
 
@@ -24,8 +29,7 @@ export const logout= username => {
         localStorage.clear();
         dispatch({type: types.FETCHING_DONE});
         dispatch({type: types.LOG_OUT, username});
-      })
-      .catch(console.log);
+      });
   };
 };
 
@@ -37,8 +41,7 @@ export const loadUserList = () => {
           type: types.LOAD_USER_LIST,
           users
         });
-      })
-      .catch(console.log);
+      });
   };
 };
 
@@ -52,8 +55,7 @@ export const loadCards = () => {
           type: types.LOAD_CARDS,
           cards
         });
-      })
-      .catch(console.log);
+      });
   };
 };
 
@@ -64,8 +66,7 @@ export const deleteCard = id => {
       .then(() => {
         dispatch({type: types.FETCHING_DONE});
         dispatch({type: types.DELETE_CARD, id});
-      })
-      .catch(console.log);
+      });
   };
 };
 
@@ -76,8 +77,7 @@ export const updateCard=  card => {
       .then(card => {
         dispatch({type: types.FETCHING_DONE});
         dispatch({type: types.UPDATE_CARD, card});
-      })
-      .catch(console.log);
+      });
   };
 };
 
@@ -88,7 +88,6 @@ export const addCard = card => {
       .then(card => {
         dispatch({type: types.FETCHING_DONE});
         dispatch({type: types.ADD_CARD, card});
-      })
-      .catch(console.log);
+      });
   };
 };

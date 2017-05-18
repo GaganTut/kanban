@@ -7,6 +7,7 @@ import Column from '../../components/Column';
 import CardForm from '../CardForm';
 import Login from '../Login';
 import Signup from '../Signup';
+import ErrorMessage from '../../components/error';
 
 class App extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class App extends Component {
         <h1 id="main-title">{this.title}</h1>
         <Login />
         <Signup />
+        <ErrorMessage />
         <div id="full-board">
           <Column
             cardList={this.props.allCards.filter(card => card.status === 'Queue')}

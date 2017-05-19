@@ -52,8 +52,7 @@ class CardForm extends Component {
   render() {
     if (this.props.loggedIn) {
       return (
-        <form
-          onSubmit={this.handleSubmit}
+        <div
           id="newCardForm"
         >
 
@@ -107,13 +106,14 @@ class CardForm extends Component {
               <datalist id="userSearch">
                 {this.props.userListOptions.map(listOption => (<option value={listOption.username} key={listOption.username}></option>))}
               </datalist>
-          <button
+          <input
+            onClick={this.handleSubmit}
             type="submit"
             id="submit-input"
             className="cardInputs"
-            >Submit Card
-            </button>
-        </form>
+            value="Submit Card"
+            />
+        </div>
       )
     } else {
       return (

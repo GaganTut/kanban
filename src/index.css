@@ -5,9 +5,13 @@ body {
 }
 
 #root {
-  display: flex;
-  justify-content: center;
   width: 100%;
+}
+
+.whole-app {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
 .main-title {

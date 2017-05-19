@@ -1,6 +1,6 @@
 module.exports = (() => {
   const validateNewUser = (req, res, next) => {
-    if (req.body.username.length < 8 || req.body.password.length < 8 || req.body.passVerif !== req.body.password) {
+    if (req.body.username.length < 8 || req.body.password.length < 8 || req.body.valPassword !== req.body.password) {
       res.json({failed: 'Please Check Inputs'});
     } else {
       next();

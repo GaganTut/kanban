@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import './Signup.css';
 import { signup } from '../../actions';
 import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 class Signup extends Component {
   constructor(props) {
@@ -41,22 +42,22 @@ class Signup extends Component {
   render() {
     if (!this.props.loggedIn) {
       return (
-        <form
-          onSubmit={this.handleSignUp}
+        <div
           className="signup-component"
           >
-          <input type="text" name="s_username" value={this.state.username} onChange={this.handleText}/>
-          <input type="text" name="s_firstname" value={this.state.firstname} onChange={this.handleText}/>
-          <input type="text" name="s_lastname" value={this.state.lastname} onChange={this.handleText}/>
-          <input type="password" name="s_password" value={this.state.password} onChange={this.handleText}/>
-          <input type="password" name="s_valPassword" value={this.state.valPassword} onChange={this.handleText}/>
-          <input type="submit" value="Sign-Up"/>
+          <h1 className="form-title">Please Enter To Sign Up</h1>
+          <input type="text" name="username" value={this.state.username} onChange={this.handleText} placeholder="Enter Username"/>
+          <input type="text" name="firstname" value={this.state.firstname} onChange={this.handleText} placeholder="Enter First Name"/>
+          <input type="text" name="lastname" value={this.state.lastname} onChange={this.handleText} placeholder="Enter Last Name"/>
+          <input type="password" name="password" value={this.state.password} onChange={this.handleText} placeholder="Enter Password"/>
+          <input type="password" name="valPassword" value={this.state.valPassword} onChange={this.handleText} placeholder="Validate Password"/>
+          <input type="button" value="Sign-Up" onClick={this.handleSubmit}/>
           <input type="button" onClick={this.handleSignUpPage} value="Back To Login"/>
-        </form>
+        </div>
       );
     } else {
       return (
-        <div></div>
+        <Redirect to='/'/>
       )
     }
   }

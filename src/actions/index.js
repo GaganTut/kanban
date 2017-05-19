@@ -37,7 +37,19 @@ export const signup = userInfo => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
     db.signupUser(userInfo)
       .then(user => {
-        console.log(user);
+        dispatch({type: types.FETCHING_DONE});
+        db.loginUser(userInfo.username, userInfo.password)
+          .then(user => {
+            dispatch({type: types.FETCHING_DONE});
+            if (typeof user === 'object' && user.hasOwnProperty('username')) {
+              localStorage.setItem('loggedIn', true);
+              localStorage.setItem('username', user.username);
+              dispatch({type: types.LOG_IN, user});
+            } else {
+              dispatch({type: types.THROW_ERROR, error: 'Login Failed'});
+            }
+          })
+          .catch(err => {console.log(err);});
       });
   };
 };
@@ -72,20 +84,28 @@ export const deleteCard = id => {
   return dispatch => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
     return db.deleteCard(id)
-      .then(() => {
+      .then(check => {
         dispatch({type: types.FETCHING_DONE});
-        dispatch({type: types.DELETE_CARD, id});
+        if (check.hasOwnProperty('failed')) {
+          dispatch({type: types.THROW_ERROR, error: check.failed});
+        } else {
+          dispatch({type: types.DELETE_CARD, id});
+        }
       });
   };
 };
 
-export const updateCard=  card => {
+export const updateCard = card => {
   return dispatch => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
     return db.updateCard(card.id, card)
       .then(card => {
         dispatch({type: types.FETCHING_DONE});
-        dispatch({type: types.UPDATE_CARD, card});
+        if (card.hasOwnProperty('failed')) {
+          dispatch({type: types.THROW_ERROR, error: card.failed});
+        } else {
+          dispatch({type: types.UPDATE_CARD, card});
+        }
       });
   };
 };
@@ -96,7 +116,11 @@ export const addCard = card => {
     return db.addCard(card)
       .then(card => {
         dispatch({type: types.FETCHING_DONE});
-        dispatch({type: types.ADD_CARD, card});
+        if (card.hasOwnProperty('failed')) {
+          dispatch({type: types.THROW_ERROR, error: card.failed});
+        } else {
+          dispatch({type: types.ADD_CARD, card});
+        }
       });
   };
 };

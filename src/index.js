@@ -24,7 +24,7 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-    <div>
+    <div className="whole-app">
       <h1 className="main-title">Kanban Board</h1>
       <Login />
       <Route exact path="/" component={App} />

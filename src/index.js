@@ -27,11 +27,11 @@ ReactDOM.render(
     <div className="whole-app">
       <div className="main-title">
         <h1>Kanban</h1>
-        <h3>Keepin' it simple n clean</h3>
+        <h3>Keepin' it simple</h3>
+        <Login />
       </div>
       <Route exact path="/" component={App} />
       <Route path="/signup" component={Signup} />
-      <Login />
       <CardForm/>
     </div>
     </Router>

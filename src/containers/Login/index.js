@@ -47,28 +47,33 @@ class Login extends Component {
       )
     } else {
       return (
-        <form
-          onSubmit={this.handleSubmit}
-          className="login-component">
-          <input type="text"
-            placeholder="Username"
-            name="username"
-            value={this.props.username}
-            onChange={this.handleText}
-            />
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={this.props.password}
-            onChange={this.handleText}
-            />
-          <input
-            type="submit"
-            value="Sign In"
-            />
-          <Link to="/signup">Sign Up</Link>
-        </form>
+        <div
+          className="login-component"
+          >
+          <form
+            onSubmit={this.handleSubmit}
+            className="login-form"
+            >
+            <input type="text"
+              placeholder="Username"
+              name="username"
+              value={this.props.username}
+              onChange={this.handleText}
+              />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={this.props.password}
+              onChange={this.handleText}
+              />
+            <input
+              type="submit"
+              value="Sign In"
+              />
+            <Link to="/signup" className="sign-up-link"><input type="button" className="btn-to-signup" value="Sign Up"/></Link>
+          </form>
+        </div>
       );
     }
   }

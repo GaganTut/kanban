@@ -32,6 +32,12 @@ class Signup extends Component {
 
   handleText = (event) => {
     this.setState({[event.target.name]: event.target.value});
+    if(event.target.name === 'valPassword' && event.target.value !== this.state.password) {
+      console.log(event.target);
+      event.target.style = {'border': '1px solid red'};
+    } else if (event.target.name === 'valPassword' && event.target.value === this.state.password) {
+      event.target.style = {'border': '1px solid green'};
+    }
   };
 
   handleSignUp = (event => {
@@ -67,7 +73,7 @@ class Signup extends Component {
             <input type="password" name="valPassword" value={this.state.valPassword} onChange={this.handleText} placeholder="Passwords Must Match"/>
           </div>
           <input className="submit-button" type="button" value="Sign-Up" onClick={this.handleSubmit}/>
-          <Link to="/"><input type="button" className="back-to-home" value="Back To Home"/></Link>
+          <Link to="/" className="back-to-home"><input type="button" className="btn-to-home" value="Back To Home"/></Link>
         </div>
       );
     } else {

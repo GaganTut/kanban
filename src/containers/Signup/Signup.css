@@ -30,6 +30,10 @@
   width: 50%;
 }
 
-.back-to-home {
+.back-to-home, .submit-button {
+  width: 30%;
+}
+
+.btn-to-home {
   width: 100%;
 }

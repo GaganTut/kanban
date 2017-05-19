@@ -1,7 +1,7 @@
 .each-card, .editCardForm {
   align-items: center;
   border-radius: 10%;
-  box-shadow: 10px 10px 5px #d9d9d9;
+  box-shadow: 5px 5px 2px #d9d9d9;
   color: gray;
   display: flex;
   flex-direction: column;

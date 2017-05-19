@@ -1,13 +1,7 @@
 .login-component {
-  align-items: center;
   display: flex;
-  flex-direction: column;
-  position: fixed;
-  right: 1%;
-  top: 1%;
-  width: 10%;
-}
-
-#loggedInMsg {
-  color: white;
+  justify-content: flex-end;
+  padding-right: 3%;
+  padding-top: 25px;
+  width: 27%;
 }

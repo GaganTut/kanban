@@ -31,14 +31,17 @@ body {
 .main-title h1 {
   font-size: 50px;
   line-height: 60px;
-  padding-left: 3%;
+  margin-left: 3%;
   text-align: left;
+  width: 17%;
 }
 
 .main-title h3 {
   font-size: 20px;
   padding-left: 3%;
   padding-top: 1%;
+  text-align: left;
+  width: 50%;
 }
 
 @media (max-width: 789px) {

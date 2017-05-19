@@ -57,15 +57,30 @@ class KanbanCard extends Component{
   getPriorityColor(priority) {
     switch (priority) {
       case 'Urgent' :
-        return {'backgroundColor':'red'};
+        return {
+          'border':'2px solid #ff9999',
+          'backgroundColor':'#ffe6e6'
+        };
       case 'High' :
-        return {'backgroundColor':'orange'};
+        return {
+          'border':'2px solid #ffcc99',
+          'backgroundColor':'#fff2e6'
+        };
       case 'Medium' :
-        return {'backgroundColor':'yellow'};
+        return {
+          'border':'2px solid #ffff99',
+          'backgroundColor':'#ffffe6'
+        };
       case 'Low' :
-        return {'backgroundColor':'beige'};
+        return {
+          'border':'2px solid #ccff99',
+          'backgroundColor':'#f2ffe6'
+        };
       default:
-        return {'backgroundColor':'beige'};
+        return {
+          'border':'2px solid #ccff99',
+          'backgroundColor':'#f2ffe6'
+        };
     }
   }
 

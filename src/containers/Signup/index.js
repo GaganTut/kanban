@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import './Signup.css';
 import { signup } from '../../actions';
 import { connect } from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 
 class Signup extends Component {
   constructor(props) {
@@ -45,14 +45,29 @@ class Signup extends Component {
         <div
           className="signup-component"
           >
-          <h1 className="form-title">Please Enter To Sign Up</h1>
-          <input type="text" name="username" value={this.state.username} onChange={this.handleText} placeholder="Enter Username"/>
-          <input type="text" name="firstname" value={this.state.firstname} onChange={this.handleText} placeholder="Enter First Name"/>
-          <input type="text" name="lastname" value={this.state.lastname} onChange={this.handleText} placeholder="Enter Last Name"/>
-          <input type="password" name="password" value={this.state.password} onChange={this.handleText} placeholder="Enter Password"/>
-          <input type="password" name="valPassword" value={this.state.valPassword} onChange={this.handleText} placeholder="Validate Password"/>
-          <input type="button" value="Sign-Up" onClick={this.handleSubmit}/>
-          <input type="button" onClick={this.handleSignUpPage} value="Back To Login"/>
+          <h1 className="form-title">Just Simply Sign Up</h1>
+          <div>
+            <label htmlFor="username">Create Username:</label>
+            <input type="text" name="username" value={this.state.username} onChange={this.handleText} placeholder="Must be 8+ Characters"/>
+          </div>
+          <div>
+            <label htmlFor="firstname">Enter First Name:</label>
+            <input type="text" name="firstname" value={this.state.firstname} onChange={this.handleText} placeholder="Enter First Name"/>
+          </div>
+          <div>
+            <label htmlFor="lastname">Enter Last Name:</label>
+            <input type="text" name="lastname" value={this.state.lastname} onChange={this.handleText} placeholder="Enter Last Name"/>
+          </div>
+          <div>
+            <label htmlFor="password">Create Password:</label>
+            <input type="password" name="password" value={this.state.password} onChange={this.handleText} placeholder="Must be 8+ Characters"/>
+          </div>
+          <div>
+            <label htmlFor="valPassword">Verify Password:</label>
+            <input type="password" name="valPassword" value={this.state.valPassword} onChange={this.handleText} placeholder="Passwords Must Match"/>
+          </div>
+          <input className="submit-button" type="button" value="Sign-Up" onClick={this.handleSubmit}/>
+          <Link to="/"><input type="button" className="back-to-home" value="Back To Home"/></Link>
         </div>
       );
     } else {

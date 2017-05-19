@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import './Login.css';
 import { login, logout } from '../../actions';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
   constructor(props) {
@@ -66,6 +67,7 @@ class Login extends Component {
             type="submit"
             value="Sign In"
             />
+          <Link to="/signup">Sign Up</Link>
         </form>
       );
     }

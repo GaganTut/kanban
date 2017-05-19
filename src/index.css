@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 body {
-  background-image: url('./assets/BG.png');
+  background-color: ghostwhite;
+  font-family: 'Raleway', sans-serif;
   overflow: hidden;
   width: 100%;
 }
@@ -15,17 +17,28 @@ body {
 }
 
 .main-title {
-  background-color: gray;
-  border-bottom: 3px groove white;
-  color: ghostwhite;
-  font-family: 'Vollkorn', serif;
-  font-size: 100px;
-  line-height: 120px;
-  text-align: center;
+  align-items: center;
+  border-bottom: 3px groove silver;
+  color: silver;
+  display: flex;
+  font-family: 'Raleway', sans-serif;
   top: 0;
-  height: 100px;
+  height: 60px;
   width: 100%;
   position: fixed;
+}
+
+.main-title h1 {
+  font-size: 50px;
+  line-height: 60px;
+  padding-left: 3%;
+  text-align: left;
+}
+
+.main-title h3 {
+  font-size: 20px;
+  padding-left: 3%;
+  padding-top: 1%;
 }
 
 @media (max-width: 789px) {

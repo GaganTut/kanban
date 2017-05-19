@@ -25,10 +25,13 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
     <div className="whole-app">
-      <h1 className="main-title">Kanban Board</h1>
-      <Login />
+      <div className="main-title">
+        <h1>Kanban</h1>
+        <h3>Keepin' it simple n clean</h3>
+      </div>
       <Route exact path="/" component={App} />
-      <Route exact path="/signup" component={Signup} />
+      <Route path="/signup" component={Signup} />
+      <Login />
       <CardForm/>
     </div>
     </Router>

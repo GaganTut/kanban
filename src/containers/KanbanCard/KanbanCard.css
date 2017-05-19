@@ -1,8 +1,11 @@
 .each-card, .editCardForm {
   align-items: center;
-  box-shadow: 10px 10px 5px gray;
+  border-radius: 10%;
+  box-shadow: 10px 10px 5px #d9d9d9;
+  color: gray;
   display: flex;
   flex-direction: column;
+  font-family: 'Raleway', sans-serif;
   justify-content: space-around;
   margin: 3% 1%;
   width: 100px;
@@ -35,7 +38,7 @@
 .close-edit {
   background-color: transparent;
   border: none;
-  color: black;
+  color: gray;
   font-size: 15px;
   position: absolute;
   top: 0;

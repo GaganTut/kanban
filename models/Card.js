@@ -17,7 +17,6 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Card.belongsTo(models.User, {
-          onDelete: "CASCADE",
           as: 'Creator',
           foreignKey: {
             allowNull: false,
@@ -25,10 +24,15 @@ module.exports = function(sequelize, DataTypes) {
           }
         });
         Card.belongsTo(models.User, {
-          onDelete: "CASCADE",
           as: 'Assigned',
           foreignKey: {
             name: 'assignedTo'
+          }
+        });
+        Card.belongsTo(models.Board, {
+          as: 'Board',
+          foreignKey: {
+            name: 'attachedTo'
           }
         });
       }

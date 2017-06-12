@@ -32,6 +32,9 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
           }
         });
+        User.belongsToMany(models.Board, {
+          through: {model: 'Users_In_Boards', unique: false, as: 'Boards'}
+        });
       }
     }
   });

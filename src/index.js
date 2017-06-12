@@ -1,7 +1,8 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './containers/App';
+import Home from './containers/Home';
+import Board from './containers/Board';
 import Signup from './containers/Signup';
 import CardForm from './containers/CardForm';
 import Login from './containers/Login';
@@ -30,8 +31,9 @@ ReactDOM.render(
         <h3>Keepin' it simple</h3>
         <Login />
       </div>
-      <Route exact path="/" component={App} />
-      <Route path="/signup" component={Signup} />
+      <Route exact path="/" component={Home} />
+      <Route path="/:board" component={Board} />
+      <Route exact path="/signup" component={Signup} />
       <CardForm/>
     </div>
     </Router>

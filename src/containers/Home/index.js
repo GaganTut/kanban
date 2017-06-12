@@ -1,37 +1,40 @@
 /*jshint esversion: 6*/
 import React, { Component } from 'react';
-import './App.css';
+import './Home.css';
 import { connect } from 'react-redux';
 import { loadCards, closeError } from '../../actions';
 import Column from '../../components/Column';
 import ErrorMessage from '../../components/ErrorMessage';
 
-class App extends Component {
+class Home extends Component {
   componentWillMount() {
-    this.getCards();
-  }
+    this.getBoards();
+  };
 
-  getCards = () => {
-    this.props.loadCards();
-  }
+  getBoards = () => {
+    this.props.loadBoards();
+  };
+
+  renderLoginMessage = () => (
+    <div>
+      <h1>Please Login or Signup</h1>
+    </div>
+  );
+
+  renderBoards = () => (
+    {allBoards.map(board => <div>{board.title}</div>)}
+  );
+
+  renderNoBoards = () => (
+    <div>
+      <h1>To Start, Create a new board</h1>
+    </div>
+  );
 
   render() {
     return (
       <div className="App">
-        <div id="full-board">
-          <Column
-            cardList={this.props.allCards.filter(card => card.status === 'Queue')}
-            columnName="Queue"
-            />
-          <Column
-            cardList={this.props.allCards.filter(card => card.status === 'Progress')}
-            columnName="Progress"
-            />
-          <Column
-            cardList={this.props.allCards.filter(card => card.status === 'Completed')}
-            columnName="Completed"
-            />
-        </div>
+        {loggedIn ? (this.props.allBoards.length > 0 ? (renderBoards()) : (renderNoBoards()) : renderLoginMessage())}
         {this.props.fetching && <div id="loading-message"></div>}
         {this.props.hasError && <ErrorMessage
                   errorMessage={this.props.errorMessage}
@@ -44,23 +47,22 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    allCards: state.board.allCards,
+    allBoards: state.board.allBoards,
     fetching: state.board.fetching,
     hasError: state.board.hasError,
-    errorMessage: state.board.errorMessage
+    errorMessage: state.board.errorMessage,
+    loggedIn: state.user.loggedIn
   };
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    loadCards: cards => dispatch(loadCards(cards)),
+    loadBoards: () => dispatch(loadCards()),
     closeError: () => dispatch(closeError())
   }
 }
 
-const ConnectedApp = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
-
-export default ConnectedApp;
+)(Home);

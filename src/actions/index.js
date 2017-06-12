@@ -1,16 +1,16 @@
 /*jshint esversion :6*/
 import * as types from '../constants';
-import * as db from '../lib/fetchFromDB';
+import * as API from '../lib/API_CALLS';
 
 export const login = (username, password) => {
   return dispatch => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
-    return db.loginUser(username, password)
-      .then(user => {
+    return API.loginUser(username, password)
+      .then(res => {
         dispatch({type: types.FETCHING_DONE});
-        if (typeof user === 'object' && user.hasOwnProperty('username')) {
+        if (res.success) {
           localStorage.setItem('loggedIn', true);
-          localStorage.setItem('username', user.username);
+          localStorage.setItem('username', res.user.username);
           dispatch({type: types.LOG_IN, user});
         } else {
           dispatch({type: types.THROW_ERROR, error: 'Login Failed'});
@@ -23,7 +23,7 @@ export const login = (username, password) => {
 export const logout= username => {
   return dispatch => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
-    db.logoutUser()
+    API.logoutUser()
       .then(() => {
         localStorage.clear();
         dispatch({type: types.FETCHING_DONE});
@@ -35,10 +35,10 @@ export const logout= username => {
 export const signup = userInfo => {
   return dispatch => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
-    db.signupUser(userInfo)
+    API.signupUser(userInfo)
       .then(user => {
         dispatch({type: types.FETCHING_DONE});
-        db.loginUser(userInfo.username, userInfo.password)
+        API.loginUser(userInfo.username, userInfo.password)
           .then(user => {
             dispatch({type: types.FETCHING_DONE});
             if (typeof user === 'object' && user.hasOwnProperty('username')) {
@@ -56,7 +56,7 @@ export const signup = userInfo => {
 
 export const loadUserList = () => {
   return dispatch => {
-    return db.getUserList()
+    return API.getUserList()
       .then(users => {
         dispatch({
           type: types.LOAD_USER_LIST,
@@ -69,7 +69,7 @@ export const loadUserList = () => {
 export const loadCards = () => {
   return dispatch => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
-    return db.getAllCards()
+    return API.getAllCards()
       .then(cards => {
         dispatch({type: types.FETCHING_DONE});
         dispatch({
@@ -83,7 +83,7 @@ export const loadCards = () => {
 export const deleteCard = id => {
   return dispatch => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
-    return db.deleteCard(id)
+    return API.deleteCard(id)
       .then(check => {
         dispatch({type: types.FETCHING_DONE});
         if (check.hasOwnProperty('failed')) {
@@ -98,7 +98,7 @@ export const deleteCard = id => {
 export const updateCard = card => {
   return dispatch => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
-    return db.updateCard(card.id, card)
+    return API.updateCard(card.id, card)
       .then(card => {
         dispatch({type: types.FETCHING_DONE});
         if (card.hasOwnProperty('failed')) {
@@ -113,7 +113,7 @@ export const updateCard = card => {
 export const addCard = card => {
   return dispatch => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
-    return db.addCard(card)
+    return API.addCard(card)
       .then(card => {
         dispatch({type: types.FETCHING_DONE});
         if (card.hasOwnProperty('failed')) {
@@ -130,3 +130,5 @@ export const closeError = () => {
     dispatch({type: types.CLOSE_ERROR});
   };
 };
+
+export const loaAPIoards = () => dispatch => API.getBoards()

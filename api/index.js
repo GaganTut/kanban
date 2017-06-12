@@ -62,5 +62,6 @@ passport.deserializeUser(function(user, done) {
 
 api.use('/cards', require('./cardAPI'));
 api.use('/user', require('./userAPI'));
+api.use('/boards', require('./boardAPI'));
 
 module.exports = api;

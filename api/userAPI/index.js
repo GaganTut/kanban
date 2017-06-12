@@ -12,10 +12,10 @@ user.route('/')
     User.findAll({
       attributes: ['username', 'firstname', 'lastname']
     })
-      .then( user => {
-        res.status(200).json(user);
+      .then( users => {
+        res.json({success: true, users});
       })
-      .catch(error => res.status(400).json({error}));
+      .catch(error => res.json({success: false, error: "Could not get all users"}));
   });
 
 user.post('/new', middleWare.validateNewUser, (req, res) => {
@@ -27,16 +27,12 @@ user.post('/new', middleWare.validateNewUser, (req, res) => {
         username: req.body.username,
         password: hash
       })
-      .then((user) => {
-        res.status(200).json(
-          {
-            "firstname": user.firstname,
-            "lastname": user.lastname,
-            "username": user.username,
-          }
+      .then(user => {
+        res.json(
+          {success: true, user}
         );
       })
-      .catch(error => res.status(400).json({error:'Create User Failed'}));
+      .catch(error => res.json({error:'Create User Failed'}));
     });
   });
 });
@@ -47,7 +43,7 @@ user.post('/login', passport.authenticate('local'), (req, res) => {
 
 user.get('/logout', (req, res) => {
   req.logout();
-  res.status(200).json({success: true});
+  res.json({success: true});
 });
 
 user.route('/:username')
@@ -58,10 +54,10 @@ user.route('/:username')
       },
       attributes: ['username', 'firstname', 'lastname']
     })
-      .then(userInfo => {
-        res.status(200).json(userInfo);
+      .then(user => {
+        res.json({success: true, user});
       })
-      .catch(error => res.status(400).json({error:'Failed to find user'}));
+      .catch(error => res.json({error:'Failed to find user'}));
   })
   .put(middleWare.userPermission, (req, res) => {
     Card.update(req.body,
@@ -71,8 +67,8 @@ user.route('/:username')
         }
       }
     )
-      .then(res.status(200).json({success: true}))
-      .catch(error => res.status(400).json({error:'Failed to update user'}));
+      .then(res.json({success: true}))
+      .catch(error => res.json({error:'Failed to update user'}));
   })
   .delete(middleWare.userPermission, (req, res) => {
     Card.destroy(
@@ -82,8 +78,8 @@ user.route('/:username')
         }
       }
     )
-    .then(res.status(200).json({success: true}))
-    .catch(error => res.status(400).json({error:'Failed to delete user'}));
+    .then(res.json({success: true}))
+    .catch(error => res.json({error:'Failed to delete user'}));
   });
 
 module.exports = user;

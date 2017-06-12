@@ -4,7 +4,7 @@ const cards = express.Router();
 const { Card, User } = require('../../models');
 const middleWare = require('../customMiddleWare');
 
-cards.route('/')
+cards.route('/board/:boardID')
   .get((req, res) => {
     Card.findAll({
       include: [
@@ -18,17 +18,20 @@ cards.route('/')
           as: 'Assigned',
           attributes: ['username', 'firstname', 'lastname']
         }
-      ]
+      ],
+      where: {
+        attachedTo: req.params.boardID
+      }
     })
       .then( cards => {
-        res.status(200).json(cards);
+        res.json(cards);
       })
-      .catch(error => res.status(400).json({error: err}));
+      .catch(error => res.json({success: false, error}));
   })
   .post(middleWare.userPermission, (req, res) => {
     Card.create(req.body)
-      .then(data => res.status(200).json(data))
-      .catch(error => res.status(400).json({error:'Failed to post new card, please try again'}));
+      .then(card => res.json({success: true, card}))
+      .catch(error => res.json({error:'Failed to post new card, please try again'}));
   });
 
 cards.delete('/:id', middleWare.userPermission, (req, res) => {

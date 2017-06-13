@@ -3,62 +3,39 @@
 import * as types from '../constants';
 
 const initialState = {
+  allBoards: [],
   allCards: [],
-  fetching: false,
-  hasError: false,
-  errorMessage: ''
 };
 
-const cards = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
-    case types.FETCHING_IN_PROGRESS:
-      return Object.assign({}, state, {
-        fetching: true
-      });
-    case types.FETCHING_DONE:
-      return Object.assign({}, state, {
-        fetching: false
-      });
 
-    case types.THROW_ERROR :
+    case types.LOAD_BOARDS:
       return Object.assign({}, state, {
-        hasError: true,
-        errorMessage: action.error
-      });
-
-    case types.CLOSE_ERROR :
-      return Object.assign({}, state, {
-        hasError: false,
-        errorMessage: ''
+        allBoards: action.allBoards
       });
 
     case types.LOAD_CARDS :
       return Object.assign({}, state, {
-        allCards: action.cards,
-        fetching: false
+        allCards: state.allCards.concat(action.cards).filter((card, index, self) => self.indexOf(card) == index)
       });
 
     case types.DELETE_CARD :
       return Object.assign({}, state, {
-        allCards: state.allCards.filter(card => card.id !== action.id),
-        fetching: false
+        allCards: state.allCards.filter(card => card.id !== action.id)
       });
 
     case types.UPDATE_CARD :
       return Object.assign({}, state, {
-        allCards: state.allCards.filter(card => card.id !== action.card.id).concat([action.card]),
-        fetching: false
+        allCards: state.allCards.filter(card => card.id !== action.card.id).concat([action.card])
       });
 
     case types.ADD_CARD :
       return Object.assign({}, state, {
-        allCards: state.allCards.concat([action.card]),
-        fetching: false
+        allCards: state.allCards.concat([action.card])
       });
 
     default:
       return state;
   }
 };
-
-export default cards;

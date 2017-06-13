@@ -1,6 +1,5 @@
 /*jshint esversion: 6*/
 import React, { Component } from 'react';
-import './Home.css';
 import { connect } from 'react-redux';
 import { loadCards, closeError } from '../../actions';
 import Column from '../../components/Column';
@@ -14,9 +13,9 @@ class Home extends Component {
     </div>
   );
 
-  renderBoards = () => (
-    {allBoards.map(board => <div>{board.title}</div>)}
-  );
+  renderBoards = () => {
+    return this.props.allBoards.map(board => <div>{board.title}</div>)
+  }
 
   renderNoBoards = () => (
     <div>
@@ -27,7 +26,7 @@ class Home extends Component {
   render() {
     return (
       <div className="App">
-        {loggedIn ? (this.props.allBoards.length > 0 ? (renderBoards()) : (renderNoBoards()) : renderLoginMessage())}
+        {this.props.loggedIn ? (this.props.allBoards.length > 0 ? (this.renderBoards()) : (this.renderNoBoards())) : (this.renderLoginMessage())}
         {this.props.fetching && <div id="loading-message"></div>}
         {this.props.hasError && <ErrorMessage
                   errorMessage={this.props.errorMessage}
@@ -41,9 +40,9 @@ class Home extends Component {
 const mapStateToProps = (state) => {
   return {
     allBoards: state.board.allBoards,
-    fetching: state.board.fetching,
-    hasError: state.board.hasError,
-    errorMessage: state.board.errorMessage,
+    fetching: state.helper.fetching,
+    hasError: state.helper.hasError,
+    errorMessage: state.helper.errorMessage,
     loggedIn: state.user.loggedIn
   };
 }

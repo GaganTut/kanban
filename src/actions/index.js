@@ -9,7 +9,7 @@ export const login = (username, password) => dispatch => {
     dispatch({type: types.FETCHING_DONE});
     if (res.success) {
       dispatch(loadBoards());
-      dispatch({type: types.LOG_IN, user});
+      dispatch({type: types.LOG_IN, user: res.user});
     } else {
       dispatch({type: types.THROW_ERROR, error: 'Login Failed'});
     }

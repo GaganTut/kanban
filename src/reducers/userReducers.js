@@ -3,11 +3,10 @@
 import * as types from '../constants';
 
 const initialState = {
-  loggedIn: localStorage.loggedIn || false,
-  loggedUsername: localStorage.username || '',
-  loggedFirstname: localStorage.firstname || '',
-  loggedLastname: localStorage.lastname || '',
-  userListOptions: []
+  loggedIn: false,
+  loggedUsername: null,
+  loggedFirstname: null,
+  loggedLastname: null
 };
 
 const users = (state = initialState, action) => {
@@ -21,17 +20,7 @@ const users = (state = initialState, action) => {
       });
 
     case types.LOG_OUT :
-      return Object.assign({}, state, {
-        loggedIn: false,
-        loggedUsername: '',
-        loggedFirstname: '',
-        loggedLastname: '',
-      });
-
-    case types.LOAD_USER_LIST :
-      return Object.assign({}, state, {
-        userListOptions: action.users
-      });
+      return Object.assign({}, state, initialState);
 
     default:
       return state;

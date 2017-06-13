@@ -8,6 +8,7 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
+import {connect} from 'react-redux';
 import {loadApp} from '../../actions';
 
 class App extends Component {
@@ -46,9 +47,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-const ConnectedKanbanCard = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(KanbanCard);
-
-export default ConnectedKanbanCard;
+)(App);

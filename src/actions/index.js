@@ -44,7 +44,7 @@ export const loadCards = (boardId) => dispatch => {
   .then(res => {
     dispatch({type: types.FETCHING_DONE});
     if (res.success) {
-      dispatch({type: types.LOAD_CARDS, boardId, cards: res.cards});
+      dispatch({type: types.LOAD_CARDS, cards: res.cards});
     }
   });
 };

@@ -29,4 +29,15 @@ boards.route('/')
     .then(res.json({success: true}));
   });
 
+boards.route('/:id')
+  .get((req, res) => {
+    Card.findAll({
+      where: {
+        attachedTo: req.params.id
+      }
+    })
+    .then(cards => res.json({success: true, cards}))
+    .catch(error => res.json({success: false}));
+  });
+
 module.exports = boards;

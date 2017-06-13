@@ -16,10 +16,6 @@ class CardForm extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.loadUserList();
-  }
-
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.addCard(this.createCardObject(this.state));
@@ -96,16 +92,11 @@ class CardForm extends Component {
             type="text"
             placeholder="Assigned To"
             onChange={this.handleChange}
-            onKeyUp={this.handleFuzzy}
             value={this.state.assignedTo}
             id="assigned-input"
             className="cardInputs"
             name="assignedTo"
-            list="userSearch"
             />
-              <datalist id="userSearch">
-                {this.props.userListOptions.map(listOption => (<option value={listOption.username} key={listOption.username}></option>))}
-              </datalist>
           <input
             onClick={this.handleSubmit}
             type="submit"

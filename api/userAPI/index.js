@@ -41,6 +41,19 @@ user.post('/login', passport.authenticate('local'), (req, res) => {
   res.redirect(`/api/user/${req.user.username}`);
 });
 
+user.get('/check', (req, res) => {
+  if(req.isAuthenticated()) {
+    User.findOne({
+      where: {
+        username: req.user.username
+      }
+    })
+    .then(user => res.json({success: true, user}));
+  } else {
+    res.json({success: false});
+  }
+});
+
 user.get('/logout', (req, res) => {
   req.logout();
   res.json({success: true});

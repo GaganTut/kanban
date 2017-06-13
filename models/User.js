@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
           }
         });
         User.belongsToMany(models.Board, {
-          through: {model: 'Users_In_Boards', unique: false, as: 'Boards'}
+          through: {model: 'BoardUser'}
         });
       }
     }

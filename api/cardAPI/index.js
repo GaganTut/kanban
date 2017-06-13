@@ -24,7 +24,7 @@ cards.route('/board/:boardID')
       }
     })
       .then( cards => {
-        res.json(cards);
+        res.json({success: true, cards});
       })
       .catch(error => res.json({success: false, error}));
   })
@@ -42,8 +42,8 @@ cards.delete('/:id', middleWare.userPermission, (req, res) => {
       }
     }
   )
-  .then(res.status(200).json({success: true}))
-  .catch(error => res.status(400).json({error:'Failed to delete card'}));
+  .then(res.json({success: true}))
+  .catch(error => res.json({error:'Failed to delete card'}));
 });
 
 
@@ -57,8 +57,8 @@ cards.put('/:id', middleWare.userPermission, (req, res) => {
       plain: true
     }
   )
-  .then(card => res.status(200).json(card[1].dataValues))
-  .catch(error => res.status(400).json({error:'Failed to update card'}));
+  .then(card => res.json({success: true, card:card[1].dataValues}))
+  .catch(error => res.json({error:'Failed to update card'}));
 });
 
 module.exports = cards;

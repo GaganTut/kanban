@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Board.belongsToMany(models.User, {
-          through: {model: 'BoardUser', unique: false, as: 'Contributors'},
+          through: {model: 'BoardUser'},
         });
         Board.hasMany(models.Card, {
           foreignKey: {

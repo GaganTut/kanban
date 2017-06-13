@@ -2,6 +2,17 @@
 import * as types from '../constants';
 import * as API from '../lib/API_CALLS';
 
+export const loadBoards = () => dispatch => {
+  dispatch({type: types.FETCHING_IN_PROGRESS});
+  return API.loadBoards()
+  .then(res => {
+    dispatch({type: types.FETCHING_DONE});
+    if (res.success) {
+      dispatch({type: types.LOAD_BOARDS, boards: res.boards});
+    }
+  });
+};
+
 export const login = (username, password) => dispatch => {
   dispatch({type: types.FETCHING_IN_PROGRESS});
   return API.loginUser(username, password)
@@ -93,20 +104,13 @@ export const addCard = card => {
 export const closeError = () => dispatch => dispatch({type: types.CLOSE_ERROR});
 
 export const loadApp = () => dispatch => {
+  dispatch({type: types.FETCHING_IN_PROGRESS});
   return API.checkLogin()
   .then(res => {
+    dispatch({type: types.FETCHING_DONE});
     if (res.success) {
       dispatch(loadBoards());
       return dispatch({type: types.LOGIN, user: res.user});
-    }
-  });
-};
-
-export const loadBoards = () => dispatch => {
-  return API.loadBoards()
-  .then(res => {
-    if (res.success) {
-      dispatch({type: types.LOAD_BOARDS, boards: res.boards});
     }
   });
 };

@@ -33,7 +33,6 @@ class Signup extends Component {
   handleText = (event) => {
     this.setState({[event.target.name]: event.target.value});
     if(event.target.name === 'valPassword' && event.target.value !== this.state.password) {
-      console.log(event.target);
       event.target.style = {'border': '1px solid red'};
     } else if (event.target.name === 'valPassword' && event.target.value === this.state.password) {
       event.target.style = {'border': '1px solid green'};
@@ -96,9 +95,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-const ConnectedSignup = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Signup);
-
-export default ConnectedSignup;

@@ -26,7 +26,7 @@ class Login extends Component {
   };
 
   handleLogOut = (event) => {
-    this.props.logout(localStorage.username);
+    this.props.logout();
   };
 
   render() {
@@ -89,13 +89,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     login: (username, password) => dispatch(login(username, password)),
-    logout: username => dispatch(logout(username))
+    logout: () => dispatch(logout())
   }
 }
 
-const ConnectedLogin = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Login);
-
-export default ConnectedLogin;

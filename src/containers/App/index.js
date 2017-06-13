@@ -28,8 +28,8 @@ class App extends Component {
             <Login />
           </div>
           <Route exact path="/" component={Home} />
-          <Route path="/:board" component={Board} />
-          <Route exact path="/signup" component={Signup} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/board/:id" component={Board} />
           <CardForm/>
         </div>
       </Router>

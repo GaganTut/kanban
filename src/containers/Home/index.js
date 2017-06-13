@@ -1,6 +1,8 @@
 /*jshint esversion: 6*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {withRouter} from 'react-router';
+import './Home.css';
 import { loadCards, closeError } from '../../actions';
 import Column from '../../components/Column';
 import ErrorMessage from '../../components/ErrorMessage';
@@ -8,8 +10,9 @@ import ErrorMessage from '../../components/ErrorMessage';
 class Home extends Component {
 
   renderLoginMessage = () => (
-    <div>
+    <div id="please-login">
       <h1>Please Login or Signup</h1>
+      <input value="Sign Up Now" type="button" onClick={()=> this.props.history.push('/signup')}/>
     </div>
   );
 
@@ -53,7 +56,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(Home));

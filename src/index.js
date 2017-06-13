@@ -1,19 +1,11 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './containers/Home';
-import Board from './containers/Board';
-import Signup from './containers/Signup';
-import CardForm from './containers/CardForm';
-import Login from './containers/Login';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
 import reducers from './reducers';
+import App from './containers/App';
 import './index.css';
 import './reset.css';
 
@@ -24,19 +16,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-    <div className="whole-app">
-      <div className="main-title">
-        <h1>Kanban</h1>
-        <h3>Keepin' it simple</h3>
-        <Login />
-      </div>
-      <Route exact path="/" component={Home} />
-      <Route path="/:board" component={Board} />
-      <Route exact path="/signup" component={Signup} />
-      <CardForm/>
-    </div>
-    </Router>
+    <App/>
   </Provider>
   ,
   document.getElementById('root')

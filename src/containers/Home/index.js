@@ -7,13 +7,6 @@ import Column from '../../components/Column';
 import ErrorMessage from '../../components/ErrorMessage';
 
 class Home extends Component {
-  componentWillMount() {
-    this.getBoards();
-  };
-
-  getBoards = () => {
-    this.props.loadBoards();
-  };
 
   renderLoginMessage = () => (
     <div>
@@ -57,7 +50,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    loadBoards: () => dispatch(loadCards()),
     closeError: () => dispatch(closeError())
   }
 }

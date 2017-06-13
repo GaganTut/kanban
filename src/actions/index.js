@@ -2,112 +2,77 @@
 import * as types from '../constants';
 import * as API from '../lib/API_CALLS';
 
-export const login = (username, password) => {
-  return dispatch => {
-    dispatch({type: types.FETCHING_IN_PROGRESS});
-    return API.loginUser(username, password)
-      .then(res => {
-        dispatch({type: types.FETCHING_DONE});
-        if (res.success) {
-          localStorage.setItem('loggedIn', true);
-          localStorage.setItem('username', res.user.username);
-          dispatch({type: types.LOG_IN, user});
-        } else {
-          dispatch({type: types.THROW_ERROR, error: 'Login Failed'});
-        }
-      })
-      .catch(err => {console.log(err);});
-  };
+export const login = (username, password) => dispatch => {
+  dispatch({type: types.FETCHING_IN_PROGRESS});
+  return API.loginUser(username, password)
+  .then(res => {
+    dispatch({type: types.FETCHING_DONE});
+    if (res.success) {
+      dispatch(loadBoards());
+      dispatch({type: types.LOG_IN, user});
+    } else {
+      dispatch({type: types.THROW_ERROR, error: 'Login Failed'});
+    }
+  });
 };
 
-export const logout= username => {
-  return dispatch => {
-    dispatch({type: types.FETCHING_IN_PROGRESS});
-    API.logoutUser()
-      .then(() => {
-        localStorage.clear();
-        dispatch({type: types.FETCHING_DONE});
-        dispatch({type: types.LOG_OUT, username});
-      });
-  };
+export const logout= username => dispatch => {
+  dispatch({type: types.FETCHING_IN_PROGRESS});
+  API.logoutUser()
+  .then(() => {
+    dispatch({type: types.FETCHING_DONE});
+    dispatch({type: types.LOG_OUT});
+  });
 };
 
-export const signup = userInfo => {
-  return dispatch => {
-    dispatch({type: types.FETCHING_IN_PROGRESS});
-    API.signupUser(userInfo)
-      .then(user => {
-        dispatch({type: types.FETCHING_DONE});
-        API.loginUser(userInfo.username, userInfo.password)
-          .then(user => {
-            dispatch({type: types.FETCHING_DONE});
-            if (typeof user === 'object' && user.hasOwnProperty('username')) {
-              localStorage.setItem('loggedIn', true);
-              localStorage.setItem('username', user.username);
-              dispatch({type: types.LOG_IN, user});
-            } else {
-              dispatch({type: types.THROW_ERROR, error: 'Login Failed'});
-            }
-          })
-          .catch(err => {console.log(err);});
-      });
-  };
+export const signup = userInfo => dispatch => {
+  dispatch({type: types.FETCHING_IN_PROGRESS});
+  API.signupUser(userInfo)
+    .then(res => {
+      dispatch({type: types.FETCHING_DONE});
+      if (res.success) {
+        dispatch(login(userInfo.username, userInfo.password));
+      } else {
+        dispatch({type: types.THROW_ERROR, error: 'Sign Up Failed'});
+      }
+    });
 };
 
-export const loadUserList = () => {
-  return dispatch => {
-    return API.getUserList()
-      .then(users => {
-        dispatch({
-          type: types.LOAD_USER_LIST,
-          users
-        });
-      });
-  };
+export const loadCards = (boardId) => dispatch => {
+  dispatch({type: types.FETCHING_IN_PROGRESS});
+  return API.loadCards(boardId)
+  .then(res => {
+    dispatch({type: types.FETCHING_DONE});
+    if (res.success) {
+      dispatch({type: types.LOAD_CARDS, boardId, cards: res.cards});
+    }
+  });
 };
 
-export const loadCards = () => {
-  return dispatch => {
-    dispatch({type: types.FETCHING_IN_PROGRESS});
-    return API.getAllCards()
-      .then(cards => {
-        dispatch({type: types.FETCHING_DONE});
-        dispatch({
-          type: types.LOAD_CARDS,
-          cards
-        });
-      });
-  };
+export const deleteCard = id => dispatch => {
+  dispatch({type: types.FETCHING_IN_PROGRESS});
+  return API.deleteCard(id)
+    .then(res => {
+      dispatch({type: types.FETCHING_DONE});
+      if (res.success) {
+        dispatch({type: types.DELETE_CARD, id});
+      } else {
+        dispatch({type: types.THROW_ERROR, error: check.failed});
+      }
+    });
 };
 
-export const deleteCard = id => {
-  return dispatch => {
-    dispatch({type: types.FETCHING_IN_PROGRESS});
-    return API.deleteCard(id)
-      .then(check => {
-        dispatch({type: types.FETCHING_DONE});
-        if (check.hasOwnProperty('failed')) {
-          dispatch({type: types.THROW_ERROR, error: check.failed});
-        } else {
-          dispatch({type: types.DELETE_CARD, id});
-        }
-      });
-  };
-};
-
-export const updateCard = card => {
-  return dispatch => {
-    dispatch({type: types.FETCHING_IN_PROGRESS});
-    return API.updateCard(card.id, card)
-      .then(card => {
-        dispatch({type: types.FETCHING_DONE});
-        if (card.hasOwnProperty('failed')) {
-          dispatch({type: types.THROW_ERROR, error: card.failed});
-        } else {
-          dispatch({type: types.UPDATE_CARD, card});
-        }
-      });
-  };
+export const updateCard = card => dispatch => {
+  dispatch({type: types.FETCHING_IN_PROGRESS});
+  return API.updateCard(card.id, card)
+    .then(res => {
+      dispatch({type: types.FETCHING_DONE});
+      if (res.success) {
+        dispatch({type: types.UPDATE_CARD, card});
+      } else {
+        dispatch({type: types.THROW_ERROR, error: card.failed});
+      }
+    });
 };
 
 export const addCard = card => {
@@ -125,10 +90,23 @@ export const addCard = card => {
   };
 };
 
-export const closeError = () => {
-  return dispatch => {
-    dispatch({type: types.CLOSE_ERROR});
-  };
+export const closeError = () => dispatch => dispatch({type: types.CLOSE_ERROR});
+
+export const loadApp = () => dispatch => {
+  return API.checkLogin()
+  .then(res => {
+    if (res.success) {
+      dispatch(loadBoards());
+      return dispatch({type: types.LOGIN, user: res.user});
+    }
+  });
 };
 
-export const loaAPIoards = () => dispatch => API.getBoards()
+export const loadBoards = () => dispatch => {
+  return API.loadBoards()
+  .then(res => {
+    if (res.success) {
+      dispatch({type: types.LOAD_BOARDS, boards: res.boards});
+    }
+  });
+};

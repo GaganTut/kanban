@@ -28,13 +28,13 @@ cards.route('/board/:boardID')
       })
       .catch(error => res.json({success: false, error}));
   })
-  .post(middleWare.userPermission, (req, res) => {
+  .post((req, res) => {
     Card.create(req.body)
       .then(card => res.json({success: true, card}))
       .catch(error => res.json({error:'Failed to post new card, please try again'}));
   });
 
-cards.delete('/:id', middleWare.userPermission, (req, res) => {
+cards.delete('/:id', (req, res) => {
   Card.destroy(
     {
       where: {
@@ -47,7 +47,7 @@ cards.delete('/:id', middleWare.userPermission, (req, res) => {
 });
 
 
-cards.put('/:id', middleWare.userPermission, (req, res) => {
+cards.put('/:id', (req, res) => {
   Card.update(req.body,
     {
       where: {

@@ -30,7 +30,6 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/signup" component={Signup} />
           <Route path="/board/:id" component={Board} />
-          <CardForm/>
         </div>
       </Router>
     );

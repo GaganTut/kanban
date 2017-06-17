@@ -49,7 +49,7 @@ class CardForm extends Component {
     if (this.props.loggedIn) {
       return (
         <div
-          id="newCardForm"
+          className="footerForm"
         >
 
           <input type="text"
@@ -108,7 +108,7 @@ class CardForm extends Component {
       )
     } else {
       return (
-        <div id="not-logged-form">
+        <div className="footerForm">
           <h1>PLEASE SIGN IN TO POST OR EDIT CARD</h1>
         </div>
       )

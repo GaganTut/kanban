@@ -7,11 +7,9 @@ const middleWare = require('../customMiddleWare');
 boards.route('/')
   .get((req, res) => {
     BoardUser.findAll({
-      where: [
-        {
-          UserUsername: req.user.username
-        }
-      ]
+      where: {
+        UserUsername: req.user.username
+      }
     })
     .then(boards => res.json({success: true, boards}))
     .catch(error => res.json({success: false, error}));

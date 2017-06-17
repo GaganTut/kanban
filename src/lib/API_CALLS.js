@@ -54,22 +54,26 @@ export const signupUser = userInfo => fetch('/api/user/new', {
   .then(res => res.json())
   .catch(err => err);
 
-export const logoutUser = () => fetch('/api/user/logout',{credentials: 'include'})
+export const logoutUser = () => fetch('/api/user/logout',{credentials: 'include'
+})
   .then(res => res.json())
   .catch(err => err);
 
-export const getUserList = () => fetch('/api/user')
+
+export const checkLogin = () => fetch('/api/user/check', {
+  credentials: 'include'
+})
   .then(res => res.json())
   .catch(err => err);
 
-export const checkLogin = () => fetch('/api/user/check')
+export const loadBoards = () => fetch('/api/boards/', {
+  credentials: 'include'
+})
   .then(res => res.json())
   .catch(err => err);
 
-export const loadBoards = () => fetch('/api/boards/')
-  .then(res => res.json())
-  .catch(err => err);
-
-export const loadCards = id => fetch(`/api/boards/${id}`)
+export const loadCards = id => fetch(`/api/boards/${id}`, {
+  credentials: 'include'
+})
   .then(res => res.json())
   .catch(err => err);

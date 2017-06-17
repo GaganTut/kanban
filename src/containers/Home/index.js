@@ -6,6 +6,7 @@ import './Home.css';
 import { loadCards, closeError } from '../../actions';
 import Column from '../../components/Column';
 import ErrorMessage from '../../components/ErrorMessage';
+import BoardForm from '../BoardForm';
 
 class Home extends Component {
 
@@ -17,7 +18,8 @@ class Home extends Component {
   );
 
   renderBoards = () => {
-    return this.props.allBoards.map(board => <div>{board.title}</div>)
+    return (this.props.allBoards.map(board => <div>{board.title}</div>)
+      )
   }
 
   renderNoBoards = () => (
@@ -35,6 +37,7 @@ class Home extends Component {
                   errorMessage={this.props.errorMessage}
                   closeError={this.props.closeError}
                   />}
+        <BoardForm/>
       </div>
     );
   }

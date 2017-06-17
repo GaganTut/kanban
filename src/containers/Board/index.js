@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { loadCards, closeError } from '../../actions';
 import Column from '../../components/Column';
 import ErrorMessage from '../../components/ErrorMessage';
+import CardForm from '../CardForm';
 
 class Board extends Component {
   componentWillMount() {
@@ -36,7 +37,9 @@ class Board extends Component {
         {this.props.hasError && <ErrorMessage
                   errorMessage={this.props.errorMessage}
                   closeError={this.props.closeError}
-                  />}
+                  />
+        }
+        <CardForm/>
       </div>
     );
   }

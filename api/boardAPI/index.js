@@ -6,19 +6,36 @@ const middleWare = require('../customMiddleWare');
 
 boards.route('/')
   .get((req, res) => {
-    BoardUser.findAll({
+    User.findOne({
       where: {
-        UserUsername: req.user.username
-      }
+        username: req.user.username
+      },
+      include: [
+        {
+          model: Board,
+          nested: true
+        }
+      ]
     })
-    .then(boards => res.json({success: true, boards}))
+    .then(user => res.json({success: true, boards: user.Boards}))
     .catch(error => res.json({success: false, error}));
   })
   .post((req, res) => {
     Board.create({title: req.body.title})
-      .then(board => {
-        BoardUser.create({BoardId: board.id, UserUsername: req.user.username, permission: 'Owner'})
-        .then(res.json({success: true, board}));
+      .then(newBoard => {
+        BoardUser.create(
+          {
+            BoardId: newBoard.id,
+            UserUsername: req.user.username,
+            permission: 'Owner'
+          }
+        )
+        .then(joinBoard => Board.findOne({
+          where: {
+            id: newBoard.id
+          }
+        }))
+        .then(board => res.json({success: true, board}));
       })
       .catch(error => res.json({success: false, error: 'Board could not be created'}));
   })

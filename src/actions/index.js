@@ -110,7 +110,20 @@ export const loadApp = () => dispatch => {
     dispatch({type: types.FETCHING_DONE});
     if (res.success) {
       dispatch(loadBoards());
-      return dispatch({type: types.LOGIN, user: res.user});
+      return dispatch({type: types.LOG_IN, user: res.user});
+    }
+  });
+};
+
+export const createBoard = title => dispatch => {
+  dispatch({type: types.FETCHING_IN_PROGRESS});
+  return API.createBoard({title})
+  .then(res => {
+    dispatch({type: types.FETCHING_DONE});
+    if (res.success) {
+      return dispatch({type: types.CREATE_BOARD, board: res.board});
+    } else {
+      dispatch({type: types.THROW_ERROR, error: 'Failed to create board'});
     }
   });
 };

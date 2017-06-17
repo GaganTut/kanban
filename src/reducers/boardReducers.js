@@ -15,6 +15,11 @@ export default (state = initialState, action) => {
         allBoards: action.allBoards
       });
 
+    case types.CREATE_BOARD:
+      return Object.assign({}, state, {
+        allBoards: state.allBoards.concat([action.board])
+      });
+
     case types.LOAD_CARDS :
       return Object.assign({}, state, {
         allCards: state.allCards.concat(action.cards).filter((card, index, self) => self.indexOf(card) == index)

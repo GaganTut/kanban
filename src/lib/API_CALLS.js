@@ -77,3 +77,14 @@ export const loadCards = id => fetch(`/api/boards/${id}`, {
 })
   .then(res => res.json())
   .catch(err => err);
+
+export const createBoard = titleObj => fetch(`/api/boards/`, {
+  method: 'POST',
+  credentials: 'include',
+  headers: new Headers({
+    'Content-Type': 'application/json'
+  }),
+  body: JSON.stringify(titleObj)
+})
+  .then(res => res.json())
+  .catch(err => err);

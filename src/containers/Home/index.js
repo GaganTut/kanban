@@ -18,7 +18,8 @@ class Home extends Component {
   );
 
   renderBoards = () => {
-    return (this.props.allBoards.map(board => <div>{board.title}</div>)
+    console.log(this.props.allBoards);
+    return (this.props.allBoards.map(board => <div key={board.id}>{board.title}</div>)
       )
   }
 

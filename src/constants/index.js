@@ -9,3 +9,4 @@ export const ADD_CARD = 'ADD_CARD';
 export const THROW_ERROR = 'THROW_ERROR';
 export const CLOSE_ERROR = 'CLOSE_ERROR';
 export const LOAD_BOARDS = 'LOAD_BOARDS';
+export const CREATE_BOARD = 'CREATE_BOARD';

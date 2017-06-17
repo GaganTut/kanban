@@ -5,6 +5,7 @@ import {withRouter} from 'react-router';
 import './Home.css';
 import { closeError } from '../../actions';
 import ErrorMessage from '../../components/ErrorMessage';
+import Homeboard from '../../components/Homeboard';
 import BoardForm from '../BoardForm';
 
 class Home extends Component {
@@ -17,8 +18,7 @@ class Home extends Component {
   );
 
   renderBoards = () => {
-    console.log(this.props.allBoards);
-    return (this.props.allBoards.map(board => <a id="please-login" key={board.BoardId} href="/board/1/"><div>{board.title}</div></a>)
+    return (this.props.allBoards.map(board => <Homeboard key={board.id} board={board} openBoard={()=>this.props.history.push(`/board/${board.id}`)}/>)
       )
   }
 
@@ -31,7 +31,14 @@ class Home extends Component {
   render() {
     return (
       <div className="App">
-        {this.props.loggedIn ? (this.props.allBoards.length > 0 ? (this.renderBoards()) : (this.renderNoBoards())) : (this.renderLoginMessage())}
+        {this.props.loggedIn ?
+          (this.props.allBoards.length > 0 ?
+            (this.renderBoards())
+            :
+            (this.renderNoBoards()))
+          :
+          (this.renderLoginMessage())
+        }
         {this.props.fetching && <div id="loading-message"></div>}
         {this.props.hasError && <ErrorMessage
                   errorMessage={this.props.errorMessage}

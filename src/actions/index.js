@@ -13,6 +13,15 @@ export const loadBoards = () => dispatch => {
   });
 };
 
+export const refreshBoards = () => dispatch => {
+  return API.loadBoards()
+  .then(res => {
+    if (res.success) {
+      dispatch({type: types.LOAD_BOARDS, allBoards: res.boards});
+    }
+  });
+};
+
 export const login = (username, password) => dispatch => {
   dispatch({type: types.FETCHING_IN_PROGRESS});
   return API.loginUser(username, password)
@@ -121,7 +130,8 @@ export const createBoard = title => dispatch => {
   .then(res => {
     dispatch({type: types.FETCHING_DONE});
     if (res.success) {
-      return dispatch({type: types.CREATE_BOARD, board: res.board});
+      dispatch({type: types.CREATE_BOARD, board: res.board});
+      dispatch(refreshBoards());
     } else {
       dispatch({type: types.THROW_ERROR, error: 'Failed to create board'});
     }

@@ -8,7 +8,7 @@ export const loadBoards = () => dispatch => {
   .then(res => {
     dispatch({type: types.FETCHING_DONE});
     if (res.success) {
-      dispatch({type: types.LOAD_BOARDS, boards: res.boards});
+      dispatch({type: types.LOAD_BOARDS, allBoards: res.boards});
     }
   });
 };

@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
 import './Home.css';
-import { loadCards, closeError } from '../../actions';
-import Column from '../../components/Column';
+import { closeError } from '../../actions';
 import ErrorMessage from '../../components/ErrorMessage';
 import BoardForm from '../BoardForm';
 
@@ -18,7 +17,6 @@ class Home extends Component {
   );
 
   renderBoards = () => {
-    console.log(this.props.allBoards);
     return (this.props.allBoards.map(board => <div key={board.id}>{board.title}</div>)
       )
   }

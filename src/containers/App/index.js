@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Home from '../../containers/Home';
 import Board from '../../containers/Board';
 import Signup from '../../containers/Signup';
-import CardForm from '../../containers/CardForm';
 import Login from '../../containers/Login';
 import {
   BrowserRouter as Router,

@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
 import React, {Component} from 'react';
 import './BoardForm.css';
-import { createBoard, deleteBoard } from '../../actions';
+import { createBoard } from '../../actions';
 import { connect } from 'react-redux';
 
 class BoardForm extends Component {
@@ -16,18 +16,14 @@ class BoardForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.createBoard(this.state.title);
-    this.reset();
+    this.setState({
+      title: ''
+    });
   };
 
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value});
   };
-
-  reset() {
-    this.setState({
-      title: ''
-    });
-  }
 
   render() {
     if (this.props.loggedIn) {

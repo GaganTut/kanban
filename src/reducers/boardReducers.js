@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
 
     case types.LOAD_CARDS :
       return Object.assign({}, state, {
-        allCards: state.allCards.concat(action.cards).filter((card, index, self) => self.indexOf(card) == index)
+        allCards: state.allCards.concat(action.cards).filter((card, index, self) => self.indexOf(card) === index)
       });
 
     case types.DELETE_CARD :

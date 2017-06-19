@@ -3,3 +3,37 @@
   top: 50%;
   left: 50%;
 }
+
+.boards-page {
+  display: flex;
+  flex-flow: column wrap;
+  width: 100%;
+  position: fixed;
+  bottom: 100px;
+  top: 60px;
+  overflow: auto;
+}
+
+.each-board {
+  background-color: #f2e6ff;
+  align-items: center;
+  border-radius: 10%;
+  box-shadow: 5px 5px 2px #d9d9d9;
+  color: gray;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Raleway', sans-serif;
+  justify-content: space-around;
+  margin: 3% 1%;
+  width: 30%;
+  height: 200px;
+  position: relative;
+}
+
+.each-board:hover {
+  background-color: #e6ccff
+}
+
+.board-title {
+  font-size: 25px;
+}

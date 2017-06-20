@@ -22,9 +22,9 @@ export const refreshBoards = () => dispatch => {
   });
 };
 
-export const login = (username, password) => dispatch => {
+export const login = (email, password) => dispatch => {
   dispatch({type: types.FETCHING_IN_PROGRESS});
-  return API.loginUser(username, password)
+  return API.loginUser(email, password)
   .then(res => {
     dispatch({type: types.FETCHING_DONE});
     if (res.success) {
@@ -36,7 +36,7 @@ export const login = (username, password) => dispatch => {
   });
 };
 
-export const logout= username => dispatch => {
+export const logout = () => dispatch => {
   dispatch({type: types.FETCHING_IN_PROGRESS});
   API.logoutUser()
   .then(() => {
@@ -51,7 +51,7 @@ export const signup = userInfo => dispatch => {
     .then(res => {
       dispatch({type: types.FETCHING_DONE});
       if (res.success) {
-        dispatch(login(userInfo.username, userInfo.password));
+        dispatch(login(userInfo.email, userInfo.password));
       } else {
         dispatch({type: types.THROW_ERROR, error: 'Sign Up Failed'});
       }
@@ -149,4 +149,4 @@ export const addBoardUser = boardUser => dispatch => {
       dispatch({type: types.THROW_ERROR, error: 'Failed to create board'});
     }
   });
-}
+};

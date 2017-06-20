@@ -4,9 +4,8 @@ import * as types from '../constants';
 
 const initialState = {
   loggedIn: false,
-  loggedUsername: null,
-  loggedFirstname: null,
-  loggedLastname: null
+  loggedEmail: null,
+  loggedFullname: null
 };
 
 const users = (state = initialState, action) => {
@@ -14,9 +13,8 @@ const users = (state = initialState, action) => {
     case types.LOG_IN :
       return Object.assign({}, state, {
         loggedIn: true,
-        loggedUsername: action.user.username,
-        loggedFirstname: action.user.firstname,
-        loggedLastname: action.user.lastname,
+        loggedEmail: action.user.email,
+        loggedFullname: action.user.fullname
       });
 
     case types.LOG_OUT :

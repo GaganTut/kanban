@@ -10,15 +10,15 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      username: '',
+      email: '',
       password: '',
     };
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.login(this.state.username, this.state.password);
-    this.setState({username: '', password: ''});
+    this.props.login(this.state.email, this.state.password);
+    this.setState({email: '', password: ''});
   };
 
   handleText = (event) => {
@@ -35,7 +35,7 @@ class Login extends Component {
         <div
           className="login-component"
           >
-          <p id="loggedInMsg">{'Hello ' + this.props.loggedUsername}
+          <p id="loggedInMsg">{'Hello ' + this.props.loggedEmail}
           </p>
 
           <input
@@ -55,9 +55,9 @@ class Login extends Component {
             className="login-form"
             >
             <input type="text"
-              placeholder="Username"
-              name="username"
-              value={this.props.username}
+              placeholder="Email"
+              name="email"
+              value={this.props.email}
               onChange={this.handleText}
               />
             <input
@@ -79,19 +79,15 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loggedIn: state.user.loggedIn,
-    loggedUsername: state.user.loggedUsername
-  };
-}
+const mapStateToProps = (state) => ({
+  loggedIn: state.user.loggedIn,
+  loggedEmail: state.user.loggedEmail
+})
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    login: (username, password) => dispatch(login(username, password)),
-    logout: () => dispatch(logout())
-  }
-}
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  login: (email, password) => dispatch(login(email, password)),
+  logout: () => dispatch(logout())
+})
 
 export default connect(
   mapStateToProps,

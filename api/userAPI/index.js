@@ -37,7 +37,7 @@ user.post('/new', middleWare.validateNewUser, (req, res) => {
 });
 
 user.post('/login', passport.authenticate('local'), (req, res) => {
-  res.redirect(`/api/user/${req.user.email}`);
+  res.redirect(`/api/user/${req.user.id}`);
 });
 
 user.get('/check', (req, res) => {
@@ -58,18 +58,18 @@ user.get('/logout', (req, res) => {
   res.json({success: true});
 });
 
-user.route('/:email')
+user.route('/:id')
   .get((req, res) => {
     User.findOne({
       where: {
-        email: req.params.email
+        id: req.params.id
       },
       attributes: ['email', 'fullname']
     })
       .then(user => {
         res.json({success: true, user});
       })
-      .catch(error => res.json({error:'Failed to find user'}));
+      .catch(error => res.json({succes: false, error:'Failed to find user'}));
   })
   .put(middleWare.userPermission, (req, res) => {
     Card.update(req.body,
@@ -80,7 +80,7 @@ user.route('/:email')
       }
     )
       .then(res.json({success: true}))
-      .catch(error => res.json({error:'Failed to update user'}));
+      .catch(error => res.json({success: false, error:'Failed to update user'}));
   })
   .delete(middleWare.userPermission, (req, res) => {
     Card.destroy(

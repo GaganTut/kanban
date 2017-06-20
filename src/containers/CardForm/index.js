@@ -14,7 +14,7 @@ class CardForm extends Component {
       priority: 'Base',
       status: 'Base',
       assignedTo: '',
-      username: '',
+      email: '',
       permission: 'Base'
     };
   }
@@ -46,7 +46,7 @@ class CardForm extends Component {
   }
   createUserObject(stateObj) {
     return {
-      UserUsername: stateObj.username,
+      UserEmail: stateObj.email,
       permission: stateObj.permission,
       BoardId: this.props.match.params.id
     };
@@ -58,7 +58,7 @@ class CardForm extends Component {
       priority: 'Base',
       status: 'Base',
       assignedTo: '',
-      username: '',
+      email: '',
       permission: 'Base'
     });
   }
@@ -124,12 +124,12 @@ class CardForm extends Component {
             />
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Enter Email"
             onChange={this.handleChange}
-            value={this.state.username}
-            id="username-input"
+            value={this.state.email}
+            id="email-input"
             className="cardInputs"
-            name="username"
+            name="email"
             />
           <select
             onChange={this.handleChange}
@@ -162,20 +162,15 @@ class CardForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loggedIn: state.user.loggedIn,
-    loggedUsername: state.user.loggedUsername,
-    userListOptions: state.user.userListOptions
-  };
-}
+const mapStateToProps = (state) => ({
+  loggedIn: state.user.loggedIn,
+  loggedEmail: state.user.loggedEmail
+})
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    addCard: card => dispatch(addCard(card)),
-    addBoardUser: (username, permission) => dispatch(addBoardUser(username, permission))
-  }
-}
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  addCard: card => dispatch(addCard(card)),
+  addBoardUser: (email, permission) => dispatch(addBoardUser(email, permission))
+})
 
 export default withRouter(connect(
   mapStateToProps,

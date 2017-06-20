@@ -59,17 +59,13 @@ class BoardForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loggedIn: state.user.loggedIn
-  };
-}
+const mapStateToProps = (state) => ({
+  loggedIn: state.user.loggedIn
+})
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    createBoard: title => dispatch(createBoard(title)),
-  }
-}
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  createBoard: title => dispatch(createBoard(title)),
+})
 
 export default connect(
   mapStateToProps,

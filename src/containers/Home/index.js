@@ -18,7 +18,6 @@ class Home extends Component {
   );
 
   renderBoards = () => {
-    console.log(this.props.allBoards)
     return (<div className="boards-page">{this.props.allBoards.map(board => <Homeboard key={board.id} board={board} openBoard={()=>this.props.history.push(`/board/${board.id}`)}/>)}</div>
       )
   }
@@ -51,21 +50,17 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    allBoards: state.board.allBoards,
-    fetching: state.helper.fetching,
-    hasError: state.helper.hasError,
-    errorMessage: state.helper.errorMessage,
-    loggedIn: state.user.loggedIn
-  };
-}
+const mapStateToProps = (state) => ({
+  allBoards: state.board.allBoards,
+  fetching: state.helper.fetching,
+  hasError: state.helper.hasError,
+  errorMessage: state.helper.errorMessage,
+  loggedIn: state.user.loggedIn
+})
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    closeError: () => dispatch(closeError())
-  }
-}
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  closeError: () => dispatch(closeError())
+})
 
 export default withRouter(connect(
   mapStateToProps,

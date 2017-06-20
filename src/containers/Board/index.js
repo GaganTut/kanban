@@ -46,21 +46,17 @@ class Board extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    allCards: state.board.allCards,
-    fetching: state.board.fetching,
-    hasError: state.board.hasError,
-    errorMessage: state.board.errorMessage
-  };
-}
+const mapStateToProps = (state) => ({
+  allCards: state.board.allCards,
+  fetching: state.board.fetching,
+  hasError: state.board.hasError,
+  errorMessage: state.board.errorMessage
+})
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    loadCards: boardId => dispatch(loadCards(boardId)),
-    closeError: () => dispatch(closeError())
-  }
-}
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  loadCards: boardId => dispatch(loadCards(boardId)),
+  closeError: () => dispatch(closeError())
+})
 
 export default connect(
   mapStateToProps,

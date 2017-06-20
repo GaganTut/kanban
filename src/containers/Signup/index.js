@@ -10,9 +10,8 @@ class Signup extends Component {
     super(props);
 
     this.state = {
-      username: '',
-      firstname: '',
-      lastname: '',
+      email: '',
+      fullname: '',
       password: '',
       valPassword: ''
     };
@@ -22,9 +21,8 @@ class Signup extends Component {
     event.preventDefault();
     this.props.signup(this.state);
     this.setState({
-      username: '',
-      firstname: '',
-      lastname: '',
+      email: '',
+      fullname: '',
       password: '',
       valPassword: ''
     });
@@ -39,11 +37,6 @@ class Signup extends Component {
     }
   };
 
-  handleSignUp = (event => {
-    event.preventDefault();
-    console.log(event.target);
-  });
-
   render() {
     if (!this.props.loggedIn) {
       return (
@@ -52,16 +45,12 @@ class Signup extends Component {
           >
           <h1 className="form-title">Just Simply Sign Up</h1>
           <div>
-            <label htmlFor="username">Create Username:</label>
-            <input type="text" name="username" value={this.state.username} onChange={this.handleText} placeholder="Must be 8+ Characters"/>
+            <label htmlFor="email">Enter Email:</label>
+            <input type="text" name="email" value={this.state.email} onChange={this.handleText} placeholder="Enter Valid Email"/>
           </div>
           <div>
-            <label htmlFor="firstname">Enter First Name:</label>
-            <input type="text" name="firstname" value={this.state.firstname} onChange={this.handleText} placeholder="Enter First Name"/>
-          </div>
-          <div>
-            <label htmlFor="lastname">Enter Last Name:</label>
-            <input type="text" name="lastname" value={this.state.lastname} onChange={this.handleText} placeholder="Enter Last Name"/>
+            <label htmlFor="fullname">Enter First Name:</label>
+            <input type="text" name="fullname" value={this.state.fullname} onChange={this.handleText} placeholder="Enter First Name"/>
           </div>
           <div>
             <label htmlFor="password">Create Password:</label>
@@ -83,17 +72,13 @@ class Signup extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loggedIn: state.user.loggedIn
-  };
-}
+const mapStateToProps = (state) => ({
+  loggedIn: state.user.loggedIn
+})
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    signup: userInfo => dispatch(signup(userInfo))
-  }
-}
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  signup: userInfo => dispatch(signup(userInfo))
+})
 
 export default connect(
   mapStateToProps,

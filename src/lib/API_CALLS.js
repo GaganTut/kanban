@@ -32,13 +32,13 @@ export const deleteCard = (id) => fetch(`/api/cards/${id}`, {
     .then(res => res.json())
     .catch(err => err);
 
-export const loginUser = (username, password) => fetch('/api/user/login', {
+export const loginUser = (email, password) => fetch('/api/user/login', {
     method: 'POST',
     credentials: 'include',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
-    body: JSON.stringify({username: username, password:password})
+    body: JSON.stringify({email, password})
   })
     .then(res => res.json())
     .catch(err => err);

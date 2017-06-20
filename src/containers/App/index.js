@@ -34,17 +34,13 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    loggedIn: state.user.loggedIn
-  };
-}
+const mapStateToProps = state => ({
+  loggedIn: state.user.loggedIn
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loadApp: () => dispatch(loadApp())
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  loadApp: () => dispatch(loadApp())
+})
 
 export default connect(
   mapStateToProps,

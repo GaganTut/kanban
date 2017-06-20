@@ -154,22 +154,15 @@ class KanbanCard extends Component{
   }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    userListOptions: state.user.userListOptions
-  };
-}
+const mapStateToProps = (state) => ({
+})
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    updateCard: card => dispatch(updateCard(card)),
-    deleteCard: card => dispatch(deleteCard(card))
-  }
-}
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  updateCard: card => dispatch(updateCard(card)),
+  deleteCard: card => dispatch(deleteCard(card))
+})
 
-const ConnectedKanbanCard = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(KanbanCard);
-
-export default ConnectedKanbanCard;

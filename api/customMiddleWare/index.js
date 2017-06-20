@@ -1,7 +1,7 @@
 module.exports = (() => {
   const validateNewUser = (req, res, next) => {
-    if (req.body.username.length < 8 || req.body.password.length < 8 || req.body.valPassword !== req.body.password) {
-      res.json({failed: 'Please Check Inputs'});
+    if (req.body.password.length < 8 || req.body.valPassword !== req.body.password) {
+      res.json({success: false, error: 'Please Check Inputs'});
     } else {
       next();
     }
@@ -11,7 +11,7 @@ module.exports = (() => {
     if (req.isAuthenticated()) {
       next();
     } else {
-      res.status(401).json({failed: 'Please Login'});
+      res.json({success:false, error: 'Not Logged In'});
     }
   };
 

@@ -20,16 +20,19 @@ api.use(passport.initialize());
 api.use(passport.session());
 
 passport.use(new LocalStrategy (
-  (username, password, done) => {
+  (email, password, done) => {
+    console.log('1');
     User.findOne({
       where: {
-        username: username
+        email: email
       }})
       .then ( user => {
+        console.log('2');
         if (user === null) {
           return done(null, false, {message: 'Login Failed - Wrong Input'});
         } else {
           bcrypt.compare(password, user.password).then(res => {
+            console.log('3');
             if (res) {
               return done(null, user);
             } else {
@@ -45,15 +48,18 @@ passport.use(new LocalStrategy (
 ));
 
 passport.serializeUser(function(user, done) {
+  console.log('serializeUser');
   return done(null, {
-    username: user.username
+    email: user.email,
+    id: user.id
   });
 });
 
 passport.deserializeUser(function(user, done) {
+  console.log('deserializeUser');
   User.findOne({
     where: {
-      username: user.username
+      email: user.email
     }
   }).then(user => {
     return done(null, user);

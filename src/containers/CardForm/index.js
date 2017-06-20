@@ -1,8 +1,9 @@
 /*jshint esversion: 6*/
 import React, {Component} from 'react';
 import './CardForm.css';
-import { addCard, loadUserList } from '../../actions';
+import { addCard, loadUserList, addBoardUser } from '../../actions';
 import { connect } from 'react-redux';
+import {withRouter} from 'react-router';
 
 class CardForm extends Component {
   constructor(props) {
@@ -12,7 +13,9 @@ class CardForm extends Component {
       title: '',
       priority: 'Base',
       status: 'Base',
-      assignedTo: ''
+      assignedTo: '',
+      username: '',
+      permission: 'Base'
     };
   }
 
@@ -22,17 +25,30 @@ class CardForm extends Component {
     this.reset();
   };
 
+  addBoardUser = (event) => {
+    event.preventDefault();
+    this.props.addBoardUser(this.createUserObject(this.state));
+    this.reset();
+  };
+
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value});
   };
 
   createCardObject(stateObj) {
     return {
-      title: this.state.title,
-      priority: this.state.priority,
-      status: this.state.status,
-      assignedTo: this.state.assignedTo,
-      createdBy: this.props.loggedUsername
+      title: stateObj.title,
+      priority: stateObj.priority,
+      status: stateObj.status,
+      assignedTo: stateObj.assignedTo,
+      attachedTo: this.props.match.params.id
+    };
+  }
+  createUserObject(stateObj) {
+    return {
+      UserUsername: stateObj.username,
+      permission: stateObj.permission,
+      BoardId: this.props.match.params.id
     };
   }
 
@@ -41,7 +57,9 @@ class CardForm extends Component {
       title: '',
       priority: 'Base',
       status: 'Base',
-      assignedTo: ''
+      assignedTo: '',
+      username: '',
+      permission: 'Base'
     });
   }
 
@@ -104,6 +122,34 @@ class CardForm extends Component {
             className="cardInputs"
             value="Submit Card"
             />
+          <input
+            type="text"
+            placeholder="Username"
+            onChange={this.handleChange}
+            value={this.state.username}
+            id="username-input"
+            className="cardInputs"
+            name="username"
+            />
+          <select
+            onChange={this.handleChange}
+            id="permission-input"
+            className="cardInputs"
+            value={this.state.permission}
+            name="permission"
+            >
+              <option disabled value="Base">Permission Level</option>
+              <option value="Admin">Admin</option>
+              <option value="Worker">Worker</option>
+              <option value="Viewer">Viewer</option>
+          </select>
+          <input
+            onClick={this.addBoardUser}
+            type="submit"
+            id="submit-input"
+            className="cardInputs"
+            value="Add User"
+            />
         </div>
       )
     } else {
@@ -127,13 +173,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     addCard: card => dispatch(addCard(card)),
-    loadUserList: () => dispatch(loadUserList())
+    addBoardUser: (username, permission) => dispatch(addBoardUser(username, permission))
   }
 }
 
-const ConnectedCardForm = connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(CardForm);
-
-export default ConnectedCardForm;
+)(CardForm));

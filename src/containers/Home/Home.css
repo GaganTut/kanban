@@ -6,7 +6,7 @@
 
 .boards-page {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
   width: 100%;
   position: fixed;
   bottom: 100px;

@@ -13,23 +13,24 @@ class Board extends Component {
   }
 
   getCards = () => {
-    this.props.loadCards();
+    this.props.loadCards(this.props.match.params.id);
   }
 
   render() {
+   const boardCards = this.props.allCards.filter(card => Number(card.attachedTo) === Number(this.props.match.params.id));
     return (
       <div className="App">
         <div id="full-board">
           <Column
-            cardList={this.props.allCards.filter(card => card.status === 'Queue')}
+            cardList={boardCards.filter(card => card.status === 'Queue')}
             columnName="Queue"
             />
           <Column
-            cardList={this.props.allCards.filter(card => card.status === 'Progress')}
+            cardList={boardCards.filter(card => card.status === 'Progress')}
             columnName="Progress"
             />
           <Column
-            cardList={this.props.allCards.filter(card => card.status === 'Completed')}
+            cardList={boardCards.filter(card => card.status === 'Completed')}
             columnName="Completed"
             />
         </div>
@@ -56,14 +57,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    loadCards: cards => dispatch(loadCards(cards)),
+    loadCards: boardId => dispatch(loadCards(boardId)),
     closeError: () => dispatch(closeError())
   }
 }
 
-const ConnectedApp = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Board);
-
-export default ConnectedApp;

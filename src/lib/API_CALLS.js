@@ -3,7 +3,7 @@ export const getAllCards = () => fetch('/api/cards')
   .then(res => res.json())
   .catch(err => err);
 
-export const addCard = (cardObj) => fetch('/api/cards', {
+export const addCard = (cardObj) => fetch(`/api/cards/board/${cardObj.attachedTo}`, {
     method: 'POST',
     credentials: 'include',
     headers: new Headers({
@@ -72,7 +72,7 @@ export const loadBoards = () => fetch('/api/boards/', {
   .then(res => res.json())
   .catch(err => err);
 
-export const loadCards = id => fetch(`/api/boards/${id}`, {
+export const loadCards = id => fetch(`/api/cards/board/${id}`, {
   credentials: 'include'
 })
   .then(res => res.json())
@@ -88,3 +88,14 @@ export const createBoard = titleObj => fetch(`/api/boards/`, {
 })
   .then(res => res.json())
   .catch(err => err);
+
+export const addBoardUser = boardUser => fetch(`/api/boards`, {
+    method: 'PUT',
+    credentials: 'include',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify(boardUser)
+  })
+    .then(res => res.json())
+    .catch(err => err);

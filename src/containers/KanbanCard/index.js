@@ -113,10 +113,7 @@ class KanbanCard extends Component{
             type="text" name="assignedTo"
             value={this.state.assignedTo}
             onChange={this.handleChange}
-            list="userSearch"/>
-            <datalist id="userSearch">
-              {this.props.userListOptions.map(listOption => (<option value={listOption.username} key={listOption.username}></option>))}
-            </datalist>
+            />
           <select
             className="edit-priority"
             type="text"

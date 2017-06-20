@@ -88,7 +88,7 @@ export const updateCard = card => dispatch => {
     .then(res => {
       dispatch({type: types.FETCHING_DONE});
       if (res.success) {
-        dispatch({type: types.UPDATE_CARD, card});
+        dispatch({type: types.UPDATE_CARD, card: res.card});
       } else {
         dispatch({type: types.THROW_ERROR, error: card.failed});
       }
@@ -99,14 +99,14 @@ export const addCard = card => {
   return dispatch => {
     dispatch({type: types.FETCHING_IN_PROGRESS});
     return API.addCard(card)
-      .then(card => {
-        dispatch({type: types.FETCHING_DONE});
-        if (card.hasOwnProperty('failed')) {
-          dispatch({type: types.THROW_ERROR, error: card.failed});
-        } else {
-          dispatch({type: types.ADD_CARD, card});
-        }
-      });
+    .then(res => {
+      dispatch({type: types.FETCHING_DONE});
+      if (res.success) {
+        dispatch({type: types.ADD_CARD, card: res.card});
+      } else {
+        dispatch({type: types.THROW_ERROR, error: 'Failed to add card'});
+      }
+    });
   };
 };
 
@@ -137,3 +137,16 @@ export const createBoard = title => dispatch => {
     }
   });
 };
+
+export const addBoardUser = boardUser => dispatch => {
+  dispatch({type: types.FETCHING_IN_PROGRESS});
+  return API.addBoardUser(boardUser)
+  .then(res => {
+    dispatch({type: types.FETCHING_DONE});
+    if (res.success) {
+      dispatch(refreshBoards());
+    } else {
+      dispatch({type: types.THROW_ERROR, error: 'Failed to create board'});
+    }
+  });
+}

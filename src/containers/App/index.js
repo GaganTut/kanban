@@ -27,19 +27,21 @@ class App extends Component {
             <Login />
           </div>
           <Route exact path="/" component={Home} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/board/:id" component={Board} />
+          {this.props.loggedIn && <Route path="/signup" component={Signup} />}
+          {this.props.loggedIn && <Route path="/board/:id" component={Board} />}
         </div>
       </Router>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {};
+const mapStateToProps = state => {
+  return {
+    loggedIn: state.user.loggedIn
+  };
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
     loadApp: () => dispatch(loadApp())
   }

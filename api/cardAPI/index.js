@@ -29,6 +29,7 @@ cards.route('/board/:boardID')
       .catch(error => res.json({success: false, error}));
   })
   .post((req, res) => {
+    req.body.createdBy = req.user.username;
     Card.create(req.body)
       .then(card => res.json({success: true, card}))
       .catch(error => res.json({error:'Failed to post new card, please try again'}));

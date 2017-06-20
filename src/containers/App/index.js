@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import Home from '../../containers/Home';
-import Board from '../../containers/Board';
-import Signup from '../../containers/Signup';
-import Login from '../../containers/Login';
+import Home from '../Home';
+import Board from '../Board';
+import Signup from '../Signup';
+import TopHeader from '../../components/TopHeader';
 import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
+import {Switch} from 'react-router';
 import {connect} from 'react-redux';
 import {loadApp} from '../../actions';
 
@@ -21,14 +22,12 @@ class App extends Component {
     return (
       <Router>
         <div className="whole-app">
-          <div className="main-title">
-            <h1>Kanban</h1>
-            <h3>Keepin' it simple</h3>
-            <Login />
-          </div>
-          <Route exact path="/" component={Home} />
-          {this.props.loggedIn && <Route path="/signup" component={Signup} />}
-          {this.props.loggedIn && <Route path="/board/:id" component={Board} />}
+          <TopHeader />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/board/:id" component={Board} />
+          </Switch>
         </div>
       </Router>
     );

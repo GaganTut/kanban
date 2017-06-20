@@ -13,7 +13,12 @@ boards.route('/')
       include: [
         {
           model: Board,
-          nested: true
+          include: [
+            {
+              model: User,
+              attributes: ['username']
+            }
+          ]
         }
       ]
     })

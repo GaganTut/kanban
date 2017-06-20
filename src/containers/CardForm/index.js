@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
 import React, {Component} from 'react';
 import './CardForm.css';
-import { addCard, loadUserList, addBoardUser } from '../../actions';
+import { addCard, addBoardUser } from '../../actions';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
 

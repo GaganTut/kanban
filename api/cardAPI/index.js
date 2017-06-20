@@ -11,12 +11,12 @@ cards.route('/board/:boardID')
         {
           model: User,
           as: 'Creator',
-          attributes: ['username', 'firstname', 'lastname']
+          attributes: ['email', 'fullname']
         },
         {
           model: User,
           as: 'Assigned',
-          attributes: ['username', 'firstname', 'lastname']
+          attributes: ['email', 'fullname']
         }
       ],
       where: {
@@ -29,7 +29,7 @@ cards.route('/board/:boardID')
       .catch(error => res.json({success: false, error}));
   })
   .post((req, res) => {
-    req.body.createdBy = req.user.username;
+    req.body.createdBy = req.user.email;
     Card.create(req.body)
       .then(card => res.json({success: true, card}))
       .catch(error => res.json({error:'Failed to post new card, please try again'}));

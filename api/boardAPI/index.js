@@ -8,7 +8,7 @@ boards.route('/')
   .get((req, res) => {
     User.findOne({
       where: {
-        username: req.user.username
+        email: req.user.email
       },
       include: [
         {
@@ -16,7 +16,7 @@ boards.route('/')
           include: [
             {
               model: User,
-              attributes: ['username']
+              attributes: ['email']
             }
           ]
         }
@@ -31,7 +31,7 @@ boards.route('/')
         BoardUser.create(
           {
             BoardId: newBoard.id,
-            UserUsername: req.user.username,
+            UserEmail: req.user.email,
             permission: 'Owner'
           }
         )

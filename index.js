@@ -10,5 +10,5 @@ app.use('/api', require('./api'));
 app.use(express.static('public'));
 
 app.listen(PORT, () => {
-  db.sequelize.sync({force: false});
+  db.sequelize.sync({force: true});
 });

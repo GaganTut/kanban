@@ -10,7 +10,7 @@ const middleWare = require('../customMiddleWare');
 user.route('/')
   .get((req, res) => {
     User.findAll({
-      attributes: ['username', 'firstname', 'lastname']
+      attributes: ['email', 'fullname']
     })
       .then( users => {
         res.json({success: true, users});
@@ -22,9 +22,8 @@ user.post('/new', middleWare.validateNewUser, (req, res) => {
   bcrypt.genSalt(saltRounds, function(err, salt) {
     bcrypt.hash(req.body.password, salt, function(err, hash) {
       User.create({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        username: req.body.username,
+        fullname: req.body.fullname,
+        email: req.body.email,
         password: hash
       })
       .then(user => {
@@ -38,14 +37,14 @@ user.post('/new', middleWare.validateNewUser, (req, res) => {
 });
 
 user.post('/login', passport.authenticate('local'), (req, res) => {
-  res.redirect(`/api/user/${req.user.username}`);
+  res.redirect(`/api/user/${req.user.email}`);
 });
 
 user.get('/check', (req, res) => {
   if(req.isAuthenticated()) {
     User.findOne({
       where: {
-        username: req.user.username
+        email: req.user.email
       }
     })
     .then(user => res.json({success: true, user}));
@@ -59,13 +58,13 @@ user.get('/logout', (req, res) => {
   res.json({success: true});
 });
 
-user.route('/:username')
+user.route('/:email')
   .get((req, res) => {
     User.findOne({
       where: {
-        username: req.params.username
+        email: req.params.email
       },
-      attributes: ['username', 'firstname', 'lastname']
+      attributes: ['email', 'fullname']
     })
       .then(user => {
         res.json({success: true, user});
@@ -76,7 +75,7 @@ user.route('/:username')
     Card.update(req.body,
       {
         where: {
-          username: req.params.username
+          email: req.params.email
         }
       }
     )
@@ -87,7 +86,7 @@ user.route('/:username')
     Card.destroy(
       {
         where: {
-          username: req.params.username
+          email: req.params.email
         }
       }
     )

@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
 module.exports = function(sequelize, DataTypes) {
   let User = sequelize.define("User", {
-    username: {
+    email: {
       type: DataTypes.STRING,
       primaryKey: true,
     },
@@ -9,11 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    firstname: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    lastname: {
+    fullname: {
       type: DataTypes.STRING,
       allowNull: false
     }

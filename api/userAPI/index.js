@@ -37,8 +37,11 @@ user.post('/new', middleWare.validateNewUser, (req, res) => {
 });
 
 user.post('/login', passport.authenticate('local'), (req, res) => {
+  console.log(req.user);
   res.redirect(`/api/user/${req.user.id}`);
 });
+
+
 
 user.get('/check', (req, res) => {
   if(req.isAuthenticated()) {

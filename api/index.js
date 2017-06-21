@@ -19,7 +19,10 @@ api.use(session({
 api.use(passport.initialize());
 api.use(passport.session());
 
-passport.use(new LocalStrategy (
+passport.use(new LocalStrategy ({
+    usernameField: 'email',
+    passwordField: 'password'
+  },
   (email, password, done) => {
     console.log('1');
     User.findOne({
@@ -50,8 +53,7 @@ passport.use(new LocalStrategy (
 passport.serializeUser(function(user, done) {
   console.log('serializeUser');
   return done(null, {
-    email: user.email,
-    id: user.id
+    email: user.email
   });
 });
 

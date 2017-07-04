@@ -24,18 +24,15 @@ passport.use(new LocalStrategy ({
     passwordField: 'password'
   },
   (email, password, done) => {
-    console.log('1');
     User.findOne({
       where: {
         email: email
       }})
       .then ( user => {
-        console.log('2');
         if (user === null) {
           return done(null, false, {message: 'Login Failed - Wrong Input'});
         } else {
           bcrypt.compare(password, user.password).then(res => {
-            console.log('3');
             if (res) {
               return done(null, user);
             } else {
@@ -51,14 +48,12 @@ passport.use(new LocalStrategy ({
 ));
 
 passport.serializeUser(function(user, done) {
-  console.log('serializeUser');
   return done(null, {
     email: user.email
   });
 });
 
 passport.deserializeUser(function(user, done) {
-  console.log('deserializeUser');
   User.findOne({
     where: {
       email: user.email

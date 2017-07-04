@@ -37,8 +37,15 @@ user.post('/new', middleWare.validateNewUser, (req, res) => {
 });
 
 user.post('/login', passport.authenticate('local'), (req, res) => {
-  console.log(req.user);
-  res.redirect(`/api/user/${req.user.id}`);
+  User.findOne({
+      where: {
+        email: req.user.email
+      }
+    })
+      .then(user => {
+        res.json({success: true, user});
+      })
+      .catch(error => res.json({succes: false, error:'Failed to find user'}));
 });
 
 

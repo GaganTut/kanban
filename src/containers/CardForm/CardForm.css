@@ -1,15 +1,15 @@
 .footerForm {
-  align-items: center;
-  background-color: #d9d9d9;
-  border-top: 3px groove silver;
-  color: ghostwhite;
-  bottom: 0;
+  background-color: silver;
   display: flex;
-  height: 100px;
-  font-family: 'Raleway', sans-serif;
-  font-size: 30px;
-  justify-content: space-around;
-  margin-top: 5%;
+  height: 400px;
+  margin: 10% 0;
   position: fixed;
-  width: 100%;
-};
+  width: 50%;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.cardInputs {
+  height: 20px;
+  width: 40%;
+}

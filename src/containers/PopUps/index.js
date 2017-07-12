@@ -2,11 +2,21 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
+import {openBoardForm} from '../../actions';
 
 class PopUps extends Component {
 
   renderButtons = () => {
-    console.log(this.props);
+    if (this.props.match.path === '/' && !this.props.showBoardForm) {
+      return (
+        <button
+          onClick={() =>
+            this.props.openBoardForm()
+          }
+        >
+          New Board
+        </button>)
+    }
 
     return (<button>HELLO</button>)
   }
@@ -21,10 +31,12 @@ class PopUps extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loggedIn: state.user.loggedIn
+  loggedIn: state.user.loggedIn,
+  showBoardForm: state.pop.showBoardForm
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  openBoardForm: () => dispatch(openBoardForm())
 })
 
 export default withRouter(connect(

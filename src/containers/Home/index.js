@@ -52,10 +52,9 @@ class Home extends Component {
 
 const mapStateToProps = (state) => ({
   allBoards: state.board.allBoards,
-  fetching: state.helper.fetching,
-  hasError: state.helper.hasError,
-  errorMessage: state.helper.errorMessage,
-  loggedIn: state.user.loggedIn
+  fetching: state.pop.fetching,
+  loggedIn: state.user.loggedIn,
+  showBoardForm: state.pop.showBoardForm
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

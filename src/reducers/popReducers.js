@@ -5,7 +5,8 @@ import * as types from '../constants';
 const initialState = {
   fetching: false,
   hasError: false,
-  errorMessage: ''
+  errorMessage: '',
+  showBoardForm: false
 };
 
 export default (state = initialState, action) => {
@@ -30,6 +31,8 @@ export default (state = initialState, action) => {
         hasError: false,
         errorMessage: ''
       });
+    case types.OPEN_BOARD_FORM :
+      return
 
     default:
       return state;

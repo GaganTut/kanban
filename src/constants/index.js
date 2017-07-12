@@ -10,3 +10,7 @@ export const THROW_ERROR = 'THROW_ERROR';
 export const CLOSE_ERROR = 'CLOSE_ERROR';
 export const LOAD_BOARDS = 'LOAD_BOARDS';
 export const CREATE_BOARD = 'CREATE_BOARD';
+export const OPEN_BOARD_FORM = 'OPEN_BOARD_FORM';
+export const CLOSE_BOARD_FORM = 'CLOSE_BOARD_FORM';
+export const OPEN_CARD_FORM = 'OPEN_CARD_FORM';
+export const CLOSE_CARD_FORM = 'CLOSE_CARD_FORM';

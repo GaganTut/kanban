@@ -150,3 +150,11 @@ export const addBoardUser = boardUser => dispatch => {
     }
   });
 };
+
+export const openBoardForm = () => dispatch => dispatch({type: types.OPEN_BOARD_FORM});
+
+export const closeBoardForm = () => dispatch => dispatch({type: types.CLOSE_BOARD_FORM});
+
+export const openCardForm = () => dispatch => dispatch({type: types.OPEN_CARD_FORM});
+
+export const closeCardForm = () => dispatch => dispatch({type: types.CLOSE_CARD_FORM});

@@ -2,12 +2,12 @@
 import { combineReducers } from 'redux';
 import board from './boardReducers';
 import user from './userReducers';
-import helper from './helperReducers';
+import pop from './popReducers';
 
 const reducers = combineReducers({
   board,
   user,
-  helper
+  pop
 });
 
 export default reducers;

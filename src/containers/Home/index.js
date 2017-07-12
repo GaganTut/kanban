@@ -44,7 +44,7 @@ class Home extends Component {
                   errorMessage={this.props.errorMessage}
                   closeError={this.props.closeError}
                   />}
-        <BoardForm/>
+        {this.props.showBoardForm && <BoardForm/>}
       </div>
     );
   }

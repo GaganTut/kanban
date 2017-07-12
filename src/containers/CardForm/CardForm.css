@@ -1,4 +1,5 @@
 .footerForm {
+  align-items: center;
   background-color: silver;
   display: flex;
   height: 400px;
@@ -13,3 +14,9 @@
   height: 20px;
   width: 40%;
 }
+
+.popupTitles {
+  text-align: center;
+  width: 100%;
+}
+

@@ -64,6 +64,15 @@ class CardForm extends Component {
           className="cardInputs"
           name="title"
         />
+        <input
+          type="text"
+          placeholder="Assigned To"
+          onChange={this.handleChange}
+          value={this.state.assignedTo}
+          id="assigned-input"
+          className="cardInputs"
+          name="assignedTo"
+          />
         <select
           onChange={this.handleChange}
           id="priority-input"
@@ -90,16 +99,6 @@ class CardForm extends Component {
             <option value="Progress">Progress</option>
             <option value="Completed">Completed</option>
         </select>
-
-        <input
-          type="text"
-          placeholder="Assigned To"
-          onChange={this.handleChange}
-          value={this.state.assignedTo}
-          id="assigned-input"
-          className="cardInputs"
-          name="assignedTo"
-          />
         <input
           onClick={this.handleSubmit}
           type="submit"

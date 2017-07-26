@@ -35,12 +35,25 @@ boards.route('/')
             permission: 'Owner'
           }
         )
-        .then(joinBoard => Board.findOne({
-          where: {
-            id: newBoard.id
-          }
-        }))
-        .then(board => res.json({success: true, board}));
+          .then(() => {
+            User.findOne({
+              where: {
+                email: req.user.email
+              },
+              include: [
+                {
+                  model: Board,
+                  include: [
+                    {
+                      model: User,
+                      attributes: ['email']
+                    }
+                  ]
+                }
+              ]
+            })
+              .then(user => res.json({success: true, boards: user.Boards}));
+          });
       })
       .catch(error => res.json({success: false, error: 'Board could not be created'}));
   })

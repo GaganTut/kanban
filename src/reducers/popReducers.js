@@ -6,7 +6,8 @@ const initialState = {
   fetching: false,
   hasError: false,
   errorMessage: '',
-  showBoardForm: false
+  showBoardForm: false,
+  showCardForm: false
 };
 
 export default (state = initialState, action) => {
@@ -32,8 +33,21 @@ export default (state = initialState, action) => {
         errorMessage: ''
       });
     case types.OPEN_BOARD_FORM :
-      return
-
+      return Object.assign({}, state, {
+        showBoardForm: true
+      });
+    case types.CLOSE_BOARD_FORM :
+      return Object.assign({}, state, {
+        showBoardForm: false
+      });
+    case types.OPEN_CARD_FORM :
+      return Object.assign({}, state, {
+        showCardForm: true
+      });
+    case types.CLOSE_CARD_FORM :
+      return Object.assign({}, state, {
+        showCardForm: false
+      });
     default:
       return state;
   }

@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
 
     case types.CREATE_BOARD:
       return Object.assign({}, state, {
-        allBoards: state.allBoards.concat([action.board])
+        allBoards: action.boards
       });
 
     case types.LOAD_CARDS :

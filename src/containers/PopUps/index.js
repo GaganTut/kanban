@@ -2,23 +2,34 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
-import {openBoardForm} from '../../actions';
+import {openBoardForm, openCardForm, closeForms} from '../../actions';
 
 class PopUps extends Component {
 
   renderButtons = () => {
-    if (this.props.match.path === '/' && !this.props.showBoardForm) {
+    if (this.props.location.pathname === '/' && !this.props.showBoardForm) {
+      return (
+        <button
+          onClick={this.props.openBoardForm}
+        >
+          New Board
+        </button>
+      )
+    }
+
+    if (this.props.location.pathname.indexOf('board') >= 0 && !this.props.showCardForm) {
       return (
         <button
           onClick={() =>
-            this.props.openBoardForm()
+            this.props.openCardForm()
           }
         >
-          New Board
-        </button>)
+          New Card
+        </button>
+      )
     }
 
-    return (<button>HELLO</button>)
+    return (<button onClick={this.props.closeForms}>Close Form</button>)
   }
 
   render() {
@@ -32,11 +43,14 @@ class PopUps extends Component {
 
 const mapStateToProps = (state) => ({
   loggedIn: state.user.loggedIn,
-  showBoardForm: state.pop.showBoardForm
+  showBoardForm: state.pop.showBoardForm,
+  showCardForm: state.pop.showCardForm
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  openBoardForm: () => dispatch(openBoardForm())
+  openBoardForm: () => dispatch(openBoardForm()),
+  openCardForm: () => dispatch(openCardForm()),
+  closeForms: () => dispatch(closeForms())
 })
 
 export default withRouter(connect(

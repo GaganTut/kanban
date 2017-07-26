@@ -49,8 +49,8 @@ class Signup extends Component {
             <input type="text" name="email" value={this.state.email} onChange={this.handleText} placeholder="Enter Valid Email"/>
           </div>
           <div>
-            <label htmlFor="fullname">Enter First Name:</label>
-            <input type="text" name="fullname" value={this.state.fullname} onChange={this.handleText} placeholder="Enter First Name"/>
+            <label htmlFor="fullname">Enter Full Name:</label>
+            <input type="text" name="fullname" value={this.state.fullname} onChange={this.handleText} placeholder="Enter Full Name"/>
           </div>
           <div>
             <label htmlFor="password">Create Password:</label>

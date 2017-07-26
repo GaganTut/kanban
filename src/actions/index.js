@@ -103,6 +103,7 @@ export const addCard = card => {
       dispatch({type: types.FETCHING_DONE});
       if (res.success) {
         dispatch({type: types.ADD_CARD, card: res.card});
+        dispatch({type: types.CLOSE_FORMS});
       } else {
         dispatch({type: types.THROW_ERROR, error: 'Failed to add card'});
       }
@@ -131,7 +132,7 @@ export const createBoard = title => dispatch => {
     dispatch({type: types.FETCHING_DONE});
     if (res.success) {
       dispatch({type: types.CREATE_BOARD, boards: res.boards});
-      dispatch({type: types.CLOSE_BOARD_FORM});
+      dispatch({type: types.CLOSE_FORMS});
       dispatch(refreshBoards());
     } else {
       dispatch({type: types.THROW_ERROR, error: 'Failed to create board'});

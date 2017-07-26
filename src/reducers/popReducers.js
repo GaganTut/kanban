@@ -36,17 +36,14 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         showBoardForm: true
       });
-    case types.CLOSE_BOARD_FORM :
-      return Object.assign({}, state, {
-        showBoardForm: false
-      });
     case types.OPEN_CARD_FORM :
       return Object.assign({}, state, {
         showCardForm: true
       });
-    case types.CLOSE_CARD_FORM :
+    case types.CLOSE_FORMS :
       return Object.assign({}, state, {
-        showCardForm: false
+        showCardForm: false,
+        showBoardForm: false
       });
     default:
       return state;

@@ -40,7 +40,7 @@ class Board extends Component {
                   closeError={this.props.closeError}
                   />
         }
-        <CardForm/>
+        {this.props.showCardForm && <CardForm/>}
       </div>
     );
   }
@@ -50,7 +50,8 @@ const mapStateToProps = (state) => ({
   allCards: state.board.allCards,
   fetching: state.board.fetching,
   hasError: state.board.hasError,
-  errorMessage: state.board.errorMessage
+  errorMessage: state.board.errorMessage,
+  showCardForm: state.pop.showCardForm
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

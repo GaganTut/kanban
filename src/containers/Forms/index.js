@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {closeForm} from '../../actions';
+import {closeForms} from '../../actions';
 import CardForm from '../CardForm';
 import BoardForm from '../BoardForm';
 import LoginForm from '../LoginForm';
 import SignupForm from '../SignupForm';
+import './Forms.css';
 
 class Forms extends Component {
 
@@ -13,6 +14,7 @@ class Forms extends Component {
       <div
       className="popup-form-div"
       >
+        <button onClick={this.props.closeForms}>X</button>
         {this.props.showCardForm && <CardForm/>}
         {this.props.showBoardForm && <BoardForm/>}
         {this.props.showLoginForm && <LoginForm/>}
@@ -30,7 +32,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  closeForm: () => dispatch(closeForm())
+  closeForms: () => dispatch(closeForms())
 })
 
 export default connect(

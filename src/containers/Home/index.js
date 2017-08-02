@@ -11,7 +11,7 @@ class Home extends Component {
   renderLoginMessage = () => (
     <div id="please-login">
       <button
-        onClick={()=>this.props.openLoginForm}
+        onClick={this.props.openLoginForm}
         id="open-login-button"
         >
           Please Login

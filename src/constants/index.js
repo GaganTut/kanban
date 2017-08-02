@@ -12,5 +12,6 @@ export const LOAD_BOARDS = 'LOAD_BOARDS';
 export const CREATE_BOARD = 'CREATE_BOARD';
 export const OPEN_BOARD_FORM = 'OPEN_BOARD_FORM';
 export const OPEN_CARD_FORM = 'OPEN_CARD_FORM';
-export const OPEN_LOGIN_FORM = 'OPEN_CARD_FORM';
+export const OPEN_LOGIN_FORM = 'OPEN_LOGIN_FORM';
+export const OPEN_SIGNUP_FORM = 'OPEN_SIGNUP_FORM';
 export const CLOSE_FORMS = 'CLOSE_FORMS';

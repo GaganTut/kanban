@@ -8,11 +8,6 @@ import SignupForm from '../SignupForm';
 
 class Forms extends Component {
 
-  componentWillMount() {
-    this.props.loadApp();
-  }
-
-
   render() {
     return (
       <div

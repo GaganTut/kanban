@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
 import React, {Component} from 'react';
 import './Login.css';
-import { login, logout } from '../../actions';
+import { login, logout, openSignupForm } from '../../actions';
 import { connect } from 'react-redux';
 
 class Login extends Component {
@@ -55,6 +55,11 @@ class Login extends Component {
             value="Sign In"
             />
         </form>
+        <button
+          onClick={this.props.openSignupForm}
+          >
+            Signup
+        </button>
       </div>
     );
   }
@@ -67,7 +72,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   login: (email, password) => dispatch(login(email, password)),
-  logout: () => dispatch(logout())
+  logout: () => dispatch(logout()),
+  openSignupForm: () => dispatch(openSignupForm())
 })
 
 export default connect(

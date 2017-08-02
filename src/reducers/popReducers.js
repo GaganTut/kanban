@@ -14,6 +14,7 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+  console.log(action);
   switch (action.type) {
     case types.FETCHING_IN_PROGRESS:
       return Object.assign({}, state, {
@@ -45,7 +46,7 @@ export default (state = initialState, action) => {
       });
     case types.OPEN_CARD_FORM :
       return Object.assign({}, state, {
-        sshowForm: true,
+        showForm: true,
         showBoardForm: false,
         showCardForm: true,
         showLoginForm: false,
@@ -64,8 +65,8 @@ export default (state = initialState, action) => {
         showForm: true,
         showBoardForm: false,
         showCardForm: false,
-        showLoginForm: true,
-        showSignupForm: false
+        showLoginForm: false,
+        showSignupForm: true
       });
     case types.CLOSE_FORMS :
       return Object.assign({}, state, {

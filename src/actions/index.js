@@ -160,3 +160,5 @@ export const closeForms = () => dispatch => dispatch({type: types.CLOSE_FORMS});
 export const openCardForm = () => dispatch => dispatch({type: types.OPEN_CARD_FORM});
 
 export const openLoginForm = () => dispatch => dispatch({type: types.OPEN_LOGIN_FORM});
+
+export const openSignupForm = () => dispatch => dispatch({type: types.OPEN_SIGNUP_FORM});

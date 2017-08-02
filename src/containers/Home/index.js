@@ -3,10 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
 import './Home.css';
-import { closeError, openLoginForm } from '../../actions';
-import ErrorMessage from '../../components/ErrorMessage';
+import { openLoginForm } from '../../actions';
 import Homeboard from '../../components/Homeboard';
-import BoardForm from '../BoardForm';
 
 class Home extends Component {
 
@@ -18,8 +16,6 @@ class Home extends Component {
         >
           Please Login
       </button>
-      {/*this.props.showLoginForm && <LoginForm/>*/}
-      {/*this.props.showSignupForm && <SignUpForm/>*/}
     </div>
   );
 
@@ -56,12 +52,6 @@ class Home extends Component {
           :
           (this.renderLoginMessage())
         }
-        {this.props.fetching && <div id="loading-message"></div>}
-        {this.props.hasError && <ErrorMessage
-                  errorMessage={this.props.errorMessage}
-                  closeError={this.props.closeError}
-                  />}
-        {this.props.showBoardForm && <BoardForm/>}
       </div>
     );
   }
@@ -69,14 +59,10 @@ class Home extends Component {
 
 const mapStateToProps = (state) => ({
   allBoards: state.board.allBoards,
-  fetching: state.pop.fetching,
   loggedIn: state.user.loggedIn,
-  showBoardForm: state.pop.showBoardForm,
-  showLoginForm: state.pop.showLoginForm
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  closeError: () => dispatch(closeError()),
   openLoginForm: () => dispatch(openLoginForm())
 })
 

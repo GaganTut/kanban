@@ -4,8 +4,6 @@ import './Board.css';
 import { connect } from 'react-redux';
 import { loadCards, closeError } from '../../actions';
 import Column from '../../components/Column';
-import ErrorMessage from '../../components/ErrorMessage';
-import CardForm from '../CardForm';
 
 class Board extends Component {
   componentWillMount() {
@@ -34,24 +32,13 @@ class Board extends Component {
             columnName="Completed"
             />
         </div>
-        {this.props.fetching && <div id="loading-message"></div>}
-        {this.props.hasError && <ErrorMessage
-                  errorMessage={this.props.errorMessage}
-                  closeError={this.props.closeError}
-                  />
-        }
-        {this.props.showCardForm && <CardForm/>}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  allCards: state.board.allCards,
-  fetching: state.board.fetching,
-  hasError: state.board.hasError,
-  errorMessage: state.board.errorMessage,
-  showCardForm: state.pop.showCardForm
+  allCards: state.board.allCards
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

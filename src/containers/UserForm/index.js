@@ -42,7 +42,7 @@ class UserForm extends Component {
   render() {
     return (
       <div
-        className="footerForm"
+        className="user-form"
       >
         <input
           type="text"

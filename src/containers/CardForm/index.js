@@ -49,7 +49,7 @@ class CardForm extends Component {
   render() {
     return (
       <div
-        className="footerForm"
+        className="card-form"
       >
         <h2
           className="cardInputs popupTitles"

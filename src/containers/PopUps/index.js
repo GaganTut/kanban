@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
-import {openBoardForm, openCardForm, closeForms} from '../../actions';
+import {openBoardForm, openCardForm} from '../../actions';
 
 class PopUps extends Component {
 
@@ -42,15 +42,12 @@ class PopUps extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loggedIn: state.user.loggedIn,
-  showBoardForm: state.pop.showBoardForm,
-  showCardForm: state.pop.showCardForm
+  loggedIn: state.user.loggedIn
 })
 
 const mapDispatchToProps = (dispatch) => ({
   openBoardForm: () => dispatch(openBoardForm()),
-  openCardForm: () => dispatch(openCardForm()),
-  closeForms: () => dispatch(closeForms())
+  openCardForm: () => dispatch(openCardForm())
 })
 
 export default withRouter(connect(

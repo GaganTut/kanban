@@ -26,12 +26,10 @@ class BoardForm extends Component {
   };
 
   render() {
-    if (this.props.loggedIn) {
-      return (
+    return (
         <div
-          className="footerForm"
+          className="board-form"
         >
-
           <input type="text"
             placeholder="title"
             onChange={this.handleChange}
@@ -48,14 +46,7 @@ class BoardForm extends Component {
             value="Create Board"
             />
         </div>
-      )
-    } else {
-      return (
-        <div className="footerForm">
-          <h1>PLEASE SIGN IN TO SEE YOUR BOARDS</h1>
-        </div>
-      )
-    }
+    )
   }
 }
 

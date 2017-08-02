@@ -7,7 +7,9 @@ const initialState = {
   hasError: false,
   errorMessage: '',
   showBoardForm: false,
-  showCardForm: false
+  showCardForm: false,
+  showLoginForm: false,
+  showSignupForm: false
 };
 
 export default (state = initialState, action) => {
@@ -40,10 +42,20 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         showCardForm: true
       });
+    case types.OPEN_LOGIN_FORM :
+      return Object.assign({}, state, {
+        showLoginForm: true
+      });
+    case types.OPEN_LOGIN_FORM :
+      return Object.assign({}, state, {
+        showSignupForm: true
+      });
     case types.CLOSE_FORMS :
       return Object.assign({}, state, {
         showCardForm: false,
-        showBoardForm: false
+        showBoardForm: false,
+        showLoginForm: false,
+        showSignupForm: false
       });
     default:
       return state;

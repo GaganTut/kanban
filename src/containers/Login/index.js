@@ -71,7 +71,6 @@ class Login extends Component {
               type="submit"
               value="Sign In"
               />
-            <Link to="/signup" className="sign-up-link"><input type="button" className="btn-to-signup" value="Sign Up"/></Link>
           </form>
         </div>
       );

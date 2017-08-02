@@ -5,3 +5,14 @@
   padding-top: 25px;
   width: 27%;
 }
+
+.login-form {
+  background-color: silver;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+.login-form * {
+  width: 100%;
+}

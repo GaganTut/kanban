@@ -25,7 +25,6 @@ class App extends Component {
           <TopHeader />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/signup" component={Signup} />
             <Route path="/board/:id" component={Board} />
           </Switch>
         </div>

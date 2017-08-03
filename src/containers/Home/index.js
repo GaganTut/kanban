@@ -8,16 +8,10 @@ import Homeboard from '../../components/Homeboard';
 
 class Home extends Component {
 
-  renderLoginMessage = () => (
-    <div id="please-login">
-      <button
-        onClick={this.props.openLoginForm}
-        id="open-login-button"
-        >
-          Please Login
-      </button>
-    </div>
-  );
+  renderLoginMessage = () => {
+    this.props.openLoginForm();
+    return (<div></div>)
+  };
 
   renderBoards = () => {
     return (
@@ -60,6 +54,7 @@ class Home extends Component {
 const mapStateToProps = (state) => ({
   allBoards: state.board.allBoards,
   loggedIn: state.user.loggedIn,
+  showForm: state.pop.showForm
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

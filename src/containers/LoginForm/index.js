@@ -31,13 +31,15 @@ class Login extends Component {
   render() {
     return (
       <div
-        className="login-form"
+        className="login-component"
         >
         <form
           onSubmit={this.handleSubmit}
           className="login-form"
           >
-          <input type="text"
+          <h3>Please Login</h3>
+          <input
+            type="text"
             placeholder="Email"
             name="email"
             value={this.props.email}
@@ -54,12 +56,12 @@ class Login extends Component {
             type="submit"
             value="Sign In"
             />
+          <button
+            onClick={this.props.openSignupForm}
+            >
+              Register
+          </button>
         </form>
-        <button
-          onClick={this.props.openSignupForm}
-          >
-            Signup
-        </button>
       </div>
     );
   }

@@ -1,10 +1,23 @@
 .popup-form-div {
+  background-color: rgba(230, 230, 230, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  width: 300px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 40%;
   height: 500px;
+  border-radius: 10px;
+}
+
+.form-close-button {
+  position: absolute;
+  right: 0;
   top: 0;
-  bottom: 0;
+  border: none;
+  font-size: 30px;
+  color: white;
+  border-radius: 10px;
 }

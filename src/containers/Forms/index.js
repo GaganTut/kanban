@@ -14,7 +14,12 @@ class Forms extends Component {
       <div
       className="popup-form-div"
       >
-        <button onClick={this.props.closeForms}>X</button>
+        <button
+        onClick={this.props.closeForms}
+        className="form-close-button"
+        >
+          X
+      </button>
         {this.props.showCardForm && <CardForm/>}
         {this.props.showBoardForm && <BoardForm/>}
         {this.props.showLoginForm && <LoginForm/>}

@@ -3,11 +3,13 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
 import {openBoardForm, openCardForm, logout} from '../../actions';
+import './PopUps.css';
 
 class PopUps extends Component {
 
   renderButtons = () => {
     if (this.props.location.pathname === '/' && !this.props.showBoardForm) {
+      if (this.props.showForm) {return (<div></div>)};
       return (
         <button
           onClick={this.props.openBoardForm}
@@ -35,7 +37,8 @@ class PopUps extends Component {
   render() {
     if (this.props.loggedIn) {
       return (
-        <div>
+        <div
+          className="pop-up-buttons">
           {this.renderButtons()}
           <button
             onClick={this.props.logout}
@@ -51,7 +54,8 @@ class PopUps extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loggedIn: state.user.loggedIn
+  loggedIn: state.user.loggedIn,
+  showForm: state.pop.showForm
 })
 
 const mapDispatchToProps = (dispatch) => ({

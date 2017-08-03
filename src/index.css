@@ -23,25 +23,33 @@ body {
   display: flex;
   font-family: 'Raleway', sans-serif;
   top: 0;
+  z-index: 1;
   height: 60px;
   width: 100%;
   position: fixed;
+  justify-content: space-between;
 }
 
-.main-title h1 {
+.header-title h1 {
   font-size: 50px;
   line-height: 60px;
   margin-left: 3%;
   text-align: left;
-  width: 17%;
+  width: 50%;
 }
 
-.main-title h3 {
+.header-title h3 {
   font-size: 20px;
   padding-left: 3%;
   padding-top: 1%;
   text-align: left;
   width: 50%;
+}
+
+.header-title {
+  width: 40%;
+  display: flex;
+  align-items: center;
 }
 
 @media (max-width: 789px) {

@@ -14,7 +14,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case types.FETCHING_IN_PROGRESS:
       return Object.assign({}, state, {

@@ -1,0 +1,12 @@
+.pop-up-buttons {
+  width: 30%;
+}
+.pop-up-buttons button {
+  border: none;
+  color: gray;
+  background-color: rgba(230, 230, 230, 0.5);
+  margin: 5px;
+  width: 80px;
+  height: 30px;
+  border-radius: 10px;
+}

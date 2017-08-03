@@ -20,6 +20,7 @@ class PopUps extends Component {
     }
 
     if (this.props.location.pathname.indexOf('board') >= 0 && !this.props.showCardForm) {
+      if (this.props.showForm) {return (<div></div>)};
       return (
         <button
           onClick={() =>

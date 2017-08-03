@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
-import {openBoardForm, openCardForm} from '../../actions';
+import {openBoardForm, openCardForm, logout} from '../../actions';
 
 class PopUps extends Component {
 
@@ -34,7 +34,16 @@ class PopUps extends Component {
 
   render() {
     if (this.props.loggedIn) {
-      return this.renderButtons();
+      return (
+        <div>
+          {this.renderButtons()}
+          <button
+            onClick={this.props.logout}
+            >
+            Log Out
+          </button>
+        </div>
+      )
     } else {
       return (<div></div>)
     }
@@ -47,7 +56,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   openBoardForm: () => dispatch(openBoardForm()),
-  openCardForm: () => dispatch(openCardForm())
+  openCardForm: () => dispatch(openCardForm()),
+  logout: () => dispatch(logout())
 })
 
 export default withRouter(connect(

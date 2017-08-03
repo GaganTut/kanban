@@ -41,17 +41,11 @@ class Signup extends Component {
       <div
         className="signup-component"
         >
-        <h1
-          className="form-title"
+        <form
+          onSubmit={this.handleSubmit}
+          className="signup-form"
           >
-            Just Simply Sign Up
-        </h1>
-        <div>
-          <label
-            htmlFor="email"
-            >
-              Enter Email:
-          </label>
+          <h3>Register Here</h3>
           <input
             type="text"
             name="email"
@@ -59,13 +53,6 @@ class Signup extends Component {
             onChange={this.handleText}
             placeholder="Enter Valid Email"
             />
-        </div>
-        <div>
-          <label
-            htmlFor="fullname"
-            >
-              Enter Full Name:
-          </label>
           <input
             type="text"
             name="fullname"
@@ -73,13 +60,6 @@ class Signup extends Component {
             onChange={this.handleText}
             placeholder="Enter Full Name"
             />
-        </div>
-        <div>
-          <label
-            htmlFor="password"
-            >
-              Create Password:
-          </label>
           <input
             type="password"
             name="password"
@@ -87,13 +67,6 @@ class Signup extends Component {
             onChange={this.handleText}
             placeholder="Must be 8+ Characters"
             />
-        </div>
-        <div>
-          <label
-            htmlFor="valPassword"
-            >
-              Verify Password:
-          </label>
           <input
             type="password"
             name="valPassword"
@@ -101,13 +74,11 @@ class Signup extends Component {
             onChange={this.handleText}
             placeholder="Passwords Must Match"
             />
-        </div>
-        <input
-          className="submit-button"
-          type="button"
-          value="Sign-Up"
-          onClick={this.handleSubmit}
-          />
+          <input
+            type="submit"
+            value="Register"
+            />
+        </form>
       </div>
     );
   }

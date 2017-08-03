@@ -2,8 +2,9 @@
   display: flex;
   flex-flow: row wrap;
   width: 100%;
-  position: fixed;
+  position: absolute;
   top: 60px;
+  bottom: 0;
   overflow: auto;
 }
 

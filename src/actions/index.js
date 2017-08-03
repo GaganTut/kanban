@@ -8,6 +8,7 @@ export const loadBoards = () => dispatch => {
   .then(res => {
     dispatch({type: types.FETCHING_DONE});
     if (res.success) {
+      dispatch({type: types.CLOSE_FORMS});
       dispatch({type: types.LOAD_BOARDS, allBoards: res.boards});
     }
   });
@@ -28,6 +29,7 @@ export const login = (email, password) => dispatch => {
   .then(res => {
     dispatch({type: types.FETCHING_DONE});
     if (res.success) {
+      dispatch({type: types.CLOSE_FORMS});
       dispatch(loadBoards());
       dispatch({type: types.LOG_IN, user: res.user});
     } else {
@@ -51,6 +53,7 @@ export const signup = userInfo => dispatch => {
     .then(res => {
       dispatch({type: types.FETCHING_DONE});
       if (res.success) {
+        dispatch({type: types.CLOSE_FORMS});
         dispatch(login(userInfo.email, userInfo.password));
       } else {
         dispatch({type: types.THROW_ERROR, error: 'Sign Up Failed'});

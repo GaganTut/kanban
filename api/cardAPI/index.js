@@ -30,9 +30,10 @@ cards.route('/board/:boardID')
   })
   .post((req, res) => {
     req.body.createdBy = req.user.email;
+    console.log(req.body);
     Card.create(req.body)
       .then(card => res.json({success: true, card}))
-      .catch(error => res.json({error:'Failed to post new card, please try again'}));
+      .catch(error => res.json({err:'Failed to post new card, please try again', error}));
   });
 
 cards.delete('/:id', (req, res) => {

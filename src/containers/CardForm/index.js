@@ -12,8 +12,7 @@ class CardForm extends Component {
     this.state = {
       title: '',
       priority: 'Base',
-      status: 'Base',
-      assignedTo: ''
+      status: 'Base'
     };
   }
 
@@ -32,7 +31,6 @@ class CardForm extends Component {
       title: stateObj.title,
       priority: stateObj.priority,
       status: stateObj.status,
-      assignedTo: stateObj.assignedTo,
       attachedTo: this.props.location.pathname.split('/board/')[1]
     };
   }
@@ -41,8 +39,7 @@ class CardForm extends Component {
     this.setState({
       title: '',
       priority: 'Base',
-      status: 'Base',
-      assignedTo: ''
+      status: 'Base'
     });
   }
 
@@ -64,15 +61,6 @@ class CardForm extends Component {
           className="cardInputs"
           name="title"
         />
-        <input
-          type="text"
-          placeholder="Assigned To"
-          onChange={this.handleChange}
-          value={this.state.assignedTo}
-          id="assigned-input"
-          className="cardInputs"
-          name="assignedTo"
-          />
         <select
           onChange={this.handleChange}
           id="priority-input"

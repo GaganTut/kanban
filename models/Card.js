@@ -1,8 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
   let Card = sequelize.define("Card", {
     title: {
-      type: DataTypes.STRING,
-      unique: true,
+      type: DataTypes.STRING(32),
       allowNull: false
     },
     status: {
@@ -12,7 +11,10 @@ module.exports = function(sequelize, DataTypes) {
     priority: {
       type: DataTypes.ENUM('Urgent', 'High', 'Medium', 'Low'),
       allowNull: false
-    }
+    },
+    description: {
+      type: DataTypes.STRING(500)
+    },
   }, {
     classMethods: {
       associate: function(models) {
@@ -26,12 +28,14 @@ module.exports = function(sequelize, DataTypes) {
         Card.belongsTo(models.User, {
           as: 'Assigned',
           foreignKey: {
+            allowNull: true,
             name: 'assignedTo'
           }
         });
         Card.belongsTo(models.Board, {
           as: 'Board',
           foreignKey: {
+            allowNull: false,
             name: 'attachedTo'
           }
         });

@@ -6,6 +6,7 @@ export const loadBoards = () => dispatch => {
   dispatch({type: types.FETCHING_IN_PROGRESS});
   return API.loadBoards()
   .then(res => {
+    console.log(res);
     dispatch({type: types.FETCHING_DONE});
     if (res.success) {
       dispatch({type: types.CLOSE_FORMS});

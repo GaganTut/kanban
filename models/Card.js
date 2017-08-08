@@ -25,13 +25,6 @@ module.exports = function(sequelize, DataTypes) {
             name: 'createdBy'
           }
         });
-        Card.belongsTo(models.User, {
-          as: 'Assigned',
-          foreignKey: {
-            allowNull: true,
-            name: 'assignedTo'
-          }
-        });
         Card.belongsTo(models.Board, {
           as: 'Board',
           foreignKey: {

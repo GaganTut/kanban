@@ -10,8 +10,9 @@ class KanbanCard extends Component{
 
     this.state = {
       editCard: false,
+      showDescription: false,
       title: this.props.card.title,
-      assignedTo: this.props.card.assignedTo,
+      assignedTo: this.props.card.assignedTo || '',
       priority: this.props.card.priority
     };
   }
@@ -51,7 +52,11 @@ class KanbanCard extends Component{
     } else {
       return;
     }
+  };
 
+  handleDescription = (event) => {
+    event.preventDefault();
+    this.setState({showDescription: !this.state.showDescription});
   };
 
   getPriorityColor(priority) {
@@ -99,19 +104,13 @@ class KanbanCard extends Component{
             value="✖"
             />
           <h1>
-            #{this.props.card.id}
+            Edit
           </h1>
           <input
             className="edit-title"
             type="text"
             name="title"
             value={this.state.title}
-            onChange={this.handleChange}
-            />
-          <input
-            className="edit-assigned"
-            type="text" name="assignedTo"
-            value={this.state.assignedTo}
             onChange={this.handleChange}
             />
           <select
@@ -127,6 +126,7 @@ class KanbanCard extends Component{
           </select>
           <input
             type="submit"
+            value="Save Edit"
             />
           <input
             type="button"
@@ -134,6 +134,19 @@ class KanbanCard extends Component{
             value="Delete Card"
             />
         </form>
+      )
+    } else if (this.state.showDescription) {
+      return (
+        <div className="card-description">
+          <input
+            className="close-edit"
+            type="button"
+            onClick={this.handleDescription}
+            value="✖"
+            />
+          <h1>{this.props.card.title}</h1>
+          <p>{this.props.card.description}</p>
+        </div>
       )
     } else {
       return (
@@ -144,10 +157,13 @@ class KanbanCard extends Component{
           onDoubleClick={this.handleEdit}
           onDragEnd={this.handleDrag}
           >
-            <h1 className="card-id">#{this.props.card.id}</h1>
             <h4 className="card-title">{this.props.card.title}</h4>
+            <button
+              onClick={this.handleDescription}
+            >
+              Description
+            </button>
             <p className="card-creator">By: {this.props.card.createdBy}</p>
-            <p className="card-assigned">For: {this.props.card.assignedTo}</p>
         </div>
       )
     }

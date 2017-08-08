@@ -22,12 +22,6 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
           }
         });
-        User.hasMany(models.Card, {
-          foreignKey: {
-            name: 'assignedTo',
-            allowNull: false
-          }
-        });
         User.belongsToMany(models.Board, {
           through: {model: 'BoardUser'}
         });

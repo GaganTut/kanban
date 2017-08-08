@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import './Board.css';
 import { connect } from 'react-redux';
+import {Redirect} from 'react-router';
 import { loadCards, closeError } from '../../actions';
 import Column from '../../components/Column';
 
@@ -16,6 +17,8 @@ class Board extends Component {
 
   render() {
    const boardCards = this.props.allCards.filter(card => Number(card.attachedTo) === Number(this.props.match.params.id));
+   console.log(boardCards);
+   if (!this.props.loggedIn){return (<Redirect to="/"/>)}
     return (
       <div className="App">
         <div id="full-board">
@@ -38,7 +41,8 @@ class Board extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  allCards: state.board.allCards
+  allCards: state.board.allCards,
+  loggedIn: state.user.loggedIn
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

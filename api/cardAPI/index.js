@@ -12,11 +12,6 @@ cards.route('/board/:boardID')
           model: User,
           as: 'Creator',
           attributes: ['email', 'fullname']
-        },
-        {
-          model: User,
-          as: 'Assigned',
-          attributes: ['email', 'fullname']
         }
       ],
       where: {

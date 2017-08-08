@@ -12,7 +12,8 @@ class CardForm extends Component {
     this.state = {
       title: '',
       priority: 'Base',
-      status: 'Base'
+      status: 'Base',
+      description: ''
     };
   }
 
@@ -39,7 +40,8 @@ class CardForm extends Component {
     this.setState({
       title: '',
       priority: 'Base',
-      status: 'Base'
+      status: 'Base',
+      description: ''
     });
   }
 
@@ -53,8 +55,9 @@ class CardForm extends Component {
           >
           Add New Card to Board
         </h2>
-        <input type="text"
-          placeholder="title"
+        <input
+          type="text"
+          placeholder="Title (Max. 32 Characters)"
           onChange={this.handleChange}
           value={this.state.title}
           id="title-input"
@@ -74,6 +77,12 @@ class CardForm extends Component {
             <option value="High">High</option>
             <option value="Urgent">Urgent</option>
         </select>
+        <textarea
+          placeholder="Description (Max. 500 Characters)"
+          onChange={this.handleChange}
+          value={this.state.description}
+          name="description"
+        />
 
         <select
           onChange={this.handleChange}

@@ -31,6 +31,7 @@
   display: flex;
   flex-direction: column;
   width: 32%;
+  min-width: 400px;
 }
 
 .card-section {
@@ -44,8 +45,7 @@
 .column-title {
   color: silver;
   font-family: 'Raleway', sans-serif;
-  font-size: 1
-  0px;
+  font-size: 15px;
   padding: 3% 0 1% 0;
   text-align: center;
 }

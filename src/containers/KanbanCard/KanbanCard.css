@@ -2,7 +2,7 @@
   align-items: center;
   border-radius: 10%;
   box-shadow: 5px 5px 2px #d9d9d9;
-  color: gray;
+  color: rgb(72,72,72);
   display: flex;
   flex-direction: column;
   font-family: 'Raleway', sans-serif;
@@ -51,4 +51,50 @@
   height: 20px;
 }
 
+.card-description {
+  font-family: 'Raleway', sans-serif;
+  background-color: #ccebff;
+  border-radius: 10%;
+  border: 2px solid #80ccff;
+  box-shadow: 5px 5px 2px #d9d9d9;
+  color: rgb(72,72,72);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  width: 400px;
+  height: 600px;
+  position: absolute;
+  z-index: 2;
+  top: 0px;
+  bottom: 0px;
+  margin: 60px auto;
+}
+.description-title {
+  border: 1px solid #80ccff;
+  border-radius:10%;
+  flex: 1;
+  font-size: 30px;
+  width: 80%;
+  text-align: center;
+  margin-top: 60px;
+  line-height: 90px;
+  height: 90px;
+  padding: 5%;
+}
 
+.description-text {
+  border-radius: 10%;
+  flex: 5;
+  width: 80%;
+  margin: 5px;
+  border: 1px solid #80ccff;
+  padding: 5%;
+}
+
+
+.card-description .close-edit {
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+}

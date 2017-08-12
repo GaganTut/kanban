@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import './KanbanCard.css';
 import { connect } from 'react-redux';
 import { updateCard, deleteCard } from '../../actions';
+import CardDescription from '../../components/CardDescription';
 
 class KanbanCard extends Component{
   constructor(props) {
@@ -136,18 +137,7 @@ class KanbanCard extends Component{
         </form>
       )
     } else if (this.state.showDescription) {
-      return (
-        <div className="card-description">
-          <input
-            className="close-edit"
-            type="button"
-            onClick={this.handleDescription}
-            value="✖"
-            />
-          <h1>{this.props.card.title}</h1>
-          <p>{this.props.card.description}</p>
-        </div>
-      )
+      return (<CardDescription card={this.props.card} closeDescription={this.handleDescription}/>)
     } else {
       return (
         <div

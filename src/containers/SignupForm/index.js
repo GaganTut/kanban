@@ -45,7 +45,7 @@ class Signup extends Component {
           onSubmit={this.handleSubmit}
           className="signup-form"
           >
-          <h3>Register Here</h3>
+          <h3>Register Now</h3>
           <input
             type="text"
             name="email"
@@ -77,6 +77,7 @@ class Signup extends Component {
           <input
             type="submit"
             value="Register"
+            className="register-button"
             />
         </form>
       </div>

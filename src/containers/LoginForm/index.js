@@ -33,35 +33,40 @@ class Login extends Component {
       <div
         className="login-component"
         >
-        <form
-          onSubmit={this.handleSubmit}
-          className="login-form"
-          >
-          <h3>Please Login</h3>
-          <input
-            type="text"
-            placeholder="Email"
-            name="email"
-            value={this.props.email}
-            onChange={this.handleText}
-            />
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={this.props.password}
-            onChange={this.handleText}
-            />
-          <input
-            type="submit"
-            value="Sign In"
-            />
-          <button
-            onClick={this.props.openSignupForm}
-            >
-              Register
-          </button>
-        </form>
+          <div className="login-intro">
+            <img src={require('../../assets/kanbanLogo.png')} alt="Kanban Logo"/>
+            <h5>Control Your Tasks</h5>
+            <p>Organize what you need to get done through a simplistic approach to a task board. </p>
+          </div>
+          <div className="login-input">
+            <input
+              type="text"
+              placeholder="Email"
+              name="email"
+              value={this.props.email}
+              onChange={this.handleText}
+              />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={this.props.password}
+              onChange={this.handleText}
+              />
+            <button
+              type="submit"
+              onClick={this.handleSubmit}
+              > Sign in
+              </button>
+          </div>
+          <div className="login-register">
+            <h3>Don't have an account?</h3>
+            <button
+              onClick={this.props.openSignupForm}
+              >
+                Register Now
+            </button>
+          </div>
       </div>
     );
   }

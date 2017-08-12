@@ -17,7 +17,6 @@ class Board extends Component {
 
   render() {
    const boardCards = this.props.allCards.filter(card => Number(card.attachedTo) === Number(this.props.match.params.id));
-   console.log(boardCards);
    if (!this.props.loggedIn){return (<Redirect to="/"/>)}
     return (
       <div className="App">

@@ -22,7 +22,14 @@ export default (state = initialState, action) => {
 
     case types.LOAD_CARDS :
       return Object.assign({}, state, {
-        allCards: state.allCards.concat(action.cards).filter((card, index, self) => self.indexOf(card) == index)
+        allCards: state.allCards.concat(action.cards).reduce((prev, curr) => {
+          for (let i = 0; i < prev.length; i++) {
+            if(prev[i].id === curr.id) {
+              return prev;
+            }
+          }
+          return prev.concat([curr]);
+        }, [])
       });
 
     case types.DELETE_CARD :

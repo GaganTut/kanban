@@ -1,22 +1,13 @@
-.footerForm {
-  align-items: center;
-  background-color: silver;
+.card-form {
   display: flex;
-  height: 400px;
-  margin: 10% 0;
-  position: fixed;
-  width: 50%;
+  width: 80%;
+  height: 80%;
+  flex-flow: column nowrap;
   justify-content: space-around;
-  flex-wrap: wrap;
+  align-items: center;
+  font-family: 'Raleway', sans-serif;
 }
 
-.cardInputs {
-  height: 20px;
-  width: 40%;
+.card-form h2 {
+  font-size: 30px;
 }
-
-.popupTitles {
-  text-align: center;
-  width: 100%;
-}
-

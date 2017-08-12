@@ -30,21 +30,23 @@ class BoardForm extends Component {
         <div
           className="board-form"
         >
+          <h3>Give Board a Title</h3>
           <input type="text"
-            placeholder="title"
+            placeholder="Enter Board Title"
             onChange={this.handleChange}
             value={this.state.title}
             id="title-input"
             className="cardInputs"
             name="title"
           />
-          <input
+          <button
             onClick={this.handleSubmit}
             type="submit"
             id="submit-input"
             className="cardInputs"
-            value="Create Board"
-            />
+            >
+            Create Board
+            </button>
         </div>
     )
   }

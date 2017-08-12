@@ -1,0 +1,27 @@
+.board-form {
+  display: flex;
+  font-family: 'Raleway', sans-serif;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  height: 30%;
+}
+
+.board-form h3 {
+  font-size: 30px;
+  text-align: center;
+  color: rgb(72, 72, 72);
+}
+
+.board-form input {
+  width: 60%;
+  height: 30px;
+  font-size: 15px;
+}
+
+.board-form button {
+  width: 60%;
+  height: 30px;
+  border: none;
+}

@@ -51,9 +51,9 @@ class CardForm extends Component {
         className="card-form"
       >
         <h2
-          className="cardInputs popupTitles"
+          className="cardInputs"
           >
-          Add New Card to Board
+          Enter Card Information
         </h2>
         <input
           type="text"
@@ -96,13 +96,13 @@ class CardForm extends Component {
             <option value="Progress">Progress</option>
             <option value="Completed">Completed</option>
         </select>
-        <input
+        <button
           onClick={this.handleSubmit}
           type="submit"
           id="submit-input"
           className="cardInputs"
-          value="Submit Card"
-          />
+          > Create Card
+          </button>
       </div>
     )
   }

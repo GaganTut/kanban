@@ -160,7 +160,7 @@ class KanbanCard extends Component{
             <h4 className="card-title">{this.props.card.title}</h4>
             <button
               onClick={this.handleDescription}
-            >
+            > Open<br/>
               Description
             </button>
             <p className="card-creator">By: {this.props.card.createdBy}</p>

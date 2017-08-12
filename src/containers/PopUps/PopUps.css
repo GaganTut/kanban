@@ -10,3 +10,7 @@
   height: 30px;
   border-radius: 10px;
 }
+
+.pop-up-buttons button:hover {
+  background-color: rgb(230, 230, 230);
+}

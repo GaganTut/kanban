@@ -13,7 +13,16 @@
   position: relative;
 }
 
-.card-id, .card-title, .card-creator, .card-assigned, .edit-title, .edit-assigned, .edit-priority {
+.each-card button {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.each-card button:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.card-id, .card-title, .card-creator, .edit-title, .edit-assigned, .edit-priority {
   text-align: center;
   width: 90%;
 }
@@ -29,11 +38,6 @@
 .card-creator {
   font-size: 8px;
 }
-
-.card-assigned {
-  font-size: 8px;
-}
-
 
 .close-edit {
   background-color: transparent;

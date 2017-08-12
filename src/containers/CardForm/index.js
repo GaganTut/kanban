@@ -56,6 +56,7 @@ class CardForm extends Component {
           Enter Card Information
         </h2>
         <input
+          maxLength="32"
           type="text"
           placeholder="Title (Max. 32 Characters)"
           onChange={this.handleChange}
@@ -77,13 +78,6 @@ class CardForm extends Component {
             <option value="High">High</option>
             <option value="Urgent">Urgent</option>
         </select>
-        <textarea
-          placeholder="Description (Max. 500 Characters)"
-          onChange={this.handleChange}
-          value={this.state.description}
-          name="description"
-        />
-
         <select
           onChange={this.handleChange}
           id="status-input"
@@ -96,6 +90,13 @@ class CardForm extends Component {
             <option value="Progress">Progress</option>
             <option value="Completed">Completed</option>
         </select>
+        <textarea
+          maxLength="500"
+          placeholder="Description (Max. 500 Characters)"
+          onChange={this.handleChange}
+          value={this.state.description}
+          name="description"
+        />
         <button
           onClick={this.handleSubmit}
           type="submit"

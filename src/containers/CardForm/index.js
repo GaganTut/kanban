@@ -32,7 +32,8 @@ class CardForm extends Component {
       title: stateObj.title,
       priority: stateObj.priority,
       status: stateObj.status,
-      attachedTo: this.props.location.pathname.split('/board/')[1]
+      attachedTo: this.props.location.pathname.split('/board/')[1],
+      description: stateObj.description
     };
   }
 

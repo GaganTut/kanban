@@ -84,11 +84,31 @@ module.exports = (() => {
       });
   };
 
+  const postPermission = (req, res, next) => {
+    BoardUser.findOne({
+      where: {
+        BoardId: req.body.attachedTo,
+        UserEmail: req.user.email
+      }
+    })
+      .then(boardUser => {
+        if(boardUser !== null &&
+          (boardUser.permission === 'Owner' ||
+           boardUser.permission === 'Worker'
+           )) {
+          next();
+        } else {
+          res.json({success:false, error: 'In-Sufficient Permission'});
+        }
+      });
+  };
+
   return {
     validateNewUser,
     hasAccess,
     cardPermission,
     boardAccess,
-    boardPermission
+    boardPermission,
+    postPermission
   };
 })();

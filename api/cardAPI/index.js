@@ -23,7 +23,7 @@ cards.route('/board/:boardID')
       })
       .catch(error => res.json({success: false, error: 'Could not load cards, try again'}));
   })
-  .post(middleWare.hasAccess, (req, res) => {
+  .post(middleWare.hasAccess, middleWare.postPermission, (req, res) => {
     req.body.createdBy = req.user.email;
     Card.create(req.body)
       .then(card => res.json({success: true, card}))

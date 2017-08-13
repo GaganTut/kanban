@@ -23,9 +23,9 @@ boards.route('/')
       ]
     })
     .then(user => res.json({success: true, boards: user.Boards}))
-    .catch(error => res.json({success: false, error}));
+    .catch(error => res.json({success: false, error: "No User Found"}));
   })
-  .post((req, res) => {
+  .post(middleWare.hasAccess, (req, res) => {
     Board.create({title: req.body.title})
       .then(newBoard => {
         BoardUser.create(
@@ -57,20 +57,10 @@ boards.route('/')
       })
       .catch(error => res.json({success: false, error: 'Board could not be created'}));
   })
-  .put((req, res) => {
+  .put(middleWare.boardPermission, (req, res) => {
     BoardUser.create(req.body)
-    .then(res.json({success: true}));
-  });
-
-boards.route('/:id')
-  .get((req, res) => {
-    Card.findAll({
-      where: {
-        attachedTo: req.params.id
-      }
-    })
-    .then(cards => res.json({success: true, cards}))
-    .catch(error => res.json({success: false}));
+    .then(res.json({success: true}))
+    .catch(error => res.json({success: false, error: 'Board could not be updated'}));
   });
 
 module.exports = boards;

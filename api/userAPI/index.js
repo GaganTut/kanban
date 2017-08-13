@@ -7,17 +7,6 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const middleWare = require('../customMiddleWare');
 
-user.route('/')
-  .get((req, res) => {
-    User.findAll({
-      attributes: ['email', 'fullname']
-    })
-      .then( users => {
-        res.json({success: true, users});
-      })
-      .catch(error => res.json({success: false, error: "Could not get all users"}));
-  });
-
 user.post('/new', middleWare.validateNewUser, (req, res) => {
   bcrypt.genSalt(saltRounds, function(err, salt) {
     bcrypt.hash(req.body.password, salt, function(err, hash) {
@@ -81,7 +70,7 @@ user.route('/:id')
       })
       .catch(error => res.json({succes: false, error:'Failed to find user'}));
   })
-  .put(middleWare.userPermission, (req, res) => {
+  .put(middleWare.hasAccess, (req, res) => {
     Card.update(req.body,
       {
         where: {
@@ -92,7 +81,7 @@ user.route('/:id')
       .then(res.json({success: true}))
       .catch(error => res.json({success: false, error:'Failed to update user'}));
   })
-  .delete(middleWare.userPermission, (req, res) => {
+  .delete(middleWare.hasAccess, (req, res) => {
     Card.destroy(
       {
         where: {

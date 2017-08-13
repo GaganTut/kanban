@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
-import {openBoardForm, openCardForm, logout} from '../../actions';
+import {openBoardForm, openCardForm, openPermissionForm, logout} from '../../actions';
 import './PopUps.css';
 
 class PopUps extends Component {
@@ -22,13 +22,22 @@ class PopUps extends Component {
     if (this.props.location.pathname.indexOf('board') >= 0 && !this.props.showCardForm) {
       if (this.props.showForm) {return (<div></div>)};
       return (
-        <button
-          onClick={() =>
-            this.props.openCardForm()
-          }
-        >
-          New Card
-        </button>
+        <div className="board-buttons">
+          <button
+            onClick={() =>
+              this.props.openCardForm()
+            }
+          >
+            New Card
+          </button>
+          <button
+            onClick={() =>
+              this.props.openPermissionForm()
+            }
+          >
+            Add User
+          </button>
+        </div>
       )
     }
 
@@ -62,6 +71,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   openBoardForm: () => dispatch(openBoardForm()),
   openCardForm: () => dispatch(openCardForm()),
+  openPermissionForm: () => dispatch(openPermissionForm()),
   logout: () => dispatch(logout())
 })
 

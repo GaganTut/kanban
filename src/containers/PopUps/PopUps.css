@@ -1,5 +1,6 @@
 .pop-up-buttons {
-  width: 30%;
+  display: flex;
+  justify-content: flex-end;
 }
 .pop-up-buttons button {
   border: none;
@@ -13,4 +14,10 @@
 
 .pop-up-buttons button:hover {
   background-color: rgb(230, 230, 230);
+}
+
+@media (max-width: 800) {
+  .pop-up-buttons {
+    width: 250px;
+  }
 }

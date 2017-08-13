@@ -10,7 +10,8 @@ const initialState = {
   showBoardForm: false,
   showCardForm: false,
   showLoginForm: false,
-  showSignupForm: false
+  showSignupForm: false,
+  showPermissionForm: false
 };
 
 export default (state = initialState, action) => {
@@ -41,7 +42,8 @@ export default (state = initialState, action) => {
         showBoardForm: true,
         showCardForm: false,
         showLoginForm: false,
-        showSignupForm: false
+        showSignupForm: false,
+        showPermissionForm: false
       });
     case types.OPEN_CARD_FORM :
       return Object.assign({}, state, {
@@ -49,7 +51,8 @@ export default (state = initialState, action) => {
         showBoardForm: false,
         showCardForm: true,
         showLoginForm: false,
-        showSignupForm: false
+        showSignupForm: false,
+        showPermissionForm: false
       });
     case types.OPEN_LOGIN_FORM :
       return Object.assign({}, state, {
@@ -57,7 +60,8 @@ export default (state = initialState, action) => {
         showBoardForm: false,
         showCardForm: false,
         showLoginForm: true,
-        showSignupForm: false
+        showSignupForm: false,
+        showPermissionForm: false
       });
     case types.OPEN_SIGNUP_FORM :
       return Object.assign({}, state, {
@@ -65,7 +69,17 @@ export default (state = initialState, action) => {
         showBoardForm: false,
         showCardForm: false,
         showLoginForm: false,
-        showSignupForm: true
+        showSignupForm: true,
+        showPermissionForm: false
+      });
+    case types.OPEN_PERMISSION_FORM :
+      return Object.assign({}, state, {
+        showForm: true,
+        showBoardForm: false,
+        showCardForm: false,
+        showLoginForm: false,
+        showSignupForm: false,
+        showPermissionForm: true
       });
     case types.CLOSE_FORMS :
       return Object.assign({}, state, {
@@ -73,7 +87,8 @@ export default (state = initialState, action) => {
         showBoardForm: false,
         showCardForm: false,
         showLoginForm: false,
-        showSignupForm: false
+        showSignupForm: false,
+        showPermissionForm: false
       });
     default:
       return state;

@@ -165,3 +165,5 @@ export const openCardForm = () => dispatch => dispatch({type: types.OPEN_CARD_FO
 export const openLoginForm = () => dispatch => dispatch({type: types.OPEN_LOGIN_FORM});
 
 export const openSignupForm = () => dispatch => dispatch({type: types.OPEN_SIGNUP_FORM});
+
+export const openPermissionForm = () => dispatch => dispatch({type: types.OPEN_PERMISSION_FORM});

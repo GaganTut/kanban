@@ -5,6 +5,7 @@ import CardForm from '../CardForm';
 import BoardForm from '../BoardForm';
 import LoginForm from '../LoginForm';
 import SignupForm from '../SignupForm';
+import PermissionForm from '../PermissionForm';
 import './Forms.css';
 
 class Forms extends Component {
@@ -24,6 +25,7 @@ class Forms extends Component {
         {this.props.showBoardForm && <BoardForm/>}
         {this.props.showLoginForm && <LoginForm/>}
         {this.props.showSignupForm && <SignupForm/>}
+        {this.props.showPermissionForm && <PermissionForm/>}
       </div>
     );
   }
@@ -33,7 +35,8 @@ const mapStateToProps = state => ({
   showCardForm: state.pop.showCardForm,
   showBoardForm: state.pop.showBoardForm,
   showLoginForm: state.pop.showLoginForm,
-  showSignupForm: state.pop.showSignupForm
+  showSignupForm: state.pop.showSignupForm,
+  showPermissionForm: state.pop.showPermissionForm
 })
 
 const mapDispatchToProps = dispatch => ({

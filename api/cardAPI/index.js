@@ -5,7 +5,7 @@ const { Card, User } = require('../../models');
 const middleWare = require('../customMiddleWare');
 
 cards.route('/board/:boardID')
-  .get((req, res) => {
+  .get(middleWare.boardPermission, (req, res) => {
     Card.findAll({
       include: [
         {
@@ -21,17 +21,16 @@ cards.route('/board/:boardID')
       .then( cards => {
         res.json({success: true, cards});
       })
-      .catch(error => res.json({success: false, error}));
+      .catch(error => res.json({success: false, error: 'Could not load cards, try again'}));
   })
-  .post((req, res) => {
+  .post(middleWare.hasAccess, (req, res) => {
     req.body.createdBy = req.user.email;
-    console.log(req.body);
     Card.create(req.body)
       .then(card => res.json({success: true, card}))
-      .catch(error => res.json({err:'Failed to post new card, please try again', error}));
+      .catch(error => res.json({success: false, error:'Failed to post new card, please try again'}));
   });
 
-cards.delete('/:id', (req, res) => {
+cards.delete('/:id', middleWare.cardPermission, (req, res) => {
   Card.destroy(
     {
       where: {
@@ -40,11 +39,11 @@ cards.delete('/:id', (req, res) => {
     }
   )
   .then(res.json({success: true}))
-  .catch(error => res.json({error:'Failed to delete card'}));
+  .catch(error => res.json({success: false, error:'Failed to delete card'}));
 });
 
 
-cards.put('/:id', (req, res) => {
+cards.put('/:id', middleWare.cardPermission, (req, res) => {
   Card.update(req.body,
     {
       where: {
@@ -54,7 +53,7 @@ cards.put('/:id', (req, res) => {
       plain: true
     }
   )
-  .then(card => res.json({success: true, card:card[1].dataValues}))
+  .then(card => res.json({success: true, card: card[1].dataValues}))
   .catch(error => res.json({error:'Failed to update card'}));
 });
 

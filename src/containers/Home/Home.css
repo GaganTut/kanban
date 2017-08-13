@@ -31,3 +31,19 @@
 .board-title {
   font-size: 25px;
 }
+
+.no-board-home {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+}
+
+.create-board-text {
+  font-size: 35px;
+  margin: 10px;
+}

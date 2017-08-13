@@ -30,8 +30,9 @@ class Home extends Component {
   }
 
   renderNoBoards = () => (
-    <div>
-      <h1>To Start, Create a new board</h1>
+    <div className="no-board-home">
+      <h1 className="create-board-text">Welcome to simplicity!</h1>
+      <h4>To get started, use the create board button on top right of the page.</h4>
     </div>
   );
 

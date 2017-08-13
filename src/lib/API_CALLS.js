@@ -89,13 +89,13 @@ export const createBoard = titleObj => fetch(`/api/boards/`, {
   .then(res => res.json())
   .catch(err => err);
 
-export const addBoardUser = boardUser => fetch(`/api/boards`, {
+export const addBoardUser = permissionObj => fetch(`/api/boards/${permissionObj.BoardId}`, {
     method: 'PUT',
     credentials: 'include',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
-    body: JSON.stringify(boardUser)
+    body: JSON.stringify(permissionObj)
   })
     .then(res => res.json())
     .catch(err => err);

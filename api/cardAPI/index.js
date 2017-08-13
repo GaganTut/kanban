@@ -5,7 +5,7 @@ const { Card, User } = require('../../models');
 const middleWare = require('../customMiddleWare');
 
 cards.route('/board/:boardID')
-  .get(middleWare.boardPermission, (req, res) => {
+  .get(middleWare.boardAccess, (req, res) => {
     Card.findAll({
       include: [
         {

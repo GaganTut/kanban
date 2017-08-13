@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import { addBoardUser } from '../../actions';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
+import './PermissionForm.css';
 
 class UserForm extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class UserForm extends Component {
     return {
       UserEmail: stateObj.email,
       permission: stateObj.permission,
-      BoardId: this.props.match.params.id
+      BoardId: this.props.location.pathname.split('/board/')[1],
     };
   }
 
@@ -42,8 +43,9 @@ class UserForm extends Component {
   render() {
     return (
       <div
-        className="user-form"
+        className="permission-form"
       >
+        <h3>Add Users!</h3>
         <input
           type="text"
           placeholder="Enter Email"
@@ -65,13 +67,12 @@ class UserForm extends Component {
             <option value="Worker">Worker</option>
             <option value="Viewer">Viewer</option>
         </select>
-        <input
+        <button
           onClick={this.addBoardUser}
           type="submit"
-          id="submit-input"
           className="cardInputs"
-          value="Add User"
-          />
+          >Give User Permission
+          </button>
       </div>
     )
   }
@@ -83,7 +84,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  addBoardUser: (email, permission) => dispatch(addBoardUser(email, permission))
+  addBoardUser: permissionObj => dispatch(addBoardUser(permissionObj))
 })
 
 export default withRouter(connect(

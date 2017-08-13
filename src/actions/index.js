@@ -143,9 +143,9 @@ export const createBoard = title => dispatch => {
   });
 };
 
-export const addBoardUser = boardUser => dispatch => {
+export const addBoardUser = permissionObj => dispatch => {
   dispatch({type: types.FETCHING_IN_PROGRESS});
-  return API.addBoardUser(boardUser)
+  return API.addBoardUser(permissionObj)
   .then(res => {
     dispatch({type: types.FETCHING_DONE});
     if (res.success) {

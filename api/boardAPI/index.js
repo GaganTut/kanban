@@ -56,7 +56,9 @@ boards.route('/')
           });
       })
       .catch(error => res.json({success: false, error: 'Board could not be created'}));
-  })
+  });
+
+  boards.route('/:boardID')
   .put(middleWare.boardPermission, (req, res) => {
     BoardUser.create(req.body)
     .then(res.json({success: true}))

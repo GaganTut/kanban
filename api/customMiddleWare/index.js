@@ -52,7 +52,7 @@ module.exports = (() => {
       });
   };
 
-  const boardPermission = (req, res, next) => {
+  const boardAccess = (req, res, next) => {
     BoardUser.findOne({
       where: {
         BoardId: req.params.boardID,
@@ -67,11 +67,28 @@ module.exports = (() => {
         }
       });
   };
+  const boardPermission = (req, res, next) => {
+    BoardUser.findOne({
+      where: {
+        BoardId: req.params.boardID,
+        UserEmail: req.user.email
+      }
+    })
+      .then(boardUser => {
+        if(boardUser !== null &&
+          boardUser.permission === 'Owner') {
+          next();
+        } else {
+          res.json({success:false, error: 'In-Sufficient Permission'});
+        }
+      });
+  };
 
   return {
     validateNewUser,
     hasAccess,
     cardPermission,
+    boardAccess,
     boardPermission
   };
 })();
